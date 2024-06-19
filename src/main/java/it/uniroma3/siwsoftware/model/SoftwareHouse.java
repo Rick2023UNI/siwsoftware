@@ -10,6 +10,38 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class SoftwareHouse {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public List<Sviluppatore> getSviluppatori() {
+		return sviluppatori;
+	}
+
+	public void setSviluppatori(List<Sviluppatore> sviluppatori) {
+		this.sviluppatori = sviluppatori;
+	}
+
+	public List<Software> getSoftware() {
+		return software;
+	}
+
+	public void setSoftware(List<Software> software) {
+		this.software = software;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

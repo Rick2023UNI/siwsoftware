@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Sviluppatore</title>
+</head>
+
+<body>
+	<h1 th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"></h1>
+	<h2 th:text="'lavora correntemente per '+${sviluppatore.softwareHouse}">software house</h2>
+
+	
+	<div th:if="${software==null || software.isEmpty()}">Non ci sono software per lo sviluppatore corrente</div>
+	<ul>
+				<li th:each="unSoft : ${software}" class="listItem">
+					<div>
+						<img th:src="@{${unSoft.immagini[0].getImagePath}}" class="recipeImage">
+						<div>
+							<a th:href="@{'/software/' + ${unSoft.id}}" th:text="${unSoft.nome}"></a>
+							<p th:text="${unSoft.categoria}"></p>
+							<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd HH:mm")}'></span>
+						</div>
+					</div>
+				</li>
+			</ul>
+</body>
+
+</html>

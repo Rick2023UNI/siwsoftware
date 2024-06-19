@@ -19,4 +19,8 @@ public class SoftwareService {
 	public void save(Software software) {
 		softwareRepository.save(software);
 	}
+
+	public Software findById(Long id) {
+		return softwareRepository.findById(id).get();
+	}
 }

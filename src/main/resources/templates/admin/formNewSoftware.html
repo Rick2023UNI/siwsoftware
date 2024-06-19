@@ -5,13 +5,14 @@
   </head>
   <body>
     <h1>Aggiungi un software</h1>
-    <form th:action="@{/software}" method="POST" th:object="${software}">
+    <form th:action="@{/admin/software}" method="POST" th:object="${software}">
 	<div>
         Nome<span><input type="text" th:field="${software.nome}" placeholder="Nome"/></span>
       </div>
       <div>
         Categoria<span><input type="text" th:field="${software.categoria}" placeholder="Categoria"/></span>
       </div>
+	  <input required type="date" th:field="${software.annoPubblicazione}"/>
         <span><button type="submit" class="submit">Conferma</button></span>
       </div>
    </form>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Software</title>
+</head>
+
+<body>
+	<h1 th:text="${software.nome}">Software</h1>
+	<h2 th:text="'prodotto da '+${software.softwareHouse}">software house</h2>
+	<span>Sviluppatori:</span>
+	<ul>
+			<li th:each="sviluppatore : ${software.sviluppatori}">
+				<span th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"></span>
+			</li>
+		</ul>
+	<span th:text='${#dates.format(software.annoPubblicazione, "yyyy")}'></span>
+	<br>
+	<h3>Nuovo commento</h3>
+	<form th:action="@{/recensione/}+${software.id}" method="POST" th:object="${recensione}">
+		<div>
+	        Titolo<span><input type="text" th:field="${recensione.titolo}" placeholder="Titolo"/></span>
+	      </div>
+	      <div>
+	        Descrizione<span><input type="text" th:field="${recensione.descrizione}" placeholder="Descrizione"/></span>
+	      </div>
+	        <span><button type="submit" class="submit">Conferma</button></span>
+	      </div>
+	   </form>
+	<br>
+	<h3>Commenti: </h3>
+	<div th:if="${software.recensioni==null || software.recensioni.isEmpty()}">Non ci sono recensioni per il software corrente</div>
+	<ul>
+		<li th:each="recensione : ${software.recensioni}">
+			<span th:text="${recensione.titolo}"></span>
+			<span th:text="${recensione.data}"></span>
+			<span th:text="${recensione.descrizione}"></span>
+			<span th:text="${recensione.numeroStelle}"></span>
+		</li>
+	</ul>
+</body>
+</html>

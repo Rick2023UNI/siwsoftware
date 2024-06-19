@@ -9,15 +9,16 @@
 
 <body>
 	<div th:if="${software==null || software.isEmpty()}">Non ci sono software nel sistema</div>
-	<a href="/newSoftware">Aggiungi software</a>
+	<a href="/admin/newSoftware">Aggiungi software</a>
+	<a href="/admin/newSviluppatore">Aggiungi sviluppatore</a>
 	<ul>
-			<li th:each="onesoft : ${software}" class="listItem">
+			<li th:each="unSoft : ${software}" class="listItem">
 				<div>
-					<img th:src="@{${onesoft.immagini[0].getImagePath}}" class="recipeImage">
+					<img th:src="@{${unSoft.immagini[0].getImagePath}}" class="recipeImage">
 					<div>
-						<a th:href="@{'/software/' + ${onesoft.id}}" th:text="${onesoft.nome}"></a>
-						<p th:text="${onesoft.categoria}"></p>
-						<span th:text='${#dates.format(onesoft.annoPubblicazione, "yyyy-MM-dd HH:mm")}'></span>
+						<a th:href="@{'/software/' + ${unSoft.id}}" th:text="${unSoft.nome}"></a>
+						<p th:text="${unSoft.categoria}"></p>
+						<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd HH:mm")}'></span>
 					</div>
 				</div>
 			</li>
