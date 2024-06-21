@@ -7,9 +7,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class SoftwareHouse {
+	public Immagine getLogo() {
+		return logo;
+	}
+
+	public void setLogo(Immagine logo) {
+		this.logo = logo;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -47,6 +56,9 @@ public class SoftwareHouse {
 	private Long id;
 	
 	private String nome;
+	
+	@OneToOne
+	private Immagine logo;
 	
 	@OneToMany(mappedBy = "softwareHouse")
 	private List<Sviluppatore> sviluppatori;

@@ -1,5 +1,6 @@
 package it.uniroma3.siwsoftware.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -77,6 +78,30 @@ public class Software {
 
 	public void setSoftwareHouse(SoftwareHouse softwareHouse) {
 		this.softwareHouse = softwareHouse;
+	}
+	
+	public void addRecensione(Recensione recensione) {
+		if (this.recensioni==null) {
+			this.recensioni= new ArrayList<Recensione>();
+		}
+		else {
+			this.recensioni.add(recensione);
+		}
+	}
+
+	public void removeRecensione(Recensione recensione) {
+		this.recensioni.remove(this.recensioni.indexOf(recensione));
+	}
+	
+	public void addImage(Immagine immagine) {
+		if (this.immagini==null) {
+			this.immagini= new ArrayList<Immagine>();
+		}
+		this.immagini.add(immagine);
+	}
+
+	public void removeImage(Immagine immagine) {
+		this.immagini.remove(this.immagini.indexOf(immagine));
 	}
 
 	@Id

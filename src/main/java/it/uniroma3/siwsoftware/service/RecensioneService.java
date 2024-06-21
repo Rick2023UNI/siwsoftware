@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import it.uniroma3.siwsoftware.model.Recensione;
 import it.uniroma3.siwsoftware.model.Software;
+import it.uniroma3.siwsoftware.model.Utente;
 import it.uniroma3.siwsoftware.repository.RecensioneRepository;
 import it.uniroma3.siwsoftware.repository.SoftwareRepository;
 
@@ -24,5 +25,14 @@ public class RecensioneService {
 
 	public Recensione findById(Long id) {
 		return recensioneRepository.findById(id).get();
+	}
+
+	public Recensione findBySoftwareAndUtente(Software software, Utente utente) {
+		return recensioneRepository.findBySoftwareAndUtente(software, utente);
+	}
+
+	public void delete(Recensione recensione) {
+		recensioneRepository.delete(recensione);
+		
 	}
 }

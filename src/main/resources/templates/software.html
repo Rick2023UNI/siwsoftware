@@ -24,6 +24,9 @@
 	      <div>
 	        Descrizione<span><input type="text" th:field="${recensione.descrizione}" placeholder="Descrizione"/></span>
 	      </div>
+		  <div>
+		  	Stelle<input type="number" name="stelle" th:field="${recensione.numeroStelle}" placeholder="Minimo 1, massimo 5" min="1" max="5">
+		  </div>
 	        <span><button type="submit" class="submit">Conferma</button></span>
 	      </div>
 	   </form>

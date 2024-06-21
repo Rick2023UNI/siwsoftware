@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1>Aggiungi un software</h1>
-    <form th:action="@{/admin/software}" method="POST" th:object="${software}">
+    <form th:action="@{/admin/software}" method="POST" th:object="${software}" enctype="multipart/form-data">
 	<div>
         Nome<span><input type="text" th:field="${software.nome}" placeholder="Nome"/></span>
       </div>
@@ -13,6 +13,7 @@
         Categoria<span><input type="text" th:field="${software.categoria}" placeholder="Categoria"/></span>
       </div>
 	  <input required type="date" th:field="${software.annoPubblicazione}"/>
+	  <input type="file" name='input-image' id="input-image" accept="image/png, image/jpeg" class="input-image"/>
         <span><button type="submit" class="submit">Conferma</button></span>
       </div>
    </form>

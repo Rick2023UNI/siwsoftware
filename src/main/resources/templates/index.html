@@ -12,11 +12,12 @@
 	<a href="/admin/newSoftware">Aggiungi software</a>
 	<a href="/admin/newSviluppatore">Aggiungi sviluppatore</a>
 	<ul>
-			<li th:each="unSoft : ${software}" class="listItem">
+			<li th:each="unSoft : ${software}">
 				<div>
-					<img th:src="@{${unSoft.immagini[0].getImagePath}}" class="recipeImage">
+					<!-- <img th:src="@{${unSoft.immagini[0].getImagePath}}">-->
 					<div>
 						<a th:href="@{'/software/' + ${unSoft.id}}" th:text="${unSoft.nome}"></a>
+						<img th:if="${unSoft.immagini!=null || !unSoft.immagini.isEmpty()}" th:src="@{${unSoft.immagini[0].getImagePath}}">
 						<p th:text="${unSoft.categoria}"></p>
 						<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd HH:mm")}'></span>
 					</div>

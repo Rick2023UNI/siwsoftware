@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>  
+	<head>
+    <title>Nuova Software House</title>
+  </head>
+  <body>
+    <h1>Aggiungi una software house</h1>
+    <form th:action="@{/admin/softwareHouse}" method="POST" th:object="${softwareHouse}" enctype="multipart/form-data">
+	<div>
+        Nome<span><input type="text" th:field="${softwareHouse.nome}" placeholder="Nome"/></span>
+      </div>
+	  <input type="file" name='input-image' id="input-image" accept="image/png, image/jpeg" class="input-image"/>
+        <span><button type="submit" class="submit">Conferma</button></span>
+      </div>
+   </form>
+  </body>
+</html>

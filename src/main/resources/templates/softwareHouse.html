@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Software House</title>
+</head>
+
+<body>
+	<h1 th:text="${softwareHouse.nome}">Software</h1>
+	<span>Sviluppatori:</span>
+	<ul>
+			<li th:each="sviluppatore : ${softwareHouse.sviluppatori}">
+				<span th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"></span>
+			</li>
+		</ul>
+	<br>
+	<h3>Software prodotti: </h3>
+	<ul>
+				<li th:each="unSoft : ${softwareHouse.software}">
+					<div>
+						<!-- <img th:src="@{${unSoft.immagini[0].getImagePath}}">-->
+						<div>
+							<a th:href="@{'/software/' + ${unSoft.id}}" th:text="${unSoft.nome}"></a>
+							<img th:if="${unSoft.immagini!=null || !unSoft.immagini.isEmpty()}" th:src="@{${unSoft.immagini[0].getImagePath}}">
+							<p th:text="${unSoft.categoria}"></p>
+							<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd HH:mm")}'></span>
+						</div>
+					</div>
+				</li>
+			</ul>
+</body>
+</html>
