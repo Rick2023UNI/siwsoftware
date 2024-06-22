@@ -1,5 +1,6 @@
 package it.uniroma3.siwsoftware.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -49,6 +50,17 @@ public class SoftwareHouse {
 
 	public void setSoftware(List<Software> software) {
 		this.software = software;
+	}
+	
+	public void addSviluppatore(Sviluppatore sviluppatore) {
+		if (this.sviluppatori==null) {
+			this.sviluppatori= new ArrayList<Sviluppatore>();
+		}
+		this.sviluppatori.add(sviluppatore);
+	}
+
+	public void removeSviluppatore(Sviluppatore sviluppatore) {
+		this.sviluppatori.remove(this.sviluppatori.indexOf(sviluppatore));
 	}
 
 	@Id

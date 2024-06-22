@@ -11,6 +11,7 @@
 	<div th:if="${software==null || software.isEmpty()}">Non ci sono software nel sistema</div>
 	<a href="/admin/newSoftware">Aggiungi software</a>
 	<a href="/admin/newSviluppatore">Aggiungi sviluppatore</a>
+	<a href="/admin/newSoftwareHouse">Aggiungi software house</a>
 	<ul>
 			<li th:each="unSoft : ${software}">
 				<div>

@@ -93,15 +93,27 @@ public class Software {
 		this.recensioni.remove(this.recensioni.indexOf(recensione));
 	}
 	
-	public void addImage(Immagine immagine) {
+	public void addImmagine(Immagine immagine) {
 		if (this.immagini==null) {
 			this.immagini= new ArrayList<Immagine>();
 		}
 		this.immagini.add(immagine);
 	}
 
-	public void removeImage(Immagine immagine) {
+	public void removeImmagine(Immagine immagine) {
 		this.immagini.remove(this.immagini.indexOf(immagine));
+	}
+	
+	public void addSviluppatore(Sviluppatore sviluppatore) {
+		if (this.sviluppatori==null) {
+			this.sviluppatori=new ArrayList<Sviluppatore>();
+		}
+		System.out.println(sviluppatori);
+		this.sviluppatori.add(sviluppatore);
+	}
+
+	public void removeSviluppatore(Sviluppatore sviluppatore) {
+		this.sviluppatori.remove(this.sviluppatori.indexOf(sviluppatore));
 	}
 
 	@Id

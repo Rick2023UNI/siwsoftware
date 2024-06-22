@@ -22,7 +22,9 @@ import it.uniroma3.siwsoftware.model.Software;
 import it.uniroma3.siwsoftware.model.Utente;
 import it.uniroma3.siwsoftware.service.ImmagineService;
 import it.uniroma3.siwsoftware.service.RecensioneService;
+import it.uniroma3.siwsoftware.service.SoftwareHouseService;
 import it.uniroma3.siwsoftware.service.SoftwareService;
+import it.uniroma3.siwsoftware.service.SviluppatoreService;
 import it.uniroma3.siwsoftware.service.UtenteService;
 
 @Controller 
@@ -31,6 +33,8 @@ public class SoftwareController {
 	@Autowired RecensioneService recensioneService;
 	@Autowired UtenteService utenteService;
 	@Autowired ImmagineService immagineService;
+	@Autowired SviluppatoreService sviluppatoreService;
+	@Autowired SoftwareHouseService softwareHouseService;
 
 	@GetMapping("/")
 	public String index(Model model) {
@@ -41,26 +45,34 @@ public class SoftwareController {
 	@GetMapping("/admin/newSoftware")
 	public String addSoftware(Model model) {
 		model.addAttribute("software", new Software());
+		model.addAttribute("softwareHouse", softwareHouseService.findAll());
 		return "admin/formNewSoftware.html";
 	}
 
 	@PostMapping("/admin/software")
 	public String newSoftware(@ModelAttribute("software") Software software,
-			@RequestParam("input-image") MultipartFile[] multipartFiles) throws IOException {
+			@RequestParam("fileImage") MultipartFile[] multipartFiles) throws IOException {
 		softwareService.save(software);
 		for (MultipartFile multipartFile : multipartFiles) {
 			//Caricamento delle immagini
 			String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			Immagine immagine=new Immagine();
-			immagine.setFolder("software/"+software.getId());
-			immagine.uploadImage(fileName, multipartFile);
-			this.immagineService.save(immagine);
-			
-			software.addImage(immagine);
-			this.immagineService.save(immagine);
+			/*Evita tentativo di caricare il file vuoto causato
+			 dall'ultimo input che viene aggiunto in automatico
+			 ed è sempre vuoto
+			 */
+			if (fileName!="") {
+				Immagine immagine=new Immagine();
+				immagine.setFolder("software/"+software.getId());
+				immagine.uploadImage(fileName, multipartFile);
+				this.immagineService.save(immagine);
+				
+				software.addImmagine(immagine);
+				this.immagineService.save(immagine);
+			}
 		}
 		softwareService.save(software);
-		return "redirect:/software/"+software.getId();
+		
+		return "redirect:/admin/formAddSviluppatore/"+software.getId();
 	}
 
 	@GetMapping("/software/{id}")
