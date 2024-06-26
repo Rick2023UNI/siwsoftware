@@ -23,4 +23,9 @@ public class SoftwareService {
 	public Software findById(Long id) {
 		return softwareRepository.findById(id).get();
 	}
+
+	public void delete(Software software) {
+		softwareRepository.delete(software);
+		
+	}
 }

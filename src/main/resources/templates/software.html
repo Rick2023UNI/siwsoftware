@@ -3,10 +3,13 @@
 
 <head>
 	<title>Software</title>
+	<script src="/js/software.js"></script>
 </head>
 
 <body>
 	<h1 th:text="${software.nome}">Software</h1>
+	<a th:href="@{'/admin/formUpdateSoftware/' + ${software.id}}">Modifica</a>
+	<a th:href="@{'/admin/removeSoftware/' + ${software.id}}">Elimina</a>
 	<h2 th:text="'prodotto da '+${software.softwareHouse}">software house</h2>
 	<span>Sviluppatori:</span>
 	<ul>
@@ -16,20 +19,25 @@
 		</ul>
 	<span th:text='${#dates.format(software.annoPubblicazione, "yyyy")}'></span>
 	<br>
-	<h3>Nuovo commento</h3>
-	<form th:action="@{/recensione/}+${software.id}" method="POST" th:object="${recensione}">
-		<div>
-	        Titolo<span><input type="text" th:field="${recensione.titolo}" placeholder="Titolo"/></span>
-	      </div>
-	      <div>
-	        Descrizione<span><input type="text" th:field="${recensione.descrizione}" placeholder="Descrizione"/></span>
-	      </div>
-		  <div>
-		  	Stelle<input type="number" name="stelle" th:field="${recensione.numeroStelle}" placeholder="Minimo 1, massimo 5" min="1" max="5">
-		  </div>
-	        <span><button type="submit" class="submit">Conferma</button></span>
-	      </div>
-	   </form>
+	<button onclick="showHideCommentForm()" id="showHideCommentForm">Recensisci</button>
+	<br>
+	<div id="commentForm" style="display: none;">
+		<a th:href="@{'removeRecensione/' + ${recensione.id}}">Elimina</a>
+		<h3>Nuovo commento</h3>
+		<form th:action="@{/recensione/}+${software.id}" method="POST" th:object="${recensione}">
+			<div>
+		        Titolo<span><input type="text" th:field="${recensione.titolo}" placeholder="Titolo"/></span>
+		      </div>
+		      <div>
+		        Descrizione<span><input type="text" th:field="${recensione.descrizione}" placeholder="Descrizione"/></span>
+		      </div>
+			  <div>
+			  	Stelle<input type="number" name="stelle" th:field="${recensione.numeroStelle}" placeholder="Minimo 1, massimo 5" min="1" max="5">
+			  </div>
+		        <span><button type="submit" class="submit">Conferma</button></span>
+		      </div>
+		   </form>
+	</div>
 	<br>
 	<h3>Commenti: </h3>
 	<div th:if="${software.recensioni==null || software.recensioni.isEmpty()}">Non ci sono recensioni per il software corrente</div>

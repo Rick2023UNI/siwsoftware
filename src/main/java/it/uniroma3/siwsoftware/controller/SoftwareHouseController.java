@@ -29,14 +29,14 @@ public class SoftwareHouseController {
 		return "SoftwareHouse.html";
 	}
 	
-	@GetMapping("/admin/newSoftwareHouse")
-	public String addsoftwareHouse(Model model) {
+	@GetMapping("/admin/formNewSoftwareHouse")
+	public String formNewSoftwareHouse(Model model) {
 		model.addAttribute("softwareHouse", new SoftwareHouse());
 		return "admin/formNewSoftwareHouse.html";
 	}
 	
 	@PostMapping("/admin/softwareHouse")
-	public String newsoftwareHousee(@ModelAttribute("softwareHouse") SoftwareHouse softwareHouse,
+	public String newSoftwareHouse(@ModelAttribute("softwareHouse") SoftwareHouse softwareHouse,
 			@RequestParam("input-image") MultipartFile multipartFile) throws IOException {
 		softwareHouseService.save(softwareHouse);
 		
@@ -50,5 +50,24 @@ public class SoftwareHouseController {
 		softwareHouse.setLogo(immagine);
 		softwareHouseService.save(softwareHouse);
 		return "redirect:/softwareHouse/"+softwareHouse.getId();
+	}
+	
+	@GetMapping("/admin/formUpdateSoftwareHouse/{id}")
+	public String formUpdateSoftwareHouse(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("softwareHouse", this.softwareHouseService.findById(id));
+		return "admin/formUpdateSoftwareHouse.html";
+	}
+	
+	@GetMapping("/admin/removeSoftwareHouse/{id}")
+	public String removeSoftwareHouse(@PathVariable("id") Long id, Model model) {
+		SoftwareHouse softwareHouse=this.softwareHouseService.findById(id);
+		this.softwareHouseService.delete(softwareHouse);
+		return "redirect:/admin/manageSoftwareHouse";
+	}
+	
+	@GetMapping("/admin/manageSoftwareHouses")
+	public String manageSoftware(Model model) {
+		model.addAttribute("softwareHouses", this.softwareHouseService.findAll());
+		return "admin/manageSoftware.html";
 	}
 }

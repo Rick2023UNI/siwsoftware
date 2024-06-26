@@ -16,7 +16,7 @@
 		
 		<ul  th:if="${sviluppatori!=null || !sviluppatori.isEmpty()}" >
 					<li th:each="sviluppatore : ${sviluppatori}">
-								<a th:href="'/admin/removeSviluppatore' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" th:text="${sviluppatore.nome} + ', ' + ${sviluppatore.cognome}"></a>
+								<a th:href="'/admin/addSviluppatore' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" th:text="${sviluppatore.nome} + ', ' + ${sviluppatore.cognome}"></a>
 					</li>
 				</ul>
 

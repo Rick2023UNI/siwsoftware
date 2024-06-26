@@ -23,4 +23,9 @@ public class SoftwareHouseService {
 	public SoftwareHouse findById(Long id) {
 		return softwareHouseRepository.findById(id).get();
 	}
+
+	public void delete(SoftwareHouse softwareHouse) {
+		softwareHouseRepository.delete(softwareHouse);
+		
+	}
 }

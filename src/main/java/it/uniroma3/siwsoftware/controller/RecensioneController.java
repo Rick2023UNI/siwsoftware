@@ -41,9 +41,8 @@ public class RecensioneController {
 		return "redirect:/software/"+id;
 	}
 
-	@GetMapping("/removeRecensione/{idSoftware}/{idRecensione}")
-	public String removeRecensione(@PathVariable("idSoftware") Long idSoftware, 
-			@PathVariable("idRecensione") Long id,
+	@GetMapping("/removeRecensione/{idRecensione}")
+	public String removeRecensione(@PathVariable("idRecensione") Long id,
 			Model model) {
 		Recensione recensione=this.recensioneService.findById(id);
 

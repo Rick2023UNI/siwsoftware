@@ -42,8 +42,8 @@ public class SoftwareController {
 		return "index.html";
 	}
 
-	@GetMapping("/admin/newSoftware")
-	public String addSoftware(Model model) {
+	@GetMapping("/admin/formNewSoftware")
+	public String formNewSoftware(Model model) {
 		model.addAttribute("software", new Software());
 		model.addAttribute("softwareHouse", softwareHouseService.findAll());
 		return "admin/formNewSoftware.html";
@@ -79,7 +79,8 @@ public class SoftwareController {
 	public String getSoftware(@PathVariable("id") Long id, Model model) {
 		Software software=this.softwareService.findById(id);
 		model.addAttribute("software", software);
-
+		//Da rimuovere il commento dell'utente corrente dalla lista di commenti mostrati
+			
 		//Utente corrente
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -90,5 +91,24 @@ public class SoftwareController {
 		}
 		model.addAttribute("recensione", recensione);
 		return "software.html";
+	}
+	
+	@GetMapping("/admin/formUpdateSoftware/{id}")
+	public String formUpdateSoftware(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("software", this.softwareService.findById(id));
+		return "admin/formUpdateSoftware.html";
+	}
+	
+	@GetMapping("/admin/removeSoftware/{id}")
+	public String removeSoftware(@PathVariable("id") Long id, Model model) {
+		Software software=this.softwareService.findById(id);
+		this.softwareService.delete(software);
+		return "redirect:/admin/manageSoftware";
+	}
+	
+	@GetMapping("/admin/manageSoftware")
+	public String manageSoftware(Model model) {
+		model.addAttribute("software", this.softwareService.findAll());
+		return "admin/manageSoftware.html";
 	}
 }

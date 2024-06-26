@@ -23,4 +23,9 @@ public class SviluppatoreService {
 	public Sviluppatore findById(Long id) {
 		return sviluppatoreRepository.findById(id).get();
 	}
+
+	public void delete(Sviluppatore sviluppatore) {
+		sviluppatoreRepository.delete(sviluppatore);
+		
+	}
 }

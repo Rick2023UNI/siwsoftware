@@ -1,7 +1,10 @@
 package it.uniroma3.siwsoftware.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,12 +45,18 @@ public class SviluppatoreController {
 		return "redirect:/sviluppatore/"+sviluppatore.getId();
 	}
 	
+	
+	
+	
+	
 	@GetMapping("/admin/formAddSviluppatoreSoftware/{idSoftware}")
 	public String formAddSviluppatoreSoftware(@PathVariable("idSoftware") Long idSoftware, 
 			Model model) {
 		Software software=this.softwareService.findById(idSoftware);
-		model.addAttribute("software", this.softwareService.findById(idSoftware));
-		model.addAttribute("sviluppatori", ((List<Sviluppatore>) this.sviluppatoreService.findAll()).removeAll(this.softwareService.findById(idSoftware).getSviluppatori()));
+		model.addAttribute("software", this.softwareService.findById(idSoftware)); 
+		ArrayList<Sviluppatore> sviluppatori=(ArrayList<Sviluppatore>) this.sviluppatoreService.findAll();
+		sviluppatori.removeAll(this.softwareService.findById(idSoftware).getSviluppatori());
+		model.addAttribute("sviluppatori", sviluppatori);
 		model.addAttribute("operazione", "Software");
 		return "admin/formAddSviluppatore.html";
 	}
@@ -61,11 +70,7 @@ public class SviluppatoreController {
 		Software software=this.softwareService.findById(idSoftware);
 		software.addSviluppatore(sviluppatore);
 		softwareService.save(software);
-		
-		model.addAttribute("software", this.softwareService.findById(idSoftware));
-		model.addAttribute("sviluppatori", ((List<Sviluppatore>) this.sviluppatoreService.findAll()).removeAll(this.softwareService.findById(idSoftware).getSviluppatori()));
-		model.addAttribute("operazione", "Software");
-		return "admin/formAddSviluppatore.html";
+		return "redirect:/admin/formAddSviluppatoreSoftware/"+idSoftware;
 	}
 	
 	@GetMapping("/admin/removeSviluppatoreSoftware/{idSoftware}/{idSviluppatore}")
@@ -78,10 +83,7 @@ public class SviluppatoreController {
 		software.removeSviluppatore(sviluppatore);
 		softwareService.save(software);
 		
-		model.addAttribute("software", this.softwareService.findById(idSoftware));
-		model.addAttribute("sviluppatori", ((List<Sviluppatore>) this.sviluppatoreService.findAll()).removeAll(this.softwareService.findById(idSoftware).getSviluppatori()));
-		model.addAttribute("operazione", "Software");
-		return "admin/formAddSviluppatore.html";
+		return "redirect:/admin/formAddSviluppatoreSoftware/"+idSoftware;
 	}
 	
 	
@@ -109,10 +111,7 @@ public class SviluppatoreController {
 		softwareHouse.addSviluppatore(sviluppatore);
 		softwareHouseService.save(softwareHouse);
 		
-		model.addAttribute("software", this.softwareHouseService.findById(idSoftwareHouse));
-		model.addAttribute("sviluppatori", ((List<Sviluppatore>) this.sviluppatoreService.findAll()).removeAll(this.softwareHouseService.findById(idSoftwareHouse).getSviluppatori()));
-		model.addAttribute("operazione", "SoftwareHouse");
-		return "admin/formAddSviluppatore.html";
+		return "redirect:/admin/formAddSviluppatoreSoftwareHouse/"+idSoftwareHouse;
 	}
 	
 	@GetMapping("/admin/removeSviluppatoreSoftwareHouse/{idSoftwareHouse}/{idSviluppatore}")
@@ -125,9 +124,31 @@ public class SviluppatoreController {
 		softwareHouse.removeSviluppatore(sviluppatore);
 		softwareHouseService.save(softwareHouse);
 		
-		model.addAttribute("software", this.softwareHouseService.findById(idSoftwareHouse));
-		model.addAttribute("sviluppatori", ((List<Sviluppatore>) this.sviluppatoreService.findAll()).removeAll(this.softwareHouseService.findById(idSoftwareHouse).getSviluppatori()));
-		model.addAttribute("operazione", "SoftwareHouse");
-		return "admin/formAddSviluppatore.html";
+		return "redirect:/admin/formAddSviluppatoreSoftwareHouse/"+idSoftwareHouse;
+	}
+	
+	@GetMapping("/admin/formUpdateSviluppatore/{id}")
+	public String formUpdateSviluppatore(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("sviluppatore", this.sviluppatoreService.findById(id));
+		return "admin/formUpdateSviluppatore.html";
+	}
+	
+	@GetMapping("/admin/removeSviluppatore/{id}")
+	public String removeSviluppatore(@PathVariable("id") Long id, Model model) {
+		Sviluppatore sviluppatore=this.sviluppatoreService.findById(id);
+		this.sviluppatoreService.delete(sviluppatore);
+		return "redirect:/admin/manageSviluppatori";
+	}
+	
+	@GetMapping("/admin/manageSviluppatori")
+	public String manageSoftware(Model model) {
+		model.addAttribute("sviluppatori", this.sviluppatoreService.findAll());
+		return "admin/manageSviluppatori.html";
+	}
+	
+	@PostMapping("/admin/updateSviluppatore")
+	public String updateSviluppatore(@ModelAttribute("sviluppatore") Sviluppatore sviluppatore) {
+		sviluppatoreService.save(sviluppatore);
+		return "redirect:/sviluppatore/"+sviluppatore.getId();
 	}
 }

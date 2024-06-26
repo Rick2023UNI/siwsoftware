@@ -9,9 +9,16 @@
 
 <body>
 	<div th:if="${software==null || software.isEmpty()}">Non ci sono software nel sistema</div>
-	<a href="/admin/newSoftware">Aggiungi software</a>
-	<a href="/admin/newSviluppatore">Aggiungi sviluppatore</a>
-	<a href="/admin/newSoftwareHouse">Aggiungi software house</a>
+	<a href="/admin/formNewSoftware">Aggiungi software</a>
+	<a href="/admin/formNewSviluppatore">Aggiungi sviluppatore</a>
+	<a href="/admin/formNewSoftwareHouse">Aggiungi software house</a>
+
+
+	<br>
+	<a href="/admin/manageSoftware">Gestisci i software</a>
+	<a href="/admin/manageSoftwareHouse">Gestisci le software house</a>
+	<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
+	<br>
 	<ul>
 			<li th:each="unSoft : ${software}">
 				<div>

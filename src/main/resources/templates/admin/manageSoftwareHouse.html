@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Gestisci le software House
+	</title>
+</head>
+
+<body>
+	<div th:if="${softwareHouses==null || softwareHouses.isEmpty()}">Non ci sono software nel sistema</div>
+	<ul>
+		<li th:each="softwareHouse : ${softwareHouses}">
+			<a th:href="@{'/softwareHouse' + '/' + ${softwareHouse.id}}" th:text="${softwareHouse.nome}"></a>
+			<a th:href="@{'/admin/formUpdateSoftwareHouse/' + ${softwareHouse.id}}">
+				modifica
+			</a>
+			<a th:href="@{'/admin/removeSoftwareHouse/' + ${softwareHouse.id}}">
+				elimina
+			</a>
+		</li>
+	</ul>
+</body>
+
+</html>

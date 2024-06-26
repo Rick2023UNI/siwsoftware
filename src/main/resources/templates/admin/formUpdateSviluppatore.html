@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>  
+	<head>
+    <title>Nuovo Sviluppatore</title>
+  </head>
+  <body>
+    <h1>Aggiungi un sviluppatore</h1>
+    <form th:action="@{/admin/updateSviluppatore}" method="POST" th:object="${sviluppatore}">
+	<div>
+        Nome<span><input type="text" th:field="${sviluppatore.nome}" placeholder="Nome"/></span>
+      </div>
+      <div>
+        Cognome<span><input type="text" th:field="${sviluppatore.cognome}" placeholder="Cognome"/></span>
+      </div>
+        <span><button type="submit" class="submit">Conferma</button></span>
+      </div>
+   </form>
+  </body>
+</html>
