@@ -8,12 +8,19 @@
 </head>
 
 <body>
+	<form th:action="@{/admin/manageSoftware}" method="post">
+		<input id="search" type="text" th:value="${nome}" name="nome" placeholder="Nome software" />
+		<button id="submit" type="submit">Cerca</button>
+	</form>
 	<div th:if="${software==null || software.isEmpty()}">Non ci sono software nel sistema</div>
 	<ul>
 		<li th:each="unSoft : ${software}">
-			<a th:href="@{'/software' + '/' + ${unSoft.id}}" th:text="${unSoft.nome}"></a>
+			<a th:href="@{'/software/' + ${unSoft.id}}" th:text="${unSoft.nome}"></a>
 			<a th:href="@{'/admin/formUpdateSoftware/' + ${unSoft.id}}">
 				modifica
+			</a>
+			<a th:href="@{'/admin/formAddSviluppatoreSoftware/' + ${unSoft.id}}">
+				aggiungi/togli sviluppatori
 			</a>
 			<a th:href="@{'/admin/removeSoftware/' + ${unSoft.id}}">
 				elimina

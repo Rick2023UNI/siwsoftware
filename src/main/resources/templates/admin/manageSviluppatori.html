@@ -8,6 +8,11 @@
 </head>
 
 <body>
+	<form th:action="@{/admin/manageSviluppatore}" method="post">
+		<input class="search" type="text" th:value="${nome}" name="nome" placeholder="Nome" />
+		<input class="search" type="text" th:value="${cognome}" name="cognome" placeholder="Cognome" />
+		<button id="submit" type="submit">Cerca</button>
+	</form>
 	<div th:if="${sviluppatori==null || sviluppatori.isEmpty()}">Non ci sono software nel sistema</div>
 	<ul>
 		<li th:each="sviluppatore : ${sviluppatori}">

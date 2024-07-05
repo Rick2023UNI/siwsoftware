@@ -58,6 +58,12 @@ public class SoftwareHouseController {
 		return "admin/formUpdateSoftwareHouse.html";
 	}
 	
+	@PostMapping("/admin/updateSoftwareHouse")
+	public String updateSoftwareHouse(@ModelAttribute("softwareHouse") SoftwareHouse softwareHouse) {
+		softwareHouseService.save(softwareHouse);
+		return "redirect:/softwareHouse/"+softwareHouse.getId();
+	}
+	
 	@GetMapping("/admin/removeSoftwareHouse/{id}")
 	public String removeSoftwareHouse(@PathVariable("id") Long id, Model model) {
 		SoftwareHouse softwareHouse=this.softwareHouseService.findById(id);
@@ -68,6 +74,13 @@ public class SoftwareHouseController {
 	@GetMapping("/admin/manageSoftwareHouses")
 	public String manageSoftware(Model model) {
 		model.addAttribute("softwareHouses", this.softwareHouseService.findAll());
-		return "admin/manageSoftware.html";
+		return "admin/manageSoftwareHouse.html";
+	}
+	
+	//Ricerca software house pagina gestione
+	@PostMapping("/admin/manageSoftwareHouses")
+	public String searchManage(@RequestParam("nome") String nome, Model model) {
+		model.addAttribute("softwareHouses", this.softwareHouseService.findByNomeContaining(nome));
+		return "admin/manageSoftwareHouse.html";
 	}
 }

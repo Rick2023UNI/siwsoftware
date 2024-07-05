@@ -9,4 +9,8 @@ import java.util.Optional;
 
 public interface SviluppatoreRepository extends CrudRepository<Sviluppatore, Long> {
 
+	Iterable<Sviluppatore> findByNomeContaining(String nome);
+
+	Iterable<Sviluppatore> findByCognomeContaining(String cognome);
+
 }

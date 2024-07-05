@@ -28,4 +28,8 @@ public class SoftwareService {
 		softwareRepository.delete(software);
 		
 	}
+
+	public Iterable<Software> findByNomeContaining(String nome) {
+		return softwareRepository.findByNomeContaining(nome);
+	}
 }

@@ -16,8 +16,13 @@
 
 	<br>
 	<a href="/admin/manageSoftware">Gestisci i software</a>
-	<a href="/admin/manageSoftwareHouse">Gestisci le software house</a>
 	<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
+	<a href="/admin/manageSoftwareHouses">Gestisci le software house</a>
+	<br>
+	<form th:action="@{/}" method="post">
+		<input id="search" type="text" th:value="${nome}" name="nome" placeholder="Nome software" />
+		<button id="submit" type="submit">Cerca</button>
+	</form>
 	<br>
 	<ul>
 			<li th:each="unSoft : ${software}">

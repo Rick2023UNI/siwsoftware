@@ -3,11 +3,16 @@
 
 <head>
 	<title>
-		Gestisci le software House
+		Gestisci software House
 	</title>
 </head>
 
 <body>
+	<form th:action="@{/admin/manageSoftwareHouses}" method="post">
+		<input id="search" type="text" th:value="${nome}" name="nome" placeholder="Nome software house" />
+		<button id="submit" type="submit">Cerca</button>
+	</form>
+	<h1>Lista software house</h1>
 	<div th:if="${softwareHouses==null || softwareHouses.isEmpty()}">Non ci sono software nel sistema</div>
 	<ul>
 		<li th:each="softwareHouse : ${softwareHouses}">
@@ -15,6 +20,9 @@
 			<a th:href="@{'/admin/formUpdateSoftwareHouse/' + ${softwareHouse.id}}">
 				modifica
 			</a>
+			<a th:href="@{'/admin/formAddSviluppatoreSoftwareHouse/' + ${softwareHouse.id}}">
+							aggiungi/togli sviluppatori
+						</a>
 			<a th:href="@{'/admin/removeSoftwareHouse/' + ${softwareHouse.id}}">
 				elimina
 			</a>

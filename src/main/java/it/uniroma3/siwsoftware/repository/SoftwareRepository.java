@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface SoftwareRepository extends CrudRepository<Software, Long> {
 
+	Iterable<Software> findByNomeContaining(String nome);
+
 }

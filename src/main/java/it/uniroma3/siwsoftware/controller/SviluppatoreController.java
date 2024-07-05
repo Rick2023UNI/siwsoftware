@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siwsoftware.model.Software;
 import it.uniroma3.siwsoftware.model.SoftwareHouse;
@@ -33,7 +34,7 @@ public class SviluppatoreController {
 		return "Sviluppatore.html";
 	}
 	
-	@GetMapping("/admin/newSviluppatore")
+	@GetMapping("/admin/formNewSviluppatore")
 	public String addSviluppatore(Model model) {
 		model.addAttribute("sviluppatore", new Sviluppatore());
 		return "admin/formNewSviluppatore.html";
@@ -53,9 +54,9 @@ public class SviluppatoreController {
 	public String formAddSviluppatoreSoftware(@PathVariable("idSoftware") Long idSoftware, 
 			Model model) {
 		Software software=this.softwareService.findById(idSoftware);
-		model.addAttribute("software", this.softwareService.findById(idSoftware)); 
+		model.addAttribute("software", software); 
 		ArrayList<Sviluppatore> sviluppatori=(ArrayList<Sviluppatore>) this.sviluppatoreService.findAll();
-		sviluppatori.removeAll(this.softwareService.findById(idSoftware).getSviluppatori());
+		sviluppatori.removeAll(software.getSviluppatori());
 		model.addAttribute("sviluppatori", sviluppatori);
 		model.addAttribute("operazione", "Software");
 		return "admin/formAddSviluppatore.html";
@@ -94,8 +95,10 @@ public class SviluppatoreController {
 	public String formAddSviluppatoreSoftwareHouse(@PathVariable("idSoftwareHouse") Long idSoftwareHouse, 
 			Model model) {
 		SoftwareHouse softwareHouse=this.softwareHouseService.findById(idSoftwareHouse);
-		model.addAttribute("software", this.softwareHouseService.findById(idSoftwareHouse));
-		model.addAttribute("sviluppatori", ((List<Sviluppatore>) this.sviluppatoreService.findAll()).removeAll(this.softwareHouseService.findById(idSoftwareHouse).getSviluppatori()));
+		ArrayList<Sviluppatore> sviluppatori=(ArrayList<Sviluppatore>) (this.sviluppatoreService.findAll());
+		sviluppatori.removeAll(softwareHouse.getSviluppatori());
+		model.addAttribute("software", softwareHouse);
+		model.addAttribute("sviluppatori", sviluppatori);
 		model.addAttribute("operazione", "SoftwareHouse");
 		return "admin/formAddSviluppatore.html";
 	}
@@ -107,9 +110,11 @@ public class SviluppatoreController {
 		Sviluppatore sviluppatore=this.sviluppatoreService.findById(idSviluppatore);
 		
 		SoftwareHouse softwareHouse=this.softwareHouseService.findById(idSoftwareHouse);
-
-		softwareHouse.addSviluppatore(sviluppatore);
-		softwareHouseService.save(softwareHouse);
+		//Stranamente funziona solo modificando la SoftwareHouse dello sviluppatore, 
+		//il cambiamento viene effettuato
+		sviluppatore.setSoftwareHouse(softwareHouse);
+		sviluppatoreService.save(sviluppatore);
+		
 		
 		return "redirect:/admin/formAddSviluppatoreSoftwareHouse/"+idSoftwareHouse;
 	}
@@ -127,12 +132,6 @@ public class SviluppatoreController {
 		return "redirect:/admin/formAddSviluppatoreSoftwareHouse/"+idSoftwareHouse;
 	}
 	
-	@GetMapping("/admin/formUpdateSviluppatore/{id}")
-	public String formUpdateSviluppatore(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("sviluppatore", this.sviluppatoreService.findById(id));
-		return "admin/formUpdateSviluppatore.html";
-	}
-	
 	@GetMapping("/admin/removeSviluppatore/{id}")
 	public String removeSviluppatore(@PathVariable("id") Long id, Model model) {
 		Sviluppatore sviluppatore=this.sviluppatoreService.findById(id);
@@ -146,9 +145,26 @@ public class SviluppatoreController {
 		return "admin/manageSviluppatori.html";
 	}
 	
+	@GetMapping("/admin/formUpdateSviluppatore/{id}")
+	public String formUpdateSviluppatore(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("sviluppatore", this.sviluppatoreService.findById(id));
+		return "admin/formUpdateSviluppatore.html";
+	}
+	
 	@PostMapping("/admin/updateSviluppatore")
 	public String updateSviluppatore(@ModelAttribute("sviluppatore") Sviluppatore sviluppatore) {
 		sviluppatoreService.save(sviluppatore);
 		return "redirect:/sviluppatore/"+sviluppatore.getId();
+	}
+	
+	//Ricerca sviluppatore pagina gestione
+	@PostMapping("/admin/manageSviluppatore")
+	public String searchManage(@RequestParam("nome") String nome, @RequestParam("cognome") String cognome, Model model) {
+		ArrayList<Sviluppatore> sviluppatoriPerNome=(ArrayList<Sviluppatore>) this.sviluppatoreService.findByNomeContaining(nome);
+		ArrayList<Sviluppatore> sviluppatoriPerCognome=(ArrayList<Sviluppatore>) this.sviluppatoreService.findByCognomeContaining(cognome);
+		//Sviluppatori con nome e cognome che contengono le stringe nome e cognome
+		sviluppatoriPerNome.retainAll(sviluppatoriPerCognome);
+		model.addAttribute("sviluppatori", sviluppatoriPerNome);
+		return "admin/manageSviluppatori.html";
 	}
 }

@@ -1,6 +1,8 @@
 package it.uniroma3.siwsoftware.service;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +29,13 @@ public class SviluppatoreService {
 	public void delete(Sviluppatore sviluppatore) {
 		sviluppatoreRepository.delete(sviluppatore);
 		
+	}
+
+	public Iterable<Sviluppatore> findByNomeContaining(String nome) {
+		return sviluppatoreRepository.findByNomeContaining(nome);
+	}
+
+	public Iterable<Sviluppatore> findByCognomeContaining(String cognome) {
+		return sviluppatoreRepository.findByCognomeContaining(cognome);
 	}
 }

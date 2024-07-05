@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import it.uniroma3.siwsoftware.model.Immagine;
 import it.uniroma3.siwsoftware.model.Recensione;
 import it.uniroma3.siwsoftware.model.Software;
+import it.uniroma3.siwsoftware.model.SoftwareHouse;
 import it.uniroma3.siwsoftware.model.Utente;
 import it.uniroma3.siwsoftware.service.ImmagineService;
 import it.uniroma3.siwsoftware.service.RecensioneService;
@@ -39,6 +40,13 @@ public class SoftwareController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("software", this.softwareService.findAll());
+		return "index.html";
+	}
+	
+	//Ricerca software
+	@PostMapping("/")
+	public String search(@RequestParam("nome") String nome, Model model) {
+		model.addAttribute("software", this.softwareService.findByNomeContaining(nome));
 		return "index.html";
 	}
 
@@ -72,7 +80,7 @@ public class SoftwareController {
 		}
 		softwareService.save(software);
 		
-		return "redirect:/admin/formAddSviluppatore/"+software.getId();
+		return "redirect:/admin/formAddSviluppatoreSoftware/"+software.getId();
 	}
 
 	@GetMapping("/software/{id}")
@@ -99,6 +107,12 @@ public class SoftwareController {
 		return "admin/formUpdateSoftware.html";
 	}
 	
+	@PostMapping("/admin/updateSoftware")
+	public String updateSoftware(@ModelAttribute("software") Software software) {
+		softwareService.save(software);
+		return "redirect:/software/"+software.getId();
+	}
+	
 	@GetMapping("/admin/removeSoftware/{id}")
 	public String removeSoftware(@PathVariable("id") Long id, Model model) {
 		Software software=this.softwareService.findById(id);
@@ -109,6 +123,13 @@ public class SoftwareController {
 	@GetMapping("/admin/manageSoftware")
 	public String manageSoftware(Model model) {
 		model.addAttribute("software", this.softwareService.findAll());
+		return "admin/manageSoftware.html";
+	}
+	
+	//Ricerca software pagina gestione
+	@PostMapping("/admin/manageSoftware")
+	public String searchManage(@RequestParam("nome") String nome, Model model) {
+		model.addAttribute("software", this.softwareService.findByNomeContaining(nome));
 		return "admin/manageSoftware.html";
 	}
 }
