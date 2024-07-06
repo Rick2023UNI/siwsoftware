@@ -12,7 +12,7 @@
 		<input id="search" type="text" th:value="${nome}" name="nome" placeholder="Nome software house" />
 		<button id="submit" type="submit">Cerca</button>
 	</form>
-	<h1>Lista software house</h1>
+	<a href="/admin/formNewSoftwareHouse">Aggiungi software house</a>
 	<div th:if="${softwareHouses==null || softwareHouses.isEmpty()}">Non ci sono software nel sistema</div>
 	<ul>
 		<li th:each="softwareHouse : ${softwareHouses}">

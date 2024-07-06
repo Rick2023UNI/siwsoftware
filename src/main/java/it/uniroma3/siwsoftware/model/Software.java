@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import it.uniroma3.siwsoftware.service.RecensioneService;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +18,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Software {
+	
 	public Long getId() {
 		return id;
 	}
@@ -114,6 +117,18 @@ public class Software {
 
 	public void removeSviluppatore(Sviluppatore sviluppatore) {
 		this.sviluppatori.remove(this.sviluppatori.indexOf(sviluppatore));
+	}
+	
+	public Integer getMediaStelle() {
+		Integer somma=0;
+		for (Recensione recensione : this.recensioni) {
+			somma+=recensione.getNumeroStelle();
+		}
+		//Se il numero di recensioni è 0
+		if (this.recensioni.size()==0) {
+			return 0;
+		}
+		return somma/this.recensioni.size();
 	}
 
 	@Id

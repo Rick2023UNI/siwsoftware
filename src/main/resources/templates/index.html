@@ -5,38 +5,77 @@
 	<title>
 		SiwSoftware - Homepage
 	</title>
+	<link rel="stylesheet" href="/css/index.css" />
+	
+	<link rel="stylesheet" href="/css/_input.css" />
+	<link rel="stylesheet" href="/css/_menu.css" />
 </head>
 
 <body>
+	<section id="Home">
+			<nav>
+				<div class="logo">
+					<a href="/">
+						<img src="/image/logo.png">
+					</a>
+				</div>
+				<ul>
+					<li th:if="${admin==true}"><a href="/admin/manageSoftware">Gestisci i software</a></li>
+					<li th:if="${admin==true}"><a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a></li>
+					<li th:if="${admin==true}"><a href="/admin/manageSoftwareHouses">Gestisci le software house</a></li>
+				</ul>
+
+				<div>
+					<a th:if="${utenteAuth!=null}" th:href="@{'/sviluppatore/' + ${sviluppatoreAuth.id}}" id="account">
+						<img th:src="@{${sviluppatoreAuth.foto.getImagePath}}" id="sviluppatore-corrente-immagine">
+					</a>
+					<a th:if="${utenteAuth!=null}" href="/logout" id="esci">Esci</a>
+					<a th:unless="${utenteAuth!=null}" href="/login" id="accedi">Accedi</a>
+					<a th:unless="${utenteAuth!=null}" href="/register" id="registrati">Registrati</a>
+				</div>
+
+			</nav>
+		</section>
 	<div th:if="${software==null || software.isEmpty()}">Non ci sono software nel sistema</div>
-	<a href="/admin/formNewSoftware">Aggiungi software</a>
-	<a href="/admin/formNewSviluppatore">Aggiungi sviluppatore</a>
-	<a href="/admin/formNewSoftwareHouse">Aggiungi software house</a>
-
-
-	<br>
-	<a href="/admin/manageSoftware">Gestisci i software</a>
-	<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
-	<a href="/admin/manageSoftwareHouses">Gestisci le software house</a>
 	<br>
 	<form th:action="@{/}" method="post">
-		<input id="search" type="text" th:value="${nome}" name="nome" placeholder="Nome software" />
-		<button id="submit" type="submit">Cerca</button>
+		<input id="search" type="text" th:value="${nome}" name="nome"/>
+		
+		<button id="submit" type="submit">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+			  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+			</svg>
+		</button>
 	</form>
 	<br>
-	<ul>
-			<li th:each="unSoft : ${software}">
-				<div>
-					<!-- <img th:src="@{${unSoft.immagini[0].getImagePath}}">-->
-					<div>
-						<a th:href="@{'/software/' + ${unSoft.id}}" th:text="${unSoft.nome}"></a>
-						<img th:if="${unSoft.immagini!=null || !unSoft.immagini.isEmpty()}" th:src="@{${unSoft.immagini[0].getImagePath}}">
-						<p th:text="${unSoft.categoria}"></p>
-						<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd HH:mm")}'></span>
+	<ul id="software">
+		<li th:each="unSoft : ${software}" class="un-software">
+			<div class="contenitore">
+				<a th:href="@{'/software/' + ${unSoft.id}}" th:text="${unSoft.nome}" class="titolo"></a>
+				<img th:if="${unSoft.immagini!=null || !unSoft.immagini.isEmpty()}"
+					th:src="@{${unSoft.immagini[0].getImagePath}}" class="immagine-software">
+				<div class="footer">
+					<span th:text="${unSoft.categoria}" class="categoria"></span>
+					<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd")}' class="data"></span>
+
+					<span class="footer-icone">
+						<a>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
+							  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+							</svg>
+							<span th:text="${unSoft.getRecensioni().size()}"></span>
+						</a>
+						<a>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+							  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+							</svg>
+							<span th:text="${unSoft.getMediaStelle()}"></span>
+						</a>
 					</div>
 				</div>
-			</li>
-		</ul>
+			</div>
+		</li>
+	</ul>
 </body>
 
 </html>

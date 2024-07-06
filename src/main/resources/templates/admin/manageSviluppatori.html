@@ -13,6 +13,7 @@
 		<input class="search" type="text" th:value="${cognome}" name="cognome" placeholder="Cognome" />
 		<button id="submit" type="submit">Cerca</button>
 	</form>
+	<a href="/admin/formNewSviluppatore">Aggiungi sviluppatore</a>
 	<div th:if="${sviluppatori==null || sviluppatori.isEmpty()}">Non ci sono software nel sistema</div>
 	<ul>
 		<li th:each="sviluppatore : ${sviluppatori}">

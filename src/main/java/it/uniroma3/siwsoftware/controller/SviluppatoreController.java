@@ -126,8 +126,12 @@ public class SviluppatoreController {
 		Sviluppatore sviluppatore=sviluppatoreService.findById(idSviluppatore);
 		SoftwareHouse softwareHouse=this.softwareHouseService.findById(idSoftwareHouse);
 		
-		softwareHouse.removeSviluppatore(sviluppatore);
-		softwareHouseService.save(softwareHouse);
+		sviluppatore.setSoftwareHouse(null);
+		//softwareHouse.removeSviluppatore(sviluppatore);
+		
+		sviluppatoreService.save(sviluppatore);
+		//softwareHouseService.save(softwareHouse);
+		
 		
 		return "redirect:/admin/formAddSviluppatoreSoftwareHouse/"+idSoftwareHouse;
 	}
