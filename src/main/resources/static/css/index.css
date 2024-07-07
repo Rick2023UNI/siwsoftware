@@ -18,7 +18,8 @@
 
 .un-software {
 	display: inline-grid;
-	padding: 1rem;
+	padding: 1ch;
+	margin: 1.2ch;
 }
 
 .contenitore {

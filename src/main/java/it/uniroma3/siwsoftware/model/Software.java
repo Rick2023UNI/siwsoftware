@@ -153,4 +153,11 @@ public class Software {
 	
 	@ManyToOne
 	private SoftwareHouse softwareHouse;
+
+	public void aggiorna(Software softwareAggiornato) {
+		this.setNome(softwareAggiornato.getNome());
+		this.setAnnoPubblicazione(softwareAggiornato.getAnnoPubblicazione());
+		this.setCategoria(softwareAggiornato.getCategoria());
+		this.setSoftwareHouse(softwareAggiornato.getSoftwareHouse());
+	}
 }

@@ -58,8 +58,11 @@ public class SoftwareHouseController {
 		return "admin/formUpdateSoftwareHouse.html";
 	}
 	
-	@PostMapping("/admin/updateSoftwareHouse")
-	public String updateSoftwareHouse(@ModelAttribute("softwareHouse") SoftwareHouse softwareHouse) {
+	@PostMapping("/admin/updateSoftwareHouse/{id}")
+	public String updateSoftwareHouse(@PathVariable("id") Long id, 
+			@ModelAttribute("softwareHouse") SoftwareHouse softwareHouseAggiornato) {
+		SoftwareHouse softwareHouse=softwareHouseService.findById(id);
+		softwareHouse.aggiorna(softwareHouseAggiornato);
 		softwareHouseService.save(softwareHouse);
 		return "redirect:/softwareHouse/"+softwareHouse.getId();
 	}

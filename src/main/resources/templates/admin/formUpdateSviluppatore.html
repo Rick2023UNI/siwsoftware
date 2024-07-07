@@ -1,19 +1,32 @@
 <!DOCTYPE html>
-<html>  
-	<head>
-    <title>Nuovo Sviluppatore</title>
+<html>  <head>
+    <title>Modifica sviluppatore</title>
   </head>
   <body>
-    <h1>Aggiungi un sviluppatore</h1>
-    <form th:action="@{/admin/updateSviluppatore}" method="POST" th:object="${sviluppatore}">
-	<div>
-        Nome<span><input type="text" th:field="${sviluppatore.nome}" placeholder="Nome"/></span>
-      </div>
-      <div>
-        Cognome<span><input type="text" th:field="${sviluppatore.cognome}" placeholder="Cognome"/></span>
-      </div>
-        <span><button type="submit" class="submit">Conferma</button></span>
-      </div>
-   </form>
+	<form th:action="'/admin/updateSviluppatore/'+${sviluppatore.id}" method="POST" enctype="multipart/form-data" th:object="${utente}">
+			<div>
+	        Username: <span><input required type="text" th:field="${utente.username}"/></span>
+	      </div>
+	      <div>
+	        Password: <span><input required type="text" th:field="${utente.password}"/></span>
+	      </div>
+	      <div>
+			  <div>
+	        Nome: <span><input required type="text" th:field="${sviluppatore.nome}"/></span>
+	      </div>
+	      <div>
+	        Cognome: <span><input required type="text" th:field="${sviluppatore.cognome}"/></span>
+	      </div>
+	      <div>
+	        Foto profilo:
+			<br>
+			<input type="file" name='input-image' id="input-image" accept="image/png, image/jpeg"/>
+	      <br>
+	      </div>
+		  <img id="thumbnail"/>
+		  </div>
+	        <span><button type="submit" id="submit">Registrati</button></span>
+	      </div>
+	    </form>
   </body>
 </html>

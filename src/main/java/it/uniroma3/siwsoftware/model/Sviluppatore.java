@@ -2,6 +2,7 @@ package it.uniroma3.siwsoftware.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -76,4 +77,21 @@ public class Sviluppatore {
 	
 	@OneToOne
 	private Immagine foto;
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "sviluppatore")
+	private Utente utente;
+
+	public Utente getUtente() {
+		return utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+	}
+
+	public void aggiorna(Sviluppatore sviluppatoreAggiornato) {
+		this.setNome(sviluppatoreAggiornato.getNome());
+		this.setCognome(sviluppatoreAggiornato.getCognome());
+		
+	}
 }

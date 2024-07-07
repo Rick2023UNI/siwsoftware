@@ -5,6 +5,8 @@
 	<title>
 		Gestisci software House
 	</title>
+	<link rel="stylesheet" href="/css/_add.css" />
+	<link rel="stylesheet" href="/css/admin/manageSoftwareHouse.css" />
 </head>
 
 <body>
@@ -12,20 +14,29 @@
 		<input id="search" type="text" th:value="${nome}" name="nome" placeholder="Nome software house" />
 		<button id="submit" type="submit">Cerca</button>
 	</form>
-	<a href="/admin/formNewSoftwareHouse">Aggiungi software house</a>
+	<span>
+		<svg class="add" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+			<path fill-rule="evenodd"
+				d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+		</svg><a class="add-text" href="/admin/formNewSoftwareHouse">Aggiungi software house</a>
+	</span>
 	<div th:if="${softwareHouses==null || softwareHouses.isEmpty()}">Non ci sono software nel sistema</div>
-	<ul>
-		<li th:each="softwareHouse : ${softwareHouses}">
-			<a th:href="@{'/softwareHouse' + '/' + ${softwareHouse.id}}" th:text="${softwareHouse.nome}"></a>
-			<a th:href="@{'/admin/formUpdateSoftwareHouse/' + ${softwareHouse.id}}">
-				modifica
-			</a>
-			<a th:href="@{'/admin/formAddSviluppatoreSoftwareHouse/' + ${softwareHouse.id}}">
-							aggiungi/togli sviluppatori
-						</a>
-			<a th:href="@{'/admin/removeSoftwareHouse/' + ${softwareHouse.id}}">
-				elimina
-			</a>
+	<ul class="software-houses">
+		<li class="software-house" th:each="softwareHouse : ${softwareHouses}">
+			<span  class="barra-titolo">
+				<a th:href="@{'/softwareHouse' + '/' + ${softwareHouse.id}}" th:text="${softwareHouse.nome}"></a>
+				<a th:href="@{'/admin/formUpdateSoftwareHouse/' + ${softwareHouse.id}}">
+					modifica
+				</a>
+				<a th:href="@{'/admin/formAddSviluppatoreSoftwareHouse/' + ${softwareHouse.id}}">
+					aggiungi/togli sviluppatori
+				</a>
+				<a th:href="@{'/admin/removeSoftwareHouse/' + ${softwareHouse.id}}">
+					elimina
+				</a>
+				</span>
+			<img th:if="${softwareHouse.logo!=null || !softwareHouse.logo.isEmpty()}"
+											th:src="@{${softwareHouse.logo.getImagePath}}" class="immagine-software-house">
 		</li>
 	</ul>
 </body>

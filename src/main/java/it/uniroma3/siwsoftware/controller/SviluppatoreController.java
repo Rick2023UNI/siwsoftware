@@ -1,5 +1,6 @@
 package it.uniroma3.siwsoftware.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -7,26 +8,36 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siwsoftware.model.Immagine;
 import it.uniroma3.siwsoftware.model.Software;
 import it.uniroma3.siwsoftware.model.SoftwareHouse;
 import it.uniroma3.siwsoftware.model.Sviluppatore;
+import it.uniroma3.siwsoftware.model.Utente;
+import it.uniroma3.siwsoftware.service.ImmagineService;
 import it.uniroma3.siwsoftware.service.SoftwareHouseService;
 import it.uniroma3.siwsoftware.service.SoftwareService;
 import it.uniroma3.siwsoftware.service.SviluppatoreService;
+import it.uniroma3.siwsoftware.service.UtenteService;
 
 @Controller 
 public class SviluppatoreController {
 	@Autowired SviluppatoreService sviluppatoreService;
 	@Autowired SoftwareService softwareService;
 	@Autowired SoftwareHouseService softwareHouseService;
+	@Autowired ImmagineService immagineService;
+	@Autowired PasswordEncoder passwordEncoder;
+	@Autowired UtenteService utenteService;
 
 	@GetMapping("/sviluppatore/{id}")
 	public String getSviluppatore(@PathVariable("id") Long id, Model model) {
@@ -37,12 +48,28 @@ public class SviluppatoreController {
 	@GetMapping("/admin/formNewSviluppatore")
 	public String addSviluppatore(Model model) {
 		model.addAttribute("sviluppatore", new Sviluppatore());
+		model.addAttribute("utente", new Utente());
 		return "admin/formNewSviluppatore.html";
 	}
 	
 	@PostMapping("/admin/sviluppatore")
-	public String newSviluppatore(@ModelAttribute("sviluppatore") Sviluppatore sviluppatore) {
-		sviluppatoreService.save(sviluppatore);
+	public String newSviluppatore(@ModelAttribute("utente") Utente utente,
+			@ModelAttribute("sviluppatore") Sviluppatore sviluppatore,
+			@RequestParam("input-image") MultipartFile multipartFile) throws IOException {
+		this.sviluppatoreService.save(sviluppatore);
+		String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		Immagine immagine=new Immagine();
+		immagine.setFolder("sviluppatore");
+		fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
+		immagine.uploadImage(fileName, multipartFile);
+		this.immagineService.save(immagine);
+		sviluppatore.setFoto(immagine);
+
+		utente.setPassword(passwordEncoder.encode(utente.getPassword()));
+		utente.setSviluppatore(sviluppatore);
+		
+		this.sviluppatoreService.save(sviluppatore);
+		utenteService.save(utente);
 		return "redirect:/sviluppatore/"+sviluppatore.getId();
 	}
 	
@@ -151,13 +178,47 @@ public class SviluppatoreController {
 	
 	@GetMapping("/admin/formUpdateSviluppatore/{id}")
 	public String formUpdateSviluppatore(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("sviluppatore", this.sviluppatoreService.findById(id));
+		Sviluppatore sviluppatore=this.sviluppatoreService.findById(id);
+		model.addAttribute("sviluppatore", sviluppatore);
+		Utente utente=sviluppatore.getUtente();
+		utente.setPassword(null);
+		model.addAttribute("utente", utente);
 		return "admin/formUpdateSviluppatore.html";
 	}
 	
-	@PostMapping("/admin/updateSviluppatore")
-	public String updateSviluppatore(@ModelAttribute("sviluppatore") Sviluppatore sviluppatore) {
+	@PostMapping("/admin/updateSviluppatore/{id}")
+	public String updateSviluppatore(@PathVariable("id") Long id, 
+			@ModelAttribute("sviluppatore") Sviluppatore sviluppatoreAggiornato,
+			@ModelAttribute("utente") Utente utenteAggiornato,
+			@RequestParam("input-image") MultipartFile multipartFile) throws IOException {
+		Sviluppatore sviluppatore=sviluppatoreService.findById(id);
+		String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		/*Evita tentativo di caricare il file vuoto causato
+		 dall'ultimo input che viene aggiunto in automatico
+		 ed è sempre vuoto
+		 */
+		if (fileName!="") {
+			sviluppatore.getFoto().delete();
+			fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
+			Immagine immagine=new Immagine();
+			immagine.setFolder("sviluppatore");
+			immagine.uploadImage(fileName, multipartFile);
+			
+			sviluppatore.setFoto(immagine);
+			this.immagineService.save(immagine);
+		}
+		sviluppatore.aggiorna(sviluppatoreAggiornato);
 		sviluppatoreService.save(sviluppatore);
+		
+		
+		Utente utente=sviluppatore.getUtente();
+		utente.setUsername(utenteAggiornato.getUsername());
+		if (utenteAggiornato.getPassword()!=null) {
+			utente.setPassword(passwordEncoder.encode(utenteAggiornato.getPassword()));
+		}
+		utenteService.save(sviluppatore.getUtente());
+		
+		
 		return "redirect:/sviluppatore/"+sviluppatore.getId();
 	}
 	

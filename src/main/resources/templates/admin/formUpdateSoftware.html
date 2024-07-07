@@ -8,7 +8,7 @@
   </head>
   <body>
     <h1>Aggiungi un software</h1>
-    <form th:action="@{/admin/updateSoftware}" method="POST" th:object="${software}" enctype="multipart/form-data">
+    <form th:action="'/admin/updateSoftware/'+${software.id}" method="POST" th:object="${software}" enctype="multipart/form-data">
 	<div>
         Nome<span><input type="text" th:field="${software.nome}" placeholder="Nome"/></span>
       </div>

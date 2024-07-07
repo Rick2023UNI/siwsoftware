@@ -2,6 +2,8 @@ package it.uniroma3.siwsoftware.model;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +13,15 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Utente {
+	
+	public String getRuolo() {
+		return ruolo;
+	}
+
+	public void setRuolo(String ruolo) {
+		this.ruolo = ruolo;
+	}
+
 	public Long getId() {
 		return id;
 	}

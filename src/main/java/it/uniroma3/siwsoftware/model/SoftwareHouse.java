@@ -77,4 +77,8 @@ public class SoftwareHouse {
 	
 	@OneToMany(mappedBy = "softwareHouse")
 	private List<Software> software;
+	
+	public void aggiorna(SoftwareHouse softwareHouseAggiornato) {
+		this.setNome(softwareHouseAggiornato.getNome());
+	}
 }

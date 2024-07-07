@@ -1,5 +1,6 @@
 package it.uniroma3.siwsoftware.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -98,5 +99,9 @@ public class Immagine {
 			throw new IOException("Could not save the upload file: " + fileName);
 		}
 	}
-
+	
+	public void delete() {
+		File file = new File("./images/" + this.getFolder() + "/" + this.getFileName());
+		file.delete();
+	}
 }

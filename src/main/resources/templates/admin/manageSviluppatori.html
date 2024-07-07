@@ -5,6 +5,8 @@
 	<title>
 		Gestisci i sviluppatori
 	</title>
+	<link rel="stylesheet" href="/css/_add.css" />
+	<link rel="stylesheet" href="/css/admin/manageSviluppatori.css" />
 </head>
 
 <body>
@@ -13,17 +15,26 @@
 		<input class="search" type="text" th:value="${cognome}" name="cognome" placeholder="Cognome" />
 		<button id="submit" type="submit">Cerca</button>
 	</form>
-	<a href="/admin/formNewSviluppatore">Aggiungi sviluppatore</a>
+	<span>
+		<svg class="add" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+			<path fill-rule="evenodd"
+				d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+		</svg><a class="add-text" href="/admin/formNewSviluppatore">Aggiungi sviluppatore</a>
+	</span>
 	<div th:if="${sviluppatori==null || sviluppatori.isEmpty()}">Non ci sono software nel sistema</div>
-	<ul>
-		<li th:each="sviluppatore : ${sviluppatori}">
-			<a th:href="@{'/sviluppatore' + '/' + ${sviluppatore.id}}" th:text="${sviluppatore.nome}"></a>
-			<a th:href="@{'/admin/formUpdateSviluppatore/' + ${sviluppatore.id}}">
-				modifica
-			</a>
-			<a th:href="@{'/admin/removeSviluppatore/' + ${sviluppatore.id}}">
-				elimina
-			</a>
+	<ul class="sviluppatori">
+		<li class="sviluppatore" th:each="sviluppatore : ${sviluppatori}">
+			<span  class="barra-titolo">
+				<a th:href="@{'/sviluppatore' + '/' + ${sviluppatore.id}}" th:text="${sviluppatore.nome}"></a>
+				<a th:href="@{'/admin/formUpdateSviluppatore/' + ${sviluppatore.id}}">
+					modifica
+				</a>
+				<a th:href="@{'/admin/removeSviluppatore/' + ${sviluppatore.id}}">
+					elimina
+				</a>
+			</span>
+			<img th:if="${sviluppatore.foto!=null || !sviluppatore.foto.isEmpty()}"
+								th:src="@{${sviluppatore.foto.getImagePath}}" class="immagine-sviluppatore">
 		</li>
 	</ul>
 </body>

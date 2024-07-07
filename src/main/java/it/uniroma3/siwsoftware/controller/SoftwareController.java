@@ -104,11 +104,34 @@ public class SoftwareController {
 	@GetMapping("/admin/formUpdateSoftware/{id}")
 	public String formUpdateSoftware(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("software", this.softwareService.findById(id));
+		model.addAttribute("softwareHouse", softwareHouseService.findAll());
 		return "admin/formUpdateSoftware.html";
 	}
 	
-	@PostMapping("/admin/updateSoftware")
-	public String updateSoftware(@ModelAttribute("software") Software software) {
+	@PostMapping("/admin/updateSoftware/{id}")
+	public String updateSoftware(@PathVariable("id") Long id,
+			@ModelAttribute("software") Software softwareAggiornato,
+			@RequestParam("fileImage") MultipartFile[] multipartFiles) throws IOException {
+		Software software=this.softwareService.findById(id);
+		software.aggiorna(softwareAggiornato);
+		softwareService.save(software);
+		for (MultipartFile multipartFile : multipartFiles) {
+			//Caricamento delle immagini
+			String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			/*Evita tentativo di caricare il file vuoto causato
+			 dall'ultimo input che viene aggiunto in automatico
+			 ed è sempre vuoto
+			 */
+			if (fileName!="") {
+				Immagine immagine=new Immagine();
+				immagine.setFolder("software/"+software.getId());
+				immagine.uploadImage(fileName, multipartFile);
+				this.immagineService.save(immagine);
+				
+				software.addImmagine(immagine);
+				this.immagineService.save(immagine);
+			}
+		}
 		softwareService.save(software);
 		return "redirect:/software/"+software.getId();
 	}
