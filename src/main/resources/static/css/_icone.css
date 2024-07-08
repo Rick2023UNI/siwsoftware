@@ -1,0 +1,18 @@
+svg.icona {
+	max-width: 1.3rem;
+	max-height: 1.3rem;
+	margin-left: 0.5rem;
+	vertical-align: middle;
+}
+
+.cancellazione {
+	color: red;
+}
+
+.modifica {
+	color: green;
+}
+
+.gestione-sviluppatori {
+	color: #f7d204;
+}

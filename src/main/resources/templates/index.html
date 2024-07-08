@@ -9,6 +9,7 @@
 	
 	<link rel="stylesheet" href="/css/_input.css" />
 	<link rel="stylesheet" href="/css/_menu.css" />
+	<link rel="stylesheet" href="/css/_lista software.css" />
 </head>
 
 <body>
@@ -51,9 +52,11 @@
 	<ul id="software">
 		<li th:each="unSoft : ${software}" class="un-software">
 			<div class="contenitore">
-				<a th:href="@{'/software/' + ${unSoft.id}}" th:text="${unSoft.nome}" class="titolo"></a>
-				<img th:if="${unSoft.immagini!=null || !unSoft.immagini.isEmpty()}"
-					th:src="@{${unSoft.immagini[0].getImagePath}}" class="immagine-software">
+				<span th:text="${unSoft.nome}" class="titolo"></span>
+				<a th:href="@{'/software/' + ${unSoft.id}}">
+					<img th:if="${unSoft.immagini!=null || !unSoft.immagini.isEmpty()}" th:src="@{${unSoft.immagini[0].getImagePath}}"
+						class="immagine-software">
+				</a>
 				<div class="footer">
 					<span th:text="${unSoft.categoria}" class="categoria"></span>
 					<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd")}' class="data"></span>

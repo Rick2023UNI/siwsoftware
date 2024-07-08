@@ -22,7 +22,7 @@
 	<button onclick="showHideCommentForm()" id="showHideCommentForm">Recensisci</button>
 	<br>
 	<div id="commentForm" style="display: none;">
-		<a th:href="@{'removeRecensione/' + ${recensione.id}}">Elimina</a>
+		<a th:if="${recensione.id}!=null" th:href="@{'/removeRecensione/' + ${recensione.id}}">Elimina</a>
 		<h3>Nuovo commento</h3>
 		<form th:action="@{/recensione/}+${software.id}" method="POST" th:object="${recensione}">
 			<div>

@@ -1,0 +1,16 @@
+.barra-titolo {
+	position: absolute;
+	padding: 1ch;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 2ch;
+	max-width: 26ch;
+	overflow-wrap: break-word;
+	color:black;
+	z-index: 1;
+}
+
+.barra-titolo a {
+	text-decoration: none;
+	color: black;
+}
