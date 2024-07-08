@@ -1,5 +1,7 @@
 package it.uniroma3.siwsoftware.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,7 +34,10 @@ public class RecensioneController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Utente utente=utenteService.getCredentials(user.getUsername());
-
+		
+		Date oggi = new Date();
+		recensione.setData(oggi);
+		
 		software.addRecensione(recensione);
 		recensione.setSoftware(software);
 		recensione.setUtente(utente);

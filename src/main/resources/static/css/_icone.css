@@ -16,3 +16,12 @@ svg.icona {
 .gestione-sviluppatori {
 	color: #f7d204;
 }
+
+a {
+	text-decoration: none;
+}
+
+h1 {
+	display: inline;
+	vertical-align: middle;
+}
