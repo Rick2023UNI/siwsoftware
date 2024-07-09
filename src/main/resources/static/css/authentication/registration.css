@@ -1,0 +1,20 @@
+#input-image {
+	display:none;
+}
+
+.icona-upload {
+	width: 3ch;
+	height: 3ch;
+	vertical-align: middle;
+}
+
+#thumbnail {
+	width: 10rem;
+	height: 10rem;
+	object-fit: cover;
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-top: 3%;
+	margin-bottom: 3%;
+	display: none;
+}
