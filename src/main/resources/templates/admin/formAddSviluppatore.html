@@ -15,7 +15,7 @@
 			<span>
 				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}" th:href="'/admin/removeSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" 
 					class="nome-sviluppatore"></a>
-				<img th:src="@{${sviluppatore.foto.getImagePath}}" class="immagine-sviluppatore"></img>
+				<img th:src="@{${sviluppatore.utente.foto.getImagePath}}" class="immagine-sviluppatore"></img>
 			</span>
 		</li>
 	</ul>
@@ -25,7 +25,7 @@
 			<span>
 				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"  th:href="'/admin/addSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" 
 					class="nome-sviluppatore"></a>
-				<img th:src="@{${sviluppatore.foto.getImagePath}}" class="immagine-sviluppatore"></img>
+				<img th:src="@{${sviluppatore.utente.foto.getImagePath}}" class="immagine-sviluppatore"></img>
 			</span>
 		</li>
 	</ul>

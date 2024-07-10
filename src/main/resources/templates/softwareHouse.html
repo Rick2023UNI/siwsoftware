@@ -43,7 +43,7 @@
 			<span>
 				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"
 					th:href="'/sviluppatore/'+${sviluppatore.id}" class="nome-sviluppatore"></a>
-				<img th:src="@{${sviluppatore.foto.getImagePath}}" class="immagine-sviluppatore"></img>
+				<img th:src="@{${sviluppatore.utente.foto.getImagePath}}" class="immagine-sviluppatore"></img>
 			</span>
 		</li>
 	</ul>

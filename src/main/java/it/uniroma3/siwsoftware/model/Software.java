@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import it.uniroma3.siwsoftware.service.RecensioneService;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -145,7 +146,7 @@ public class Software {
 	
 	private String categoria;
 	
-	@OneToMany(mappedBy = "software")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "software")
 	private List<Recensione> recensioni;
 	
 	@ManyToMany

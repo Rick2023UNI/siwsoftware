@@ -1,4 +1,4 @@
-#sviluppatore-corrente-immagine {
+#utente-corrente-immagine {
 	width: 4rem;
 	height: 4rem;
 	object-fit: cover;
@@ -8,6 +8,6 @@
 	
 }
 
-#sviluppatore-corrente-immagine:hover {
+#utente-corrente-immagine:hover {
 	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
 }

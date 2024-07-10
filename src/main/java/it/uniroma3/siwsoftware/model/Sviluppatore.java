@@ -13,14 +13,6 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Sviluppatore {
-	public Immagine getFoto() {
-		return foto;
-	}
-
-	public void setFoto(Immagine foto) {
-		this.foto = foto;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -74,9 +66,6 @@ public class Sviluppatore {
 	
 	@ManyToOne
 	private SoftwareHouse softwareHouse;
-	
-	@OneToOne
-	private Immagine foto;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "sviluppatore")
 	private Utente utente;

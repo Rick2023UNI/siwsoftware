@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -61,7 +62,15 @@ public class Utente {
 	public void setRecensioni(List<Recensione> recensioni) {
 		this.recensioni = recensioni;
 	}
+	
+	public Immagine getFoto() {
+		return foto;
+	}
 
+	public void setFoto(Immagine foto) {
+		this.foto = foto;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -72,9 +81,12 @@ public class Utente {
 	
 	private String ruolo;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Sviluppatore sviluppatore;
 	
 	@OneToMany(mappedBy = "utente")
 	private List<Recensione> recensioni;
+	
+	@OneToOne
+	private Immagine foto;
 }

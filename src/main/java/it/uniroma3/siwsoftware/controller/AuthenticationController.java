@@ -69,7 +69,7 @@ public class AuthenticationController {
 		fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
 		immagine.uploadImage(fileName, multipartFile);
 		this.immagineService.save(immagine);
-		sviluppatore.setFoto(immagine);
+		utente.setFoto(immagine);
 
 		utente.setPassword(passwordEncoder.encode(utente.getPassword()));
 		utente.setSviluppatore(sviluppatore);

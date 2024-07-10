@@ -28,7 +28,7 @@
 
 				<div>
 					<a th:if="${utenteAuth!=null}" th:href="@{'/sviluppatore/' + ${sviluppatoreAuth.id}}" id="account">
-						<img th:src="@{${sviluppatoreAuth.foto.getImagePath}}" id="sviluppatore-corrente-immagine">
+						<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" id="utente-corrente-immagine">
 					</a>
 					<a th:if="${utenteAuth!=null}" href="/logout" id="esci">Esci</a>
 					<a th:unless="${utenteAuth!=null}" href="/login" id="accedi">Accedi</a>

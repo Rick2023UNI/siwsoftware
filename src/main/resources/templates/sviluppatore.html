@@ -3,26 +3,46 @@
 
 <head>
 	<title>Sviluppatore</title>
+	<link rel="stylesheet" href="/css/sviluppatore.css" />
+	
+	<link rel="stylesheet" href="/css/_lista software.css" />
 </head>
 
 <body>
 	<h1 th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"></h1>
-	<h2 th:text="'lavora correntemente per '+${sviluppatore.softwareHouse}">software house</h2>
+	<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" class="sviluppatore-immagine">
+	<h2>lavora correntemente per <a th:text="${sviluppatore.softwareHouse.nome}" th:href="'/softwareHouse/'+${sviluppatore.softwareHouse.id}"></a></h2>
+	<span th:text="'Ha lavorato a ' + ${sviluppatore.software.size} + ' software'"></span>
+	<div th:if="${sviluppatore.software==null || sviluppatore.software.isEmpty()}">Non ci sono software per lo sviluppatore corrente</div>
+	<ul id="software">
+			<li th:each="unSoft : ${sviluppatore.software}" class="un-software">
+				<div class="contenitore">
+					<span th:text="${unSoft.nome}" class="titolo"></span>
+					<a th:href="@{'/software/' + ${unSoft.id}}">
+						<img th:if="${unSoft.immagini!=null || !unSoft.immagini.isEmpty()}" th:src="@{${unSoft.immagini[0].getImagePath}}"
+							class="immagine-software">
+					</a>
+					<div class="footer">
+						<span th:text="${unSoft.categoria}" class="categoria"></span>
+						<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd")}' class="data"></span>
 
-	
-	<div th:if="${software==null || software.isEmpty()}">Non ci sono software per lo sviluppatore corrente</div>
-	<ul>
-				<li th:each="unSoft : ${software}" class="listItem">
-					<div>
-						<img th:src="@{${unSoft.immagini[0].getImagePath}}" class="recipeImage">
-						<div>
-							<a th:href="@{'/software/' + ${unSoft.id}}" th:text="${unSoft.nome}"></a>
-							<p th:text="${unSoft.categoria}"></p>
-							<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd HH:mm")}'></span>
+						<span class="footer-icone">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+								<path
+									d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+							</svg>
+							<span th:text="${unSoft.getRecensioni().size()}"></span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+								<path
+									d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+							</svg>
+							<span th:text="${unSoft.getMediaStelle()}"></span>
+						</span>
 						</div>
 					</div>
-				</li>
-			</ul>
+				</div>
+			</li>
+		</ul>
 </body>
 
 </html>

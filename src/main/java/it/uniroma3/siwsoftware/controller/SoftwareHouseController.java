@@ -55,14 +55,26 @@ public class SoftwareHouseController {
 	@GetMapping("/admin/formUpdateSoftwareHouse/{id}")
 	public String formUpdateSoftwareHouse(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("softwareHouse", this.softwareHouseService.findById(id));
-		return "admin/formUpdateSoftwareHouse.html";
+		return "admin/formNewSoftwareHouse.html";
 	}
 	
 	@PostMapping("/admin/updateSoftwareHouse/{id}")
 	public String updateSoftwareHouse(@PathVariable("id") Long id, 
-			@ModelAttribute("softwareHouse") SoftwareHouse softwareHouseAggiornato) {
+			@ModelAttribute("softwareHouse") SoftwareHouse softwareHouseAggiornato,
+			@RequestParam("input-immagine") MultipartFile multipartFile) throws IOException {
 		SoftwareHouse softwareHouse=softwareHouseService.findById(id);
 		softwareHouse.aggiorna(softwareHouseAggiornato);
+		softwareHouse.getLogo().delete();
+		
+		String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		Immagine immagine=new Immagine();
+		immagine.setFolder("softwareHouse");
+		fileName=softwareHouse.getId()+fileName.substring(fileName.lastIndexOf('.'));
+		immagine.uploadImage(fileName, multipartFile);
+		this.immagineService.save(immagine);
+		
+		softwareHouse.setLogo(immagine);
+		
 		softwareHouseService.save(softwareHouse);
 		return "redirect:/softwareHouse/"+softwareHouse.getId();
 	}

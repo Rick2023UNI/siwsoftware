@@ -63,7 +63,7 @@ public class SviluppatoreController {
 		fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
 		immagine.uploadImage(fileName, multipartFile);
 		this.immagineService.save(immagine);
-		sviluppatore.setFoto(immagine);
+		sviluppatore.getUtente().setFoto(immagine);
 
 		utente.setPassword(passwordEncoder.encode(utente.getPassword()));
 		utente.setSviluppatore(sviluppatore);
@@ -200,13 +200,13 @@ public class SviluppatoreController {
 		 ed è sempre vuoto
 		 */
 		if (fileName!="") {
-			sviluppatore.getFoto().delete();
+			sviluppatore.getUtente().getFoto().delete();
 			fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
 			Immagine immagine=new Immagine();
 			immagine.setFolder("sviluppatore");
 			immagine.uploadImage(fileName, multipartFile);
 			
-			sviluppatore.setFoto(immagine);
+			sviluppatore.getUtente().setFoto(immagine);
 			this.immagineService.save(immagine);
 		}
 		sviluppatore.aggiorna(sviluppatoreAggiornato);

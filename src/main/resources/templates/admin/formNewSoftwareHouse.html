@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>  
 	<head>
-    <title>Nuova Software House</title>
+    <title th:if="${softwareHouse.id==null}">Nuova Software House</title>
+	<title th:if="${softwareHouse.id!=null}">Modifica Software House</title>
 	
 	<script src="/js/3.7.1_jquery.min.js"></script>
+	
+	<script src="/js/admin/formNewSoftwareHouse.js"></script>
+	
 	<script src="/js/_form.js"></script>
-	<link rel="stylesheet" href="/css/_form.css?version=3" />
+	<link rel="stylesheet" href="/css/_form.css?version=3"/>
+	
+	<link rel="stylesheet" href="/css/admin/formNewSoftwareHouse.css?version=3"/>
   </head>
   <body>
-    <h1>Aggiungi una software house</h1>
-    <form th:action="@{/admin/softwareHouse}" method="POST" th:object="${softwareHouse}" enctype="multipart/form-data">
+    <h1 th:if="${softwareHouse.id==null}">Aggiungi una software house</h1>
+	<h1 th:if="${softwareHouse.id!=null}">Modifica una software house</h1>
+    <form th:action="${softwareHouse.id!=null} ? '/admin/updateSoftwareHouse/' + ${softwareHouse.id} : '/admin/softwareHouse'" method="POST" th:object="${softwareHouse}" enctype="multipart/form-data">
 		<div class="input-div">
 		    <label class="input-label">Nome</label>
 		    <input th:field="${softwareHouse.nome}" required name='nome' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
@@ -20,6 +27,7 @@
 		  <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M6.354 9.854a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 8.707V12.5a.5.5 0 0 1-1 0V8.707z"></path>
 		</svg> Carica file</label>
 		<br>
+		<img th:src="${softwareHouse.id!=null} ? ${softwareHouse.logo.getImagePath()} : ''" method="POST" th:object="${softwareHouse}" id="thumbnail" class="immagine"/>
 		<br>
         <span><button type="submit" class="bottone">Conferma</button></span>
       </div>
