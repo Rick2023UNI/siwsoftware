@@ -1,0 +1,9 @@
+.contenitore-immagine {
+	display: flex;
+	margin-left: 0;
+}
+
+.immagini {
+	list-style-type: none;
+	margin-left: 0;
+}

@@ -8,7 +8,7 @@ function newImageInputAndThumbnail() {
 
 function removeImageInput(event) {
 	//Rimuove il nodo genitore dell'elemento che ha lanciato l'evento
-	event.target.parentElement.parentElement.parentElement.remove();
+	event.currentTarget.parentElement.parentElement.remove();
 }
 //Inizializzazione evento per l'aggiunta di ulteriori input
 $(document).ready(function() {
@@ -27,9 +27,9 @@ function showRecipeImageThumbnail(fileInput) {
 }
 
 function addImageInput() {
-	var images = document.getElementById("images");
+	var images = document.getElementById("immagini");
 	//Creazione nuovo input e impostazione
-	var newDiv = images.getElementsByClassName("imageUpload")[0].cloneNode(true);
+	var newDiv = images.getElementsByClassName("carica-immagine")[0].cloneNode(true);
 	//Impostazione id del nuovo div contenente il nuovo input
 	newDiv.id = 'image' + i.toString();
 
@@ -54,22 +54,22 @@ function addImageInput() {
 	image.setAttribute("src", "");
 
 	var A = newDiv.getElementsByTagName("a")[0];
-	A.classList.add("hidden")
+	A.classList.add("nascosto")
 
 	images.appendChild(newDiv);
 
 	//Nasconde precedente input file
-	var imageUploads = images.getElementsByClassName("imageUpload");
-	document.getElementById("image" + (i - 1)).getElementsByClassName("label")[0].style.display = "none";
+	var imageUploads = images.getElementsByClassName("carica-immagine");
+	document.getElementById("image" + (i - 1)).getElementsByClassName("bottone")[0].style.display = "none";
 
 	//Reset nuovo input
-	document.getElementById("image" + i).getElementsByClassName("label")[0].style.display = "block";
+	document.getElementById("image" + i).getElementsByClassName("bottone")[0].style.display = "block";
 
-	console.log(imageUploads[imageUploads.length - 2].getElementsByTagName("label")[0]);
+	console.log(imageUploads[imageUploads.length - 2].getElementsByTagName("bottone")[0]);
 	if ($('#image' + (i - 1)).length > 0) {
 		//Aggiunta possibilità rimozione elemento precedente
 		var newA = document.getElementById('fileImageRemove' + (i - 1));
-		newA.classList.remove("hidden");
+		newA.classList.remove("nascosto");
 		$('#fileImageRemove' + (i - 1)).click(function(event) { removeImageInput(event); });
 	}
 }

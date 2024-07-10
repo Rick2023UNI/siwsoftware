@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('#input-image').change(aggiorna);
+	$('#input-immagine').change(aggiorna);
 });
 
 function aggiorna() {

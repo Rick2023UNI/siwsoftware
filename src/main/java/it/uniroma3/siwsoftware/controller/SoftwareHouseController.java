@@ -37,7 +37,7 @@ public class SoftwareHouseController {
 	
 	@PostMapping("/admin/softwareHouse")
 	public String newSoftwareHouse(@ModelAttribute("softwareHouse") SoftwareHouse softwareHouse,
-			@RequestParam("input-image") MultipartFile multipartFile) throws IOException {
+			@RequestParam("input-immagine") MultipartFile multipartFile) throws IOException {
 		softwareHouseService.save(softwareHouse);
 		
 		String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());

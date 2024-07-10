@@ -153,3 +153,7 @@ input {
 	text-decoration: none;
 	display: block;
 }
+
+.nascosto {
+	display: none;
+}

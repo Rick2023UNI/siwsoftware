@@ -25,7 +25,7 @@
 	<ul class="software-houses">
 		<li class="software-house" th:each="softwareHouse : ${softwareHouses}">
 			<span  class="barra-titolo">
-				<a th:href="@{'/softwareHouse' + '/' + ${softwareHouse.id}}" th:text="${softwareHouse.nome}"></a>
+				<a class="titolo" th:href="@{'/softwareHouse' + '/' + ${softwareHouse.id}}" th:text="${softwareHouse.nome}"></a>
 				<a th:href="@{'/admin/formUpdateSoftwareHouse/' + ${softwareHouse.id}}">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icona modifica"
 						viewBox="0 0 16 16">

@@ -61,7 +61,7 @@ public class AuthenticationController {
 	@PostMapping("/register")
 	public String registerUtente(@ModelAttribute("utente") Utente utente,
 			@ModelAttribute("sviluppatore") Sviluppatore sviluppatore,
-			@RequestParam("input-image") MultipartFile multipartFile) throws IOException {
+			@RequestParam("input-immagine") MultipartFile multipartFile) throws IOException {
 		this.sviluppatoreService.save(sviluppatore);
 		String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		Immagine immagine=new Immagine();
