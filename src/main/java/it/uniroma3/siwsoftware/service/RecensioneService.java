@@ -35,4 +35,8 @@ public class RecensioneService {
 		recensioneRepository.delete(recensione);
 		
 	}
+
+	public boolean existsById(Long id) {
+		return recensioneRepository.existsById(id);
+	}
 }

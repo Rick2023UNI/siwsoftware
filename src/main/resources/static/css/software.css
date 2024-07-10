@@ -1,33 +1,10 @@
-.nome-sviluppatore {
-	text-decoration: none;
-	vertical-align: middle;
-	color:black;
-	font-size: 3ch;
-}
-
-.immagine-sviluppatore {
-	vertical-align: middle;
-	width: 4rem;
-	height: 4rem;
-	object-fit: cover;
-	border-radius: 50%;
-	vertical-align: middle;
-	margin-right: 1rem;
-	margin-left: 1rem;
-}
-
-.sviluppatore, .recensione{
+.recensione{
 	border-radius: 10%;
 	border-radius: 25px;
 	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
 	display: inline-grid;
   	padding: 1ch;
   	margin: 0.4ch;
-}
-
-.sviluppatori {
-	overflow: auto;
- 	white-space: nowrap;
 }
 
 .recensione {
@@ -92,6 +69,34 @@
 	color: gold;
 }
 
+.input-recensione {
+	background-color: none;
+	outline: 0;
+  border-width: 0 0 1px;
+  border-color: #80868b;
+  margin-bottom: 1ch;
+  transition: 150ms;
+}
+
+.input-recensione:focus {
+	border-width: 0 0 2px;
+  	border-color: #1a73e8;
+}
+
+.submit {
+	border: none;
+	background: none;
+}
+
+.conferma {
+	color: green;
+	font-weight: 700;
+}
+
+.annulla {
+	color: red;
+}
+
 .slider-wrapper {
 	position: relative;
 	max-width: 48rem;
@@ -107,12 +112,9 @@
 	box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
 	border-radius: 0.5rem;
 	-ms-overflow-style: none;
-	/* Hide scrollbar IE and Edge */
 	scrollbar-width: none;
-	/* Hide scrollbar Firefox */
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .slider::-webkit-scrollbar {
 	display: none;
 }

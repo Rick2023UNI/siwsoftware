@@ -5,22 +5,31 @@
 	<title>
 		SiwSoftware - aggiungi sviluppatore
 	</title>
+	<link rel="stylesheet" href="/css/_lista sviluppatori.css" />
 </head>
 
 <body>
-	<ul  th:if="${software.sviluppatori!=null || !software.sviluppatori.isEmpty()}" >
-			<li th:each="sviluppatore : ${software.sviluppatori}">
-						<a th:href="'/admin/removeSviluppatore' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" th:text="${sviluppatore.nome} + ', ' + ${sviluppatore.cognome}"></a>
-			</li>
-		</ul>
-		
-		<ul  th:if="${sviluppatori!=null || !sviluppatori.isEmpty()}" >
-					<li th:each="sviluppatore : ${sviluppatori}">
-								<a th:href="'/admin/addSviluppatore' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" th:text="${sviluppatore.nome} + ', ' + ${sviluppatore.cognome}"></a>
-					</li>
-				</ul>
-
-		<a th:href="'/software/' + ${software.id}" class="button">Fine</a>
+	<h3>Aggiunti</h3>
+	<ul class="sviluppatori" th:if="${software.sviluppatori!=null || !software.sviluppatori.isEmpty()}">
+		<li th:each="sviluppatore : ${software.sviluppatori}" class="sviluppatore">
+			<span>
+				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}" th:href="'/admin/removeSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" 
+					class="nome-sviluppatore"></a>
+				<img th:src="@{${sviluppatore.foto.getImagePath}}" class="immagine-sviluppatore"></img>
+			</span>
+		</li>
+	</ul>
+	<h3>Sviluppatori</h3>
+	<ul class="sviluppatori" th:if="${sviluppatori!=null || !sviluppatori.isEmpty()}">
+		<li th:each="sviluppatore : ${sviluppatori}" class="sviluppatore">
+			<span>
+				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"  th:href="'/admin/addSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" 
+					class="nome-sviluppatore"></a>
+				<img th:src="@{${sviluppatore.foto.getImagePath}}" class="immagine-sviluppatore"></img>
+			</span>
+		</li>
+	</ul>
+	<a th:href="'/s' + ${operazione} + '/' + ${software.id}" class="button">Fine</a>
 </body>
 
 </html>

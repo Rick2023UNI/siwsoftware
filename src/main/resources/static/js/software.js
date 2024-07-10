@@ -1,11 +1,27 @@
 function showHideCommentForm() {
+	var recensione = document.getElementById("recensione-utente-corrente");
+	
   var form = document.getElementById("commentForm");
   var button = document.getElementById("showHideCommentForm");
   if (form.style.display == "none") {
-	button.textContent="Non recensisci";
+	//Nasconde recensione se presente
+	if (recensione!=null) {
+		recensione.style.display = "none";
+	}
+	
+	if (button!=null) {
+		button.textContent="Non recensisci";
+	}
     form.style.display = "block";
   } else {
-	  button.textContent="Recensisci";
+	//Nasconde recensione se presente
+	if (recensione!=null) {
+		recensione.style.display = "";
+	}
+	
+	if (button!=null) {
+		button.textContent="Recensisci";
+	}
     form.style.display = "none";
   }
   stelleSelezionate(document.getElementById("numeroStelle").value);
@@ -37,4 +53,23 @@ function stelleSelezionate(numero) {
 		stella.classList.remove('non-selezionata');
 		stella.classList.add('selezionata');
 	}
+}
+
+function annulla (){
+	//Reimposta titolo
+	var titolo = document.getElementById("titolo");
+	titolo.value = titolo.defaultValue;
+	
+	//Reimposta descrizione
+	var descrizione = document.getElementById("descrizione");
+	descrizione.value = descrizione.defaultValue;
+	
+	//Reimposta valore input del numero stelle
+	var numeroStelle  = document.getElementById("numeroStelle");
+	numeroStelle.value = numeroStelle.defaultValue;
+	
+	//Aggiornamento delle stelle selezionate
+	stelleSelezionate(numeroStelle.defaultValue);
+	
+	showHideCommentForm();
 }

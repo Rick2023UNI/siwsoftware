@@ -1,0 +1,31 @@
+.sviluppatori {
+	overflow: auto;
+ 	white-space: nowrap;
+}
+
+.sviluppatore{
+	border-radius: 10%;
+	border-radius: 25px;
+	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
+	display: inline-grid;
+  	padding: 1ch;
+  	margin: 0.4ch;
+}
+
+.nome-sviluppatore {
+	text-decoration: none;
+	vertical-align: middle;
+	color:black;
+	font-size: 3ch;
+}
+
+.immagine-sviluppatore {
+	vertical-align: middle;
+	width: 4rem;
+	height: 4rem;
+	object-fit: cover;
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-right: 1rem;
+	margin-left: 1rem;
+}

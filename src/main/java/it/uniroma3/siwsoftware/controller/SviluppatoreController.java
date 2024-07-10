@@ -85,7 +85,8 @@ public class SviluppatoreController {
 		ArrayList<Sviluppatore> sviluppatori=(ArrayList<Sviluppatore>) this.sviluppatoreService.findAll();
 		sviluppatori.removeAll(software.getSviluppatori());
 		model.addAttribute("sviluppatori", sviluppatori);
-		model.addAttribute("operazione", "Software");
+		//La s è mancante per rendere possibile concatenare la s minuscola o maiuscola a seconda del caso
+		model.addAttribute("operazione", "oftware");
 		return "admin/formAddSviluppatore.html";
 	}
 	
@@ -126,7 +127,8 @@ public class SviluppatoreController {
 		sviluppatori.removeAll(softwareHouse.getSviluppatori());
 		model.addAttribute("software", softwareHouse);
 		model.addAttribute("sviluppatori", sviluppatori);
-		model.addAttribute("operazione", "SoftwareHouse");
+		//La s è mancante per rendere possibile concatenare la s minuscola o maiuscola a seconda del caso
+		model.addAttribute("operazione", "oftwareHouse");
 		return "admin/formAddSviluppatore.html";
 	}
 	

@@ -1,6 +1,7 @@
 package it.uniroma3.siwsoftware.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -87,7 +88,7 @@ public class SoftwareController {
 	public String getSoftware(@PathVariable("id") Long id, Model model) {
 		Software software=this.softwareService.findById(id);
 		model.addAttribute("software", software);
-		//Da rimuovere il commento dell'utente corrente dalla lista di commenti mostrati
+		List<Recensione> recensioni=software.getRecensioni();
 			
 		//Utente corrente
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -97,7 +98,11 @@ public class SoftwareController {
 		if (recensione==null) {
 			recensione=new Recensione();
 		}
+		
+		//Rimozione recensione utente corrente
+		recensioni.remove(recensione);
 		model.addAttribute("recensione", recensione);
+		model.addAttribute("recensioni", recensioni);
 		return "software.html";
 	}
 	

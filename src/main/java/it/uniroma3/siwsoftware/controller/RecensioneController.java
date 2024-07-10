@@ -26,10 +26,17 @@ public class RecensioneController {
 	@Autowired SoftwareService softwareService;
 	@Autowired UtenteService utenteService;
 
-	@PostMapping("/recensione/{id}")
-	public String newRecensione(@PathVariable("id") Long id, @ModelAttribute("recensione") Recensione recensione) {
-		Software software=softwareService.findById(id);
-
+	@PostMapping("/recensione/{idSoftware}/{idRecensione}")
+	public String newRecensione(@PathVariable("idSoftware") Long idSoftware, 
+			@PathVariable("idRecensione") Long idRecensione, 
+			@ModelAttribute("recensione") Recensione recensione) {
+		Software software=softwareService.findById(idSoftware);
+		
+		if(recensioneService.existsById(idRecensione)) {
+			Recensione vecchiaRecensione=recensioneService.findById(idRecensione);
+			recensioneService.delete(vecchiaRecensione);
+		}
+		
 		//Utente corrente
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -43,14 +50,36 @@ public class RecensioneController {
 		recensione.setUtente(utente);
 		recensioneService.save(recensione);
 		softwareService.save(software);
-		return "redirect:/software/"+id;
+		return "redirect:/software/"+idSoftware;
+	}
+	
+	@PostMapping("/recensione/{idSoftware}")
+	public String newRecensione(@PathVariable("idSoftware") Long idSoftware,
+			@ModelAttribute("recensione") Recensione recensione) {
+		Software software=softwareService.findById(idSoftware);
+		
+		//Utente corrente
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Utente utente=utenteService.getCredentials(user.getUsername());
+		
+		Date oggi = new Date();
+		recensione.setData(oggi);
+		
+		software.addRecensione(recensione);
+		recensione.setSoftware(software);
+		recensione.setUtente(utente);
+		recensioneService.save(recensione);
+		softwareService.save(software);
+		return "redirect:/software/"+idSoftware;
 	}
 
 	@GetMapping("/removeRecensione/{idRecensione}")
 	public String removeRecensione(@PathVariable("idRecensione") Long id,
 			Model model) {
 		Recensione recensione=this.recensioneService.findById(id);
-
+		Software software = recensione.getSoftware();
+		
 		//Utente corrente
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -60,6 +89,6 @@ public class RecensioneController {
 		if (recensione.getUtente()==utente || auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("admin"))) {
 			recensioneService.delete(recensione);
 		}
-		return "redirect:/software/"+id; 
+		return "redirect:/software/"+software.getId(); 
 	}
 }
