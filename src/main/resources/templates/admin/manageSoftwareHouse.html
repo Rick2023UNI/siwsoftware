@@ -8,6 +8,10 @@
 	<link rel="stylesheet" href="/css/_add.css" />
 	<link rel="stylesheet" href="/css/admin/manageSoftwareHouse.css" />
 	<link rel="stylesheet" href="/css/_icone.css" />
+	
+	<script src="/js/3.7.1_jquery.min.js"></script>
+	<link rel="stylesheet" href="/css/_avviso.css" />
+	<script src="/js/_avviso.js"></script>
 </head>
 
 <body>
@@ -38,7 +42,7 @@
 					  <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
 					</svg>
 				</a>
-				<a th:href="@{'/admin/removeSoftwareHouse/' + ${softwareHouse.id}}">
+				<a th:onclick="@{'verifica(&quot;/admin/removeSoftwareHouse/' + ${softwareHouse.id}+'&quot;)'}">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icona cancellazione"
 						viewBox="0 0 16 16">
 						<path
@@ -50,6 +54,22 @@
 											th:src="@{${softwareHouse.logo.getImagePath}}" class="immagine-software-house">
 		</li>
 	</ul>
+	
+	<div class="avviso" id="avviso">
+		<div class="contenuto-avviso">
+			<div class="header-avviso">
+				<span class="chiudi">&times;</span>
+				<h2>Conferma eliminazione</h2>
+			</div>
+			<div class="body-avviso">
+				<span>L'eliminazione della software house comporta anche l'eliminazione dei relativi software e delle relative recensioni. L'eliminazione &egrave; un'operazione irreversibile.</span>
+				<p>Vuoi confermare l'eliminazione del software?</p>
+				<span>
+					<button id="annulla">Annulla</button>
+					<button id="conferma">Conferma</button>
+				</span>
+			</div>
+		</div>
 </body>
 
 </html>

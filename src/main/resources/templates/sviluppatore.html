@@ -11,7 +11,7 @@
 <body>
 	<h1 th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"></h1>
 	<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" class="sviluppatore-immagine">
-	<h2>lavora correntemente per <a th:text="${sviluppatore.softwareHouse.nome}" th:href="'/softwareHouse/'+${sviluppatore.softwareHouse.id}"></a></h2>
+	<h2>lavora correntemente per <a class="link" th:text="${sviluppatore.softwareHouse.nome}" th:href="'/softwareHouse/'+${sviluppatore.softwareHouse.id}"></a></h2>
 	<span th:text="'Ha lavorato a ' + ${sviluppatore.software.size} + ' software'"></span>
 	<div th:if="${sviluppatore.software==null || sviluppatore.software.isEmpty()}">Non ci sono software per lo sviluppatore corrente</div>
 	<ul id="software">
