@@ -12,18 +12,26 @@
 	<script src="/js/3.7.1_jquery.min.js"></script>
 	<link rel="stylesheet" href="/css/_avviso.css" />
 	<script src="/js/_avviso.js"></script>
+	
+	<link rel="stylesheet" href="/css/_form.css" />
 </head>
 
 <body>
 	<form th:action="@{/admin/manageSoftwareHouses}" method="post">
-		<input id="search" type="text" th:value="${nome}" name="nome" placeholder="Nome software house" />
-		<button id="submit" type="submit">Cerca</button>
+		<div class="input-div">
+		    <input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome" onfocus="setFocus(true)" onblur="setFocus(false)">
+			<button id="cerca" type="submit">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+				  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+				</svg>
+			</button>
+		</div>
 	</form>
-	<span>
-		<svg class="add" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	<span class="aggiungi-span">
+			<svg class="aggiungi" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
 			<path fill-rule="evenodd"
 				d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-		</svg><a class="add-text" href="/admin/formNewSoftwareHouse">Aggiungi software house</a>
+		</svg><a href="/admin/formNewSoftwareHouse">Aggiungi software house</a>
 	</span>
 	<div th:if="${softwareHouses==null || softwareHouses.isEmpty()}">Non ci sono software nel sistema</div>
 	<ul class="software-houses">

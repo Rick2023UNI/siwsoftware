@@ -46,16 +46,36 @@ public class SviluppatoreController {
 	}
 	
 	@GetMapping("/admin/formNewSviluppatore")
-	public String addSviluppatore(Model model) {
+	public String formNewSviluppatore(Model model) {
+		model.addAttribute("action", "/admin/sviluppatore");
 		model.addAttribute("sviluppatore", new Sviluppatore());
 		model.addAttribute("utente", new Utente());
+		return "admin/formNewSviluppatore.html";
+	}
+	
+	@GetMapping("/admin/formUpdateSviluppatore/{id}")
+	public String formUpdateSviluppatore(Model model,
+			@PathVariable("id") Long id) {
+		Sviluppatore sviluppatore=sviluppatoreService.findById(id);
+		Utente utente;
+		if (sviluppatore==null) {
+			sviluppatore=new Sviluppatore();
+			utente=new Utente();
+		}
+		else {
+			utente=sviluppatore.getUtente();
+			utente.setPassword("");
+		}
+		model.addAttribute("action", "/admin/updateSviluppatore/"+sviluppatore.getId());
+		model.addAttribute("sviluppatore", sviluppatore);
+		model.addAttribute("utente", utente);
 		return "admin/formNewSviluppatore.html";
 	}
 	
 	@PostMapping("/admin/sviluppatore")
 	public String newSviluppatore(@ModelAttribute("utente") Utente utente,
 			@ModelAttribute("sviluppatore") Sviluppatore sviluppatore,
-			@RequestParam("input-image") MultipartFile multipartFile) throws IOException {
+			@RequestParam("input-immagine") MultipartFile multipartFile) throws IOException {
 		this.sviluppatoreService.save(sviluppatore);
 		String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		Immagine immagine=new Immagine();
@@ -74,7 +94,45 @@ public class SviluppatoreController {
 	}
 	
 	
-	
+	@PostMapping("/admin/updateSviluppatore/{id}")
+	public String updateSviluppatore(@PathVariable("id") Long id, 
+			@ModelAttribute("sviluppatore") Sviluppatore sviluppatoreAggiornato,
+			@ModelAttribute("utente") Utente utenteAggiornato,
+			@RequestParam("input-immagine") MultipartFile multipartFile) throws IOException {
+		Sviluppatore sviluppatore=sviluppatoreService.findById(id);
+		Utente utente=utenteService.getCredentials(sviluppatore.getUtente().getId());
+		String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		/*Evita tentativo di caricare il file vuoto causato
+		 dall'ultimo input che viene aggiunto in automatico
+		 ed è sempre vuoto
+		 */
+		if (fileName!="") {
+			utente.getFoto().delete();
+			fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
+			Immagine immagine=new Immagine();
+			immagine.setFolder("sviluppatore");
+			immagine.uploadImage(fileName, multipartFile);
+			
+			utente.setFoto(immagine);
+			this.immagineService.save(immagine);
+		}
+		sviluppatore.aggiorna(sviluppatoreAggiornato);
+		sviluppatoreService.save(sviluppatore);
+		
+		
+		utente.setUsername(utenteAggiornato.getUsername());
+		System.out.println(utenteAggiornato.getPassword());
+		System.out.println(utenteAggiornato.getPassword()!=null);
+		System.out.println(utenteAggiornato.getPassword()!="");
+		if (utenteAggiornato.getPassword()!=null && utenteAggiornato.getPassword()!="") {
+			utente.setPassword(passwordEncoder.encode(utenteAggiornato.getPassword()));
+		}
+		System.out.println(utente.getUsername() + " " + utente.getPassword());
+		utenteService.save(utente);
+		
+		
+		return "redirect:/sviluppatore/"+sviluppatore.getId();
+	}
 	
 	
 	@GetMapping("/admin/formAddSviluppatoreSoftware/{idSoftware}")
@@ -176,52 +234,6 @@ public class SviluppatoreController {
 	public String manageSoftware(Model model) {
 		model.addAttribute("sviluppatori", this.sviluppatoreService.findAll());
 		return "admin/manageSviluppatori.html";
-	}
-	
-	@GetMapping("/admin/formUpdateSviluppatore/{id}")
-	public String formUpdateSviluppatore(@PathVariable("id") Long id, Model model) {
-		Sviluppatore sviluppatore=this.sviluppatoreService.findById(id);
-		model.addAttribute("sviluppatore", sviluppatore);
-		Utente utente=sviluppatore.getUtente();
-		utente.setPassword(null);
-		model.addAttribute("utente", utente);
-		return "admin/formUpdateSviluppatore.html";
-	}
-	
-	@PostMapping("/admin/updateSviluppatore/{id}")
-	public String updateSviluppatore(@PathVariable("id") Long id, 
-			@ModelAttribute("sviluppatore") Sviluppatore sviluppatoreAggiornato,
-			@ModelAttribute("utente") Utente utenteAggiornato,
-			@RequestParam("input-image") MultipartFile multipartFile) throws IOException {
-		Sviluppatore sviluppatore=sviluppatoreService.findById(id);
-		String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		/*Evita tentativo di caricare il file vuoto causato
-		 dall'ultimo input che viene aggiunto in automatico
-		 ed è sempre vuoto
-		 */
-		if (fileName!="") {
-			sviluppatore.getUtente().getFoto().delete();
-			fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
-			Immagine immagine=new Immagine();
-			immagine.setFolder("sviluppatore");
-			immagine.uploadImage(fileName, multipartFile);
-			
-			sviluppatore.getUtente().setFoto(immagine);
-			this.immagineService.save(immagine);
-		}
-		sviluppatore.aggiorna(sviluppatoreAggiornato);
-		sviluppatoreService.save(sviluppatore);
-		
-		
-		Utente utente=sviluppatore.getUtente();
-		utente.setUsername(utenteAggiornato.getUsername());
-		if (utenteAggiornato.getPassword()!=null) {
-			utente.setPassword(passwordEncoder.encode(utenteAggiornato.getPassword()));
-		}
-		utenteService.save(sviluppatore.getUtente());
-		
-		
-		return "redirect:/sviluppatore/"+sviluppatore.getId();
 	}
 	
 	//Ricerca sviluppatore pagina gestione

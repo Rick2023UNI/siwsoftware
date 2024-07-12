@@ -12,19 +12,25 @@
 	<script src="/js/3.7.1_jquery.min.js"></script>
 	<link rel="stylesheet" href="/css/_avviso.css" />
 	<script src="/js/_avviso.js"></script>
+	
+	<link rel="stylesheet" href="/css/_form.css" />
 </head>
 
 <body>
 	<form th:action="@{/admin/manageSviluppatore}" method="post">
-		<input class="search" type="text" th:value="${nome}" name="nome" placeholder="Nome" />
-		<input class="search" type="text" th:value="${cognome}" name="cognome" placeholder="Cognome" />
-		<button id="submit" type="submit">Cerca</button>
+		<div class="input-div doppio-input">
+		    <input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome" onfocus="setFocus(true)" onblur="setFocus(false)">
+		</div>
+		<div class="input-div doppio-input">
+		    <input th:value="${cognome}" required name='cognome' type="text" class="input" placeholder="Cerca per cognome" onfocus="setFocus(true)" onblur="setFocus(false)">
+		</div>
+		<button id="submit" type="submit" class="bottone bottone-ricerca">Cerca</button>
 	</form>
-	<span>
-		<svg class="add" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	<span class="aggiungi-span">
+		<svg class="aggiungi" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
 			<path fill-rule="evenodd"
 				d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-		</svg><a class="add-text" href="/admin/formNewSviluppatore">Aggiungi sviluppatore</a>
+		</svg><a href="/admin/formNewSviluppatore">Aggiungi sviluppatore</a>
 	</span>
 	<div th:if="${sviluppatori==null || sviluppatori.isEmpty()}">Non ci sono software nel sistema</div>
 	<ul class="sviluppatori">
