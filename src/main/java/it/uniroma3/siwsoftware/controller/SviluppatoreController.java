@@ -83,13 +83,14 @@ public class SviluppatoreController {
 		fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
 		immagine.uploadImage(fileName, multipartFile);
 		this.immagineService.save(immagine);
-		sviluppatore.getUtente().setFoto(immagine);
+		utente.setFoto(immagine);
 
 		utente.setPassword(passwordEncoder.encode(utente.getPassword()));
 		utente.setSviluppatore(sviluppatore);
 		
 		this.sviluppatoreService.save(sviluppatore);
 		utenteService.save(utente);
+		
 		return "redirect:/sviluppatore/"+sviluppatore.getId();
 	}
 	
@@ -238,12 +239,11 @@ public class SviluppatoreController {
 	
 	//Ricerca sviluppatore pagina gestione
 	@PostMapping("/admin/manageSviluppatore")
-	public String searchManage(@RequestParam("nome") String nome, @RequestParam("cognome") String cognome, Model model) {
-		ArrayList<Sviluppatore> sviluppatoriPerNome=(ArrayList<Sviluppatore>) this.sviluppatoreService.findByNomeContaining(nome);
-		ArrayList<Sviluppatore> sviluppatoriPerCognome=(ArrayList<Sviluppatore>) this.sviluppatoreService.findByCognomeContaining(cognome);
-		//Sviluppatori con nome e cognome che contengono le stringe nome e cognome
-		sviluppatoriPerNome.retainAll(sviluppatoriPerCognome);
-		model.addAttribute("sviluppatori", sviluppatoriPerNome);
+	public String searchManage(@RequestParam("nome") String nome, 
+			@RequestParam("cognome") String cognome, 
+			Model model) {
+		ArrayList<Sviluppatore> sviluppatori=this.sviluppatoreService.findByNomeAndCognomeContaining(nome, cognome);
+		model.addAttribute("sviluppatori", sviluppatori);
 		return "admin/manageSviluppatori.html";
 	}
 }

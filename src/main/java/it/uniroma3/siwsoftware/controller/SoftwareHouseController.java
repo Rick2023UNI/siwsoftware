@@ -23,6 +23,13 @@ public class SoftwareHouseController {
 	@Autowired SoftwareHouseService softwareHouseService;
 	@Autowired ImmagineService immagineService;
 
+	
+	@GetMapping("/softwareHouses")
+	public String getsoftwareHouses(Model model) {
+		model.addAttribute("softwareHouses", this.softwareHouseService.findAll());
+		return "admin/manageSoftwareHouse.html";
+	}
+	
 	@GetMapping("/softwareHouse/{id}")
 	public String getsoftwareHouse(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("softwareHouse", this.softwareHouseService.findById(id));
@@ -83,7 +90,7 @@ public class SoftwareHouseController {
 	public String removeSoftwareHouse(@PathVariable("id") Long id, Model model) {
 		SoftwareHouse softwareHouse=this.softwareHouseService.findById(id);
 		this.softwareHouseService.delete(softwareHouse);
-		return "redirect:/admin/manageSoftwareHouse";
+		return "redirect:/admin/manageSoftwareHouses";
 	}
 	
 	@GetMapping("/admin/manageSoftwareHouses")
@@ -93,7 +100,7 @@ public class SoftwareHouseController {
 	}
 	
 	//Ricerca software house pagina gestione
-	@PostMapping("/admin/manageSoftwareHouses")
+	@PostMapping("/manageSoftwareHouses")
 	public String searchManage(@RequestParam("nome") String nome, Model model) {
 		model.addAttribute("softwareHouses", this.softwareHouseService.findByNomeContaining(nome));
 		return "admin/manageSoftwareHouse.html";

@@ -19,6 +19,9 @@
 				</a>
 			</div>
 			<ul>
+				<li th:if="${admin!=true}">
+					<a href="/softwareHouses">Software house</a>
+				</li>
 				<li th:if="${admin==true}">
 					<a href="/admin/manageSoftware">Gestisci i software</a>
 					<ul class="dropdown">

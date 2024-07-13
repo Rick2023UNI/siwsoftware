@@ -18,9 +18,12 @@
 		</div>
 	  <div>
 		Software house
-			  <select th:field="${software.softwareHouse}" id="softwareHouseId" name="softwareHouseId">
+		<label class="select" for="softwareHouseId">
+			  <select th:field="${software.softwareHouse}" id="slct" required name="softwareHouseId">
 			      <option th:each="unSoftHouse : ${softwareHouse}" th:value="${unSoftHouse.id}" th:text="${unSoftHouse.nome}"></option>
 			    </select>
+				<svg><use xlink:href="#select-arrow-down"></use></svg>
+				</label>
 	  </div>
 	  <div class="input-div">
 	    <label class="input-label">Categoria</label>
@@ -46,5 +49,8 @@
         <span><button type="submit" class="bottone">Conferma</button></span>
       </div>
    </form>
+   
+   <!-- Sprite SVG-->
+   	<svg class="sprites"><symbol id="select-arrow-down" viewbox="0 0 10 6"><polyline points="1 1 5 5 9 1"></polyline></symbol></svg>
   </body>
 </html>

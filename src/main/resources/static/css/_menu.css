@@ -30,6 +30,7 @@
 	background: #1a73e8;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	z-index: 1000;
+	height: 74px;
 }
 
 #Home nav ul {
@@ -47,6 +48,8 @@
 	font-weight: 500;
 	font-size: 17px;
 	transition: 0.1s;
+	padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 #Home nav ul li a::after {
@@ -139,12 +142,13 @@
 
 
 ul li ul {
-  background: #1566d1;
+  background: #104fa2;
   visibility: hidden;
   opacity: 0;
   position: absolute;
   transition: all 0.5s ease;
-  margin-top: 1.2rem;
+  margin-top: 1.63rem;
+  height: 40px;
   /*display: none;*/
 }
 
@@ -155,8 +159,7 @@ ul li ul:hover {
   display: block;
 }
 
-ul li ul li {
-  clear: both;
-  width: 100%;
-  float:left;
+#Home nav ul li ul li{
+	margin-left: -3ch;
+	margin-top: 1ch;
 }

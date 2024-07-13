@@ -77,7 +77,7 @@
 						d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
 				</svg>
 			</a>
-			<a th:href="@{'/admin/removeSoftware/' + ${software.id}}">
+			<a th:onclick="@{'verifica(&quot;/admin/removeSoftware/' + ${software.id}+'&quot;, 2)'}">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icona cancellazione"
 					viewBox="0 0 16 16">
 					<path
@@ -124,7 +124,7 @@
 						d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001" />
 				</svg>
 			</span>
-			<a th:onclick="@{'verifica(&quot;/removeRecensione/' + ${recensione.id}+'&quot;)'}">
+			<a th:onclick="@{'verifica(&quot;/removeRecensione/' + ${recensione.id}+'&quot;, 1)'}">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icona cancellazione"
 					viewBox="0 0 16 16">
 					<path
@@ -248,7 +248,7 @@
 			<span>
 				<span th:text="${recensione.titolo}" class="titolo"></span>
 				<span th:if="${admin}">
-					<a th:onclick="@{'verifica(&quot;/removeRecensione/' + ${recensione.id}+'&quot;)'}">
+					<a th:onclick="@{'verifica(&quot;/removeRecensione/' + ${recensione.id}+'&quot;, 1)'}">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icona cancellazione"
 							viewBox="0 0 16 16">
 							<path
@@ -315,8 +315,10 @@
 				<h2>Conferma eliminazione</h2>
 			</div>
 			<div class="body-avviso">
-				<span>L'eliminazione &egrave; un'operazione irreversibile.</span>
-				<p>Vuoi confermare l'eliminazione della recensione?</p>
+				<span id="span_1" class="nascosto">L'eliminazione &egrave; un'operazione irreversibile.</span>
+				<span id="span_2" class="nascosto">L'eliminazione del software comporta anche l'eliminazione delle relative recensioni. L'eliminazione &egrave; un'operazione irreversibile.</span>
+				<p id="messaggio_1" class="nascosto">Vuoi confermare l'eliminazione della recensione?</p>
+				<p id="messaggio_2" class="nascosto">Vuoi confermare l'eliminazione del software?</p>
 				<span>
 					<button id="annulla">Annulla</button>
 					<button id="conferma">Conferma</button>

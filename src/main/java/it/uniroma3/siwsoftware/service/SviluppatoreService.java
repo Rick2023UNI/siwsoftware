@@ -38,4 +38,8 @@ public class SviluppatoreService {
 	public Iterable<Sviluppatore> findByCognomeContaining(String cognome) {
 		return sviluppatoreRepository.findByCognomeContaining(cognome);
 	}
+
+	public ArrayList<Sviluppatore> findByNomeAndCognomeContaining(String nome, String cognome) {
+		return sviluppatoreRepository.findByNomeAndCognomeContaining(nome, cognome);
+	}
 }

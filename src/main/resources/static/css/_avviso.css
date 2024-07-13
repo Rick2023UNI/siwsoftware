@@ -135,3 +135,7 @@
 		opacity: 1
 	}
 }
+
+.nascosto {
+	display: none;
+}
