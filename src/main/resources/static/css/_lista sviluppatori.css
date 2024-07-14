@@ -17,6 +17,7 @@
 	vertical-align: middle;
 	color:black;
 	font-size: 3ch;
+	margin-left: 0.4ch;
 }
 
 .immagine-sviluppatore {
@@ -26,6 +27,10 @@
 	object-fit: cover;
 	border-radius: 50%;
 	vertical-align: middle;
-	margin-right: 1rem;
-	margin-left: 1rem;
+	margin-right: 0.4rem;
+  	margin-left: 1rem;
+}
+
+.diversa-software-house {
+	background: #dfdfdf;
 }

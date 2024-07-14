@@ -10,12 +10,35 @@
 	<link rel="stylesheet" href="/css/_form.css" />
 	<link rel="stylesheet" href="/css/admin/formAddSviluppatore.css" />
 	
+	<link rel="stylesheet" href="/css/_icone.css" />
+	
 	<script src="/js/3.7.1_jquery.min.js"></script>
-		<script src="/js/_form.js"></script>
+	<script src="/js/_form.js"></script>
+	
+	<script src="/js/admin/formAddSviluppatore.js"></script>
 </head>
 
 <body>
-	<h3>Aggiunti</h3>
+	<h3>Aggiunti 
+		<span th:if="${operazione}=='oftware'" onclick="mostraNascondiInformazione();">
+			<svg class="icona informazioni" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+				<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+			</svg>
+	</span></h3>
+	<section th:if="${operazione}=='oftware'" id="informazione" class="nascosto">
+		<div>
+			I sviluppatori che appaiono rappresentati come di seguito con un sfondo grigio
+			<div class="sviluppatori">
+				<div class="sviluppatore diversa-software-house">
+					<span>
+						<span id="nome-sviluppatore-informazione"></span>
+						<span class="immagine-sviluppatore" id="immagine-sviluppatore-informazione"></span>
+					</span>
+				</div>
+			</div>
+			Sono sviluppatori che lavorano per una software house diversa da quella del software
+		</div>
+	</section>
 	<form th:action="@{'/admin/cercaAddSviluppatore/software/'+${operazione}+'/'+${software.id}}" method="post">
 		<div class="input-div doppio-input">
 		    <input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome" onfocus="setFocus(true)" onblur="setFocus(false)">
@@ -45,7 +68,7 @@
 		<button id="submit" type="submit" class="bottone bottone-ricerca">Cerca</button>
 	</form>
 	<ul class="sviluppatori" th:if="${sviluppatori!=null || !sviluppatori.isEmpty()}">
-		<li th:each="sviluppatore : ${sviluppatori}" class="sviluppatore">
+		<li th:each="sviluppatore : ${sviluppatori}" th:class="${sviluppatore.softwareHouse==software.getSoftwareHouse()} ? 'sviluppatore' : 'sviluppatore diversa-software-house'">
 			<span>
 				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"  th:href="'/admin/addSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" 
 					class="nome-sviluppatore"></a>

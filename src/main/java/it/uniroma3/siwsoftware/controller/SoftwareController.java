@@ -55,7 +55,7 @@ public class SoftwareController {
 	public String formNewSoftware(Model model) {
 		model.addAttribute("software", new Software());
 		model.addAttribute("softwareHouse", softwareHouseService.findAll());
-		return "admin/formNewSoftware.html";
+		return "admin/formUpdateSoftware.html";
 	}
 
 	@PostMapping("/admin/software")

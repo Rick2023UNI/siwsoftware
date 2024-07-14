@@ -3,31 +3,37 @@
 	<head>
     <title>Modifica Software</title>
 	<script src="/js/3.7.1_jquery.min.js"></script>
-	<script src="/js/admin/formNewSoftware.js"></script>
-	<link rel="stylesheet" href="/css/admin/formNewSoftware.css?version=3" />
+	<script src="/js/admin/formUpdateSoftware.js"></script>
 	<link rel="stylesheet" href="/css/admin/formUpdateSoftware.css?version=3" />
 	
 	<script src="/js/_form.js"></script>
 	<link rel="stylesheet" href="/css/_form.css?version=3" />
   </head>
   <body>
-    <h1>Aggiungi un software</h1>
-    <form th:action="'/admin/updateSoftware/'+${software.id}" method="POST" th:object="${software}" enctype="multipart/form-data">
+	<h1 th:if="${software.id==null}">Crea un nuovo software</h1>
+	<h1 th:unless="${software.id==null}">Modifica un software</h1>
+    <form th:action="${software.id!=null} ? '/admin/updateSoftware/' + ${software.id} : '/admin/software'" method="POST" th:object="${software}" enctype="multipart/form-data">
 		<div class="input-div">
 		    <label class="input-label">Nome</label>
 		    <input th:field="${software.nome}" required name='nome' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 		</div>
-	  <div>
-		Software house
-			  <select th:field="${software.softwareHouse}" id="softwareHouseId" name="softwareHouseId">
-			      <option th:each="unSoftHouse : ${softwareHouse}" th:value="${unSoftHouse.id}" th:text="${unSoftHouse.nome}"></option>
-			    </select>
-	  </div>
+		<div>
+			Software house
+			<label class="select" for="softwareHouseId">
+				<select th:field="${software.softwareHouse}" id="slct" required name="softwareHouseId">
+					<option th:each="unSoftHouse : ${softwareHouse}" th:value="${unSoftHouse.id}" th:text="${unSoftHouse.nome}">
+					</option>
+				</select>
+				<svg>
+					<use xlink:href="#select-arrow-down"></use>
+				</svg>
+			</label>
+		</div>
 	  <div class="input-div">
 	    <label class="input-label">Categoria</label>
 	    <input th:field="${software.categoria}" required name='categoria' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 	</div>
-	  <input required type="date" th:field="${software.annoPubblicazione}"/>
+	  <input required type="date" th:value="${software.id!=null} ? ${software.annoPubblicazione}+'-01-01' : ''" th:field="${software.annoPubblicazione}"/>
 	<div th:if="${software.immagini==null || software.immagini.isEmpty()}">Non ci sono immagini per il software corrente</div>
 	<ul class="immagini">
 		<li th:each="immagine : ${software.immagini}">
@@ -69,5 +75,8 @@
         <span><button type="submit" class="bottone">Conferma</button></span>
       </div>
    </form>
+   
+   <!-- Sprite SVG-->
+      	<svg class="sprites"><symbol id="select-arrow-down" viewbox="0 0 10 6"><polyline points="1 1 5 5 9 1"></polyline></symbol></svg>
   </body>
 </html>

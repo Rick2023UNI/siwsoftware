@@ -125,7 +125,7 @@ public class SviluppatoreController {
 		System.out.println(utenteAggiornato.getPassword());
 		System.out.println(utenteAggiornato.getPassword()!=null);
 		System.out.println(utenteAggiornato.getPassword()!="");
-		if (utenteAggiornato.getPassword()!=null && utenteAggiornato.getPassword()!="") {
+		if (!utenteAggiornato.getPassword().isEmpty()) {
 			utente.setPassword(passwordEncoder.encode(utenteAggiornato.getPassword()));
 		}
 		System.out.println(utente.getUsername() + " " + utente.getPassword());

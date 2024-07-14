@@ -11,7 +11,7 @@
   </head>
   <body>
 	<h1 th:if="${sviluppatore.id==null}">Crea un nuovo sviluppatore</h1>
-		<h1 th:if="${sviluppatore.id!=null}">Modifica un sviluppatore</h1>
+	<h1 th:unless="${sviluppatore.id==null}">Modifica un sviluppatore</h1>
 	<form th:action="${action}" method="POST" enctype="multipart/form-data" th:object="${utente}">
 		<div>
 			<div class="input-div">

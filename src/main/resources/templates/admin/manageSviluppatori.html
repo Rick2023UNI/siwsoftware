@@ -53,6 +53,9 @@
 				</a>
 			</span>
 			<img th:if="${sviluppatore.getUtente().foto!=null || !sviluppatore.getUtente().foto.isEmpty()}"  th:src="@{${sviluppatore.getUtente().foto.getImagePath}}" class="immagine-sviluppatore">
+			<span th:if="${sviluppatore.software.size()}>1" th:text="${sviluppatore.software.size()} + ' software prodotti'" class="footer"></span>
+			<span th:if="${sviluppatore.software.size()}==1" th:text="${sviluppatore.software.size()} + ' software prodotto'" class="footer"></span>
+			<span th:if="${sviluppatore.software.size()}==0" class="footer">Nessun software prodotto</span>
 		</li>
 	</ul>
 	

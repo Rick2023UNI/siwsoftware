@@ -7,6 +7,7 @@ svg.icona {
 
 .cancellazione {
 	color: red;
+	cursor: pointer;
 }
 
 .modifica {
@@ -24,4 +25,17 @@ a {
 h1 {
 	display: inline;
 	vertical-align: middle;
+}
+
+.informazioni {
+	color: blue;
+	height: 5ch;
+	width: 5ch;
+	cursor: pointer;
+}
+
+.informazioni:hover {
+	color: rgb(0, 0, 168);
+	height: 5ch;
+	width: 5ch;
 }
