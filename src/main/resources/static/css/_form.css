@@ -176,7 +176,7 @@ input {
 }
 
 .bottone-ricerca {
-	height: 50px;
+	height: 43px;
 }
 
 
@@ -189,6 +189,7 @@ input {
   display: flex;
   height: 44px;
 }
+
 .select svg {
   position: absolute;
   right: 12px;
@@ -202,6 +203,7 @@ input {
   stroke-linejoin: round;
   pointer-events: none;
 }
+
 .select select {
   -webkit-appearance: none;
   padding: 7px 40px 7px 12px;
@@ -214,22 +216,28 @@ input {
   font-size: 16px;
   transition: all 150ms ease;
 }
+
 .select select:required:invalid {
   color: #5a667f;
 }
+
 .select select option {
   color: #1a73e8;
 }
+
 .select select option[value=""][disabled] {
   display: none;
 }
+
 .select select:focus {
   outline: none;
   border: 2px solid #1a73e8;
 }
+
 .select select:hover + svg {
   stroke: #1a73e8;
 }
+
 .sprites {
   position: absolute;
   width: 0;

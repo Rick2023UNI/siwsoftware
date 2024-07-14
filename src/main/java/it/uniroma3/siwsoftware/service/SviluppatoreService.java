@@ -39,7 +39,7 @@ public class SviluppatoreService {
 		return sviluppatoreRepository.findByCognomeContaining(cognome);
 	}
 
-	public ArrayList<Sviluppatore> findByNomeAndCognomeContaining(String nome, String cognome) {
-		return sviluppatoreRepository.findByNomeAndCognomeContaining(nome, cognome);
+	public ArrayList<Sviluppatore> findByNomeContainingAndCognomeContaining(String nome, String cognome) {
+		return sviluppatoreRepository.findByNomeContainingAndCognomeContaining(nome, cognome);
 	}
 }

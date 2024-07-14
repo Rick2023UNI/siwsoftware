@@ -1,6 +1,6 @@
 .sviluppatore {
 	width: 30ch;
-	height: 30ch;
+	height: 33ch;
 	border-radius: 10%;
 	border-radius: 25px;
 	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
@@ -16,6 +16,7 @@
 	border-radius: 50%;
 	vertical-align: middle;
 	margin: auto;
+	margin-top: 0;
 }
 
 .barra-titolo {

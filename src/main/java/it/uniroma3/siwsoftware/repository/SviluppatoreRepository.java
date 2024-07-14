@@ -14,6 +14,6 @@ public interface SviluppatoreRepository extends CrudRepository<Sviluppatore, Lon
 
 	Iterable<Sviluppatore> findByCognomeContaining(String cognome);
 
-	ArrayList<Sviluppatore> findByNomeAndCognomeContaining(String nome, String cognome);
+	ArrayList<Sviluppatore> findByNomeContainingAndCognomeContaining(String nome, String cognome);
 
 }

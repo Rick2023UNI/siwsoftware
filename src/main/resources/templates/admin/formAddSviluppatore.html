@@ -6,12 +6,27 @@
 		SiwSoftware - aggiungi sviluppatore
 	</title>
 	<link rel="stylesheet" href="/css/_lista sviluppatori.css" />
+	
+	<link rel="stylesheet" href="/css/_form.css" />
+	<link rel="stylesheet" href="/css/admin/formAddSviluppatore.css" />
+	
+	<script src="/js/3.7.1_jquery.min.js"></script>
+		<script src="/js/_form.js"></script>
 </head>
 
 <body>
 	<h3>Aggiunti</h3>
-	<ul class="sviluppatori" th:if="${software.sviluppatori!=null || !software.sviluppatori.isEmpty()}">
-		<li th:each="sviluppatore : ${software.sviluppatori}" class="sviluppatore">
+	<form th:action="@{'/admin/cercaAddSviluppatore/software/'+${operazione}+'/'+${software.id}}" method="post">
+		<div class="input-div doppio-input">
+		    <input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome" onfocus="setFocus(true)" onblur="setFocus(false)">
+		</div>
+		<div class="input-div doppio-input">
+		    <input th:value="${cognome}" required name='cognome' type="text" class="input" placeholder="Cerca per cognome" onfocus="setFocus(true)" onblur="setFocus(false)">
+		</div>
+		<button id="submit" type="submit" class="bottone bottone-ricerca">Cerca</button>
+	</form>
+	<ul class="sviluppatori" th:if="${sviluppatoriSoftware!=null || !sviluppatoriSoftware.isEmpty()}">
+		<li th:each="sviluppatore : ${sviluppatoriSoftware}" class="sviluppatore">
 			<span>
 				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}" th:href="'/admin/removeSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" 
 					class="nome-sviluppatore"></a>
@@ -20,6 +35,15 @@
 		</li>
 	</ul>
 	<h3>Sviluppatori</h3>
+	<form th:action="@{'/admin/cercaAddSviluppatore/sviluppatori/'+${operazione}+'/'+${software.id}}" method="post">
+		<div class="input-div doppio-input">
+		    <input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome" onfocus="setFocus(true)" onblur="setFocus(false)">
+		</div>
+		<div class="input-div doppio-input">
+		    <input th:value="${cognome}" required name='cognome' type="text" class="input" placeholder="Cerca per cognome" onfocus="setFocus(true)" onblur="setFocus(false)">
+		</div>
+		<button id="submit" type="submit" class="bottone bottone-ricerca">Cerca</button>
+	</form>
 	<ul class="sviluppatori" th:if="${sviluppatori!=null || !sviluppatori.isEmpty()}">
 		<li th:each="sviluppatore : ${sviluppatori}" class="sviluppatore">
 			<span>
@@ -29,7 +53,7 @@
 			</span>
 		</li>
 	</ul>
-	<a th:href="'/s' + ${operazione} + '/' + ${software.id}" class="button">Fine</a>
+	<a th:href="'/s' + ${operazione} + '/' + ${software.id}" class="bottone" id="fine">Fine</a>
 </body>
 
 </html>

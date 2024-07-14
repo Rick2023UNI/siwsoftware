@@ -139,11 +139,12 @@ public class SviluppatoreController {
 	@GetMapping("/admin/formAddSviluppatoreSoftware/{idSoftware}")
 	public String formAddSviluppatoreSoftware(@PathVariable("idSoftware") Long idSoftware, 
 			Model model) {
-		Software software=this.softwareService.findById(idSoftware);
-		model.addAttribute("software", software); 
+		Software software=this.softwareService.findById(idSoftware); 
 		ArrayList<Sviluppatore> sviluppatori=(ArrayList<Sviluppatore>) this.sviluppatoreService.findAll();
 		sviluppatori.removeAll(software.getSviluppatori());
+		model.addAttribute("software", software);
 		model.addAttribute("sviluppatori", sviluppatori);
+		model.addAttribute("sviluppatoriSoftware", software.getSviluppatori());
 		//La s è mancante per rendere possibile concatenare la s minuscola o maiuscola a seconda del caso
 		model.addAttribute("operazione", "oftware");
 		return "admin/formAddSviluppatore.html";
@@ -185,6 +186,7 @@ public class SviluppatoreController {
 		ArrayList<Sviluppatore> sviluppatori=(ArrayList<Sviluppatore>) (this.sviluppatoreService.findAll());
 		sviluppatori.removeAll(softwareHouse.getSviluppatori());
 		model.addAttribute("software", softwareHouse);
+		model.addAttribute("sviluppatoriSoftware", softwareHouse.getSviluppatori());
 		model.addAttribute("sviluppatori", sviluppatori);
 		//La s è mancante per rendere possibile concatenare la s minuscola o maiuscola a seconda del caso
 		model.addAttribute("operazione", "oftwareHouse");
@@ -242,8 +244,68 @@ public class SviluppatoreController {
 	public String searchManage(@RequestParam("nome") String nome, 
 			@RequestParam("cognome") String cognome, 
 			Model model) {
-		ArrayList<Sviluppatore> sviluppatori=this.sviluppatoreService.findByNomeAndCognomeContaining(nome, cognome);
+		ArrayList<Sviluppatore> sviluppatori=this.sviluppatoreService.findByNomeContainingAndCognomeContaining(nome, cognome);
 		model.addAttribute("sviluppatori", sviluppatori);
 		return "admin/manageSviluppatori.html";
+	}
+	
+	@PostMapping("/admin/cercaAddSviluppatore/{tipologiaRicerca}/{operazione}/{id}")
+	public String searchAddSviluppatore(@PathVariable("operazione") String operazione, 
+			@PathVariable("tipologiaRicerca") String tipologiaRicerca, 
+			@PathVariable("id") Long id,
+			@RequestParam("nome") String nome, 
+			@RequestParam("cognome") String cognome, 
+			Model model) {
+		
+		System.out.println(operazione + " " + tipologiaRicerca);
+		List<Sviluppatore> sviluppatoriSoftware = null;
+		ArrayList<Sviluppatore> sviluppatoriRicerca = null;
+		ArrayList<Sviluppatore> sviluppatori=null;
+		
+		if (tipologiaRicerca.equals("software")) {
+			if (operazione.equals("oftware")) {
+				System.out.println("ok");
+				Software software=softwareService.findById(id);
+				sviluppatoriSoftware=software.getSviluppatori();
+				model.addAttribute("software", software);
+			} 
+			else if (operazione.equals("oftwareHouse")) {
+				SoftwareHouse softwareHouse=softwareHouseService.findById(id);
+				sviluppatoriSoftware=softwareHouse.getSviluppatori();
+				model.addAttribute("software", softwareHouse);
+			}
+			
+			sviluppatoriRicerca=this.sviluppatoreService.findByNomeContainingAndCognomeContaining(nome, cognome);
+			sviluppatoriRicerca.retainAll(sviluppatoriSoftware);
+			sviluppatori=(ArrayList<Sviluppatore>) this.sviluppatoreService.findAll();
+			
+			//Rimozione di tutti gli sviluppatori che già fanno parte del software/software house
+			sviluppatori.removeAll(sviluppatoriSoftware);
+			model.addAttribute("sviluppatori", sviluppatori);
+			model.addAttribute("sviluppatoriSoftware", sviluppatoriRicerca);
+		}
+		else if (tipologiaRicerca.equals("sviluppatori")) {
+			System.out.println("else");
+			if (operazione.equals("oftware")) {
+				Software software=softwareService.findById(id);
+				sviluppatoriSoftware=software.getSviluppatori();
+				model.addAttribute("software", software);
+			} 
+			else if (operazione.equals("oftwareHouse")) {
+				SoftwareHouse softwareHouse=softwareHouseService.findById(id);
+				sviluppatoriSoftware=softwareHouse.getSviluppatori();
+				model.addAttribute("software", softwareHouse);
+			}
+			
+			sviluppatoriRicerca=this.sviluppatoreService.findByNomeContainingAndCognomeContaining(nome, cognome);
+			
+			//Rimozione di tutti gli sviluppatori che già fanno parte del software/software house
+			sviluppatoriRicerca.removeAll(sviluppatoriSoftware);
+			model.addAttribute("sviluppatori", sviluppatoriRicerca);
+			model.addAttribute("sviluppatoriSoftware", sviluppatoriSoftware);
+		}
+		
+		model.addAttribute("operazione", operazione);
+		return "admin/formAddSviluppatore.html";
 	}
 }

@@ -2,16 +2,17 @@ function showHideCommentForm() {
 	var recensione = document.getElementById("recensione-utente-corrente");
 	
   var form = document.getElementById("commentForm");
-  var button = document.getElementById("showHideCommentForm");
+  var showButton = document.getElementById("showCommentForm");
+  var hideButton = document.getElementById("hideCommentForm");
   if (form.style.display == "none") {
 	//Nasconde recensione se presente
 	if (recensione!=null) {
 		recensione.style.display = "none";
 	}
 	
-	if (button!=null) {
-		button.textContent="Non recensisci";
-	}
+	hideButton.style.display="block";
+	showButton.style.display="none";
+	
     form.style.display = "block";
   } else {
 	//Nasconde recensione se presente
@@ -19,9 +20,8 @@ function showHideCommentForm() {
 		recensione.style.display = "";
 	}
 	
-	if (button!=null) {
-		button.textContent="Recensisci";
-	}
+	hideButton.style.display="none";
+	showButton.style.display="block";
     form.style.display = "none";
   }
   stelleSelezionate(document.getElementById("numeroStelle").value);
