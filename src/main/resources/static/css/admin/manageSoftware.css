@@ -8,6 +8,7 @@
 	overflow-wrap: break-word;
 	color:black;
 	z-index: 1;
+	max-width: 90%;
 }
 
 .barra-titolo a {

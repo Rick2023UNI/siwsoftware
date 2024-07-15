@@ -35,3 +35,11 @@
 	color: black;
 	font-weight: 700;
 }
+
+.barra-titolo span {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 18ch;
+  	display: inline-block;
+  	vertical-align: middle;
+}

@@ -40,3 +40,11 @@
 .footer {
 	margin-left:1ch;
 }
+
+.barra-titolo span {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 21ch;
+  	display: inline-block;
+  	vertical-align: middle;
+}
