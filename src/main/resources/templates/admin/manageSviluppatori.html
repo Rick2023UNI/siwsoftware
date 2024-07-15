@@ -37,7 +37,7 @@
 		<li class="sviluppatore" th:each="sviluppatore : ${sviluppatori}">
 			<span  class="barra-titolo">
 				<span>
-					<a class="titolo" th:href="@{'/sviluppatore' + '/' + ${sviluppatore.id}}" th:text="${sviluppatore.nome}"></a>
+					<a class="titolo" th:href="@{'/sviluppatore' + '/' + ${sviluppatore.id}}" th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"></a>
 				</span>
 				<a th:href="@{'/admin/formUpdateSviluppatore/' + ${sviluppatore.id}}">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icona modifica"

@@ -50,6 +50,7 @@
 	transition: 0.1s;
 	padding-top: 30px;
   padding-bottom: 30px;
+  transition: 0.3s;
 }
 
 #Home nav ul li a::after {
@@ -63,7 +64,7 @@
 }
 
 #Home nav ul li a:hover {
-	text-shadow: 2px 2px 4px white;
+	font-weight: 700;
 }
 
 #Home nav ul li a:hover {
@@ -163,3 +164,5 @@ ul li ul:hover {
 	margin-left: -3ch;
 	margin-top: 1ch;
 }
+
+#Home 

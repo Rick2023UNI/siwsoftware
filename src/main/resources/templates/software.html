@@ -311,8 +311,18 @@
 					</span>
 				</span>
 			</span>
-			<span th:text='${#dates.format(recensione.data, "yyyy-MM-dd HH:mm")}'></span>
-			<span th:text="${recensione.descrizione}"></span>
+			<div class="recensione-autore">
+				<span>
+					<span th:text='${#dates.format(recensione.data, "yyyy-MM-dd HH:mm")}'></span><br>
+					<span class="descrizione-recensione" th:text="${recensione.descrizione}"></span>
+				</span>
+				<span class="destra-autore" th:if="${admin}">
+					<a class="titolo nome-autore" th:href="@{'/sviluppatore' + '/' + ${recensione.utente.sviluppatore.id}}"
+						th:text="${recensione.utente.sviluppatore.nome} + ' ' + ${recensione.utente.sviluppatore.cognome}"></a>
+					<img th:if="${recensione.utente.foto!=null || !recensione.utente.foto.isEmpty()}"
+						th:src="@{${recensione.utente.foto.getImagePath}}" class="immagine-sviluppatore">
+				</span>
+			</div>
 		</li>
 	</ul>
 	

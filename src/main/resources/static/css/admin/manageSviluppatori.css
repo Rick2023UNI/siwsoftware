@@ -43,8 +43,10 @@
 
 .barra-titolo span {
 	overflow: hidden;
+	white-space:nowrap;
 	text-overflow: ellipsis;
 	max-width: 21ch;
   	display: inline-block;
   	vertical-align: middle;
+  	height: 2.3ch;
 }

@@ -37,7 +37,8 @@
 	<br>
 	<img th:src="@{${softwareHouse.logo.getImagePath}}"></img>
 	<br>
-	<span>Sviluppatori:</span>
+	<h4>Sviluppatori</h4>
+	<div th:if="${softwareHouse.sviluppatori==null || softwareHouse.sviluppatori.isEmpty()}">Non ci sono sviluppatori nel sistema</div>
 	<ul class="sviluppatori">
 		<li th:each="sviluppatore : ${softwareHouse.sviluppatori}" class="sviluppatore">
 			<span>
@@ -48,7 +49,8 @@
 		</li>
 	</ul>
 	<br>
-	<h3>Software prodotti: </h3>
+	<h4>Software prodotti</h4>
+	<div th:if="${software==null || software.isEmpty()}">Non ci sono software nel sistema</div>
 	<ul id="software">
 		<li th:each="unSoft : ${softwareHouse.software}" class="un-software">
 			<div class="contenitore">

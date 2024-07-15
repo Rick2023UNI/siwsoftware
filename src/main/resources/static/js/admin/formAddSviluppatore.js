@@ -11,9 +11,10 @@ function mostraNascondiInformazione() {
 
 $(document).ready(function() {
 	var dragEl = document.getElementsByClassName('scroll-orizzontale')[0];
-
+	var scroll=document.getElementsByClassName('sviluppatori')[1];
+	dragEl.style.width=((window.innerWidth-32)/(scroll.scrollWidth/(window.innerWidth)))+"px";
 var dragging = false;
-var elDragPointOffset = 0;
+var elDragPointOffset = 16;
 
 dragEl.addEventListener('mousedown', function(evt){
 	evt.preventDefault();
@@ -45,27 +46,31 @@ window.addEventListener('mousemove', function(evt){
     var parentWidth = parentBounds.right - parentBounds.left;
     
     var newDragElLeftValue = mouseX - parentLeft - elDragPointOffset;
-    
-    if(newDragElLeftValue < 0)
-      dragEl.style.left = 0; 
-    else if(newDragElLeftValue > (parentWidth - dragElWidth))
+    console.log(newDragElLeftValue);
+    if(newDragElLeftValue < 16) {
+      dragEl.style.left = 16; 
+      newDragElLeftValue = 0;
+    }
+    else if(newDragElLeftValue > (parentWidth - dragElWidth)) {
       dragEl.style.left = parentWidth - dragElWidth; 
+      newDragElLeftValue = parentWidth - dragElWidth;
+    }
     else
       dragEl.style.left = newDragElLeftValue + 'px';
     
-    var scrollMaxWidth=document.getElementsByClassName('sviluppatori')[2].scrollWidth;
-    var screenSize=window.innerWidth-dragEl.scrollWidth;
+    var scrollMaxWidth=scroll.scrollWidth;
+    var screenSize=window.innerWidth-dragElWidth;
     console.log("scrollMaxWidth "+scrollMaxWidth);
-    console.log("scroll size: "+dragEl.scrollWidth);
+    console.log("scrollMaxWidth-screenSize "+(scrollMaxWidth-screenSize));
+    console.log("scroll size: "+dragElWidth);
     console.log("window.innerWidth "+window.innerWidth);
     console.log("newDragElLeftValue "+newDragElLeftValue);
-    var r=(scrollMaxWidth-screenSize)/screenSize;
+    var r=(scrollMaxWidth-window.innerWidth-32)/(parentWidth - dragElWidth - 32);
+    //r=1.87;
     console.log("r "+r);
-    r=1.80;
     console.log("newDragElLeftValue*r "+newDragElLeftValue*r);
     console.log("--------------------------------------------------");
-    if (newDragElLeftValue>0)
-    	document.getElementsByClassName("sviluppatori")[2].scrollTo(newDragElLeftValue*r, 0); // values are x,y-offset
+    scroll.scrollTo(newDragElLeftValue*r, 0);
   }
 });
 	});
