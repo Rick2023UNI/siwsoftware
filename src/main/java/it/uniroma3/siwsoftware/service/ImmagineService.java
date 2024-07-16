@@ -19,4 +19,9 @@ public class ImmagineService {
 	public Immagine findById(Long id) {
 		return immagineRepository.findById(id).get();
 	}
+	
+	public void delete(Immagine immagine) {
+		immagine.delete();
+		immagineRepository.delete(immagine);
+	}
 }

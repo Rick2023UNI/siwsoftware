@@ -49,7 +49,7 @@
 		<button id="submit" type="submit" class="bottone bottone-ricerca">Cerca</button>
 	</form>
 	<ul class="sviluppatori" th:if="${sviluppatoriSoftware!=null || !sviluppatoriSoftware.isEmpty()}">
-		<li th:each="sviluppatore : ${sviluppatoriSoftware}" class="sviluppatore">
+		<li th:each="sviluppatore : ${sviluppatoriSoftware}" th:class="${operazione!='oftware' || sviluppatore.softwareHouse==software.getSoftwareHouse()} ? 'sviluppatore' : 'sviluppatore diversa-software-house'">
 			<span>
 				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}" th:href="'/admin/removeSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" 
 					class="nome-sviluppatore"></a>
@@ -69,7 +69,7 @@
 		<button id="submit" type="submit" class="bottone bottone-ricerca">Cerca</button>
 	</form>
 	<ul class="sviluppatori" th:if="${sviluppatori!=null || !sviluppatori.isEmpty()}">
-		<li th:each="sviluppatore : ${sviluppatori}" th:class="${sviluppatore.softwareHouse==software.getSoftwareHouse()} ? 'sviluppatore' : 'sviluppatore diversa-software-house'">
+		<li th:each="sviluppatore : ${sviluppatori}" th:class="${operazione!='oftware' || sviluppatore.softwareHouse==software.getSoftwareHouse()} ? 'sviluppatore' : 'sviluppatore diversa-software-house'">
 			<span>
 				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"  th:href="'/admin/addSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" 
 					class="nome-sviluppatore"></a>

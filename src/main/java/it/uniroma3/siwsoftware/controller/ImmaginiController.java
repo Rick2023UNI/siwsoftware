@@ -18,6 +18,7 @@ public class ImmaginiController {
 	@Autowired ImmagineService immagineService;
 	@Autowired SoftwareService softwareService;
 	
+	//rimuove la foto di quel software
 	@GetMapping("/admin/removeImageSoftware/{idSoftware}/{idImmagine}") 
 	public String removeImageSoftware(@PathVariable("idSoftware") Long idSoftware,
 			@PathVariable("idImmagine") Long idImmagine) {
@@ -27,7 +28,7 @@ public class ImmaginiController {
 		software.removeImmagine(immagine);
 		softwareService.save(software);
 		
-		immagine.delete();
+		immagineService.delete(immagine);
 		return "redirect:/admin/formUpdateSoftware/"+idSoftware;
 	}
 }

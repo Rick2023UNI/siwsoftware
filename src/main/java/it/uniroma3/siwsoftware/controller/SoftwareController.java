@@ -22,6 +22,7 @@ import it.uniroma3.siwsoftware.model.Recensione;
 import it.uniroma3.siwsoftware.model.Software;
 import it.uniroma3.siwsoftware.model.SoftwareHouse;
 import it.uniroma3.siwsoftware.model.Utente;
+import it.uniroma3.siwsoftware.repository.SoftwareRepository;
 import it.uniroma3.siwsoftware.service.ImmagineService;
 import it.uniroma3.siwsoftware.service.RecensioneService;
 import it.uniroma3.siwsoftware.service.SoftwareHouseService;
@@ -51,6 +52,7 @@ public class SoftwareController {
 		return "index.html";
 	}
 
+	//form per nuovo software
 	@GetMapping("/admin/formNewSoftware")
 	public String formNewSoftware(Model model) {
 		model.addAttribute("software", new Software());
@@ -58,6 +60,7 @@ public class SoftwareController {
 		return "admin/formUpdateSoftware.html";
 	}
 
+	//aggiunge un software con la sua immagine
 	@PostMapping("/admin/software")
 	public String newSoftware(@ModelAttribute("software") Software software,
 			@RequestParam("fileImage") MultipartFile[] multipartFiles) throws IOException {
@@ -88,21 +91,34 @@ public class SoftwareController {
 	public String getSoftware(@PathVariable("id") Long id, Model model) {
 		Software software=this.softwareService.findById(id);
 		model.addAttribute("software", software);
-		List<Recensione> recensioni=software.getRecensioni();
+		List<Recensione> recensioni=software.getRecensioni(); //tutte le recensioni
 			
 		//Utente corrente
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Utente utente=utenteService.getCredentials(user.getUsername());
-		Recensione recensione=recensioneService.findBySoftwareAndUtente(software, utente);
+		Recensione recensione=recensioneService.findBySoftwareAndUtente(software, utente); //cerca recensione dell utete corrente
 		if (recensione==null) {
-			recensione=new Recensione();
+			recensione=new Recensione(); //se non ha una rceensione per il software ne crea una nuova
 		}
 		
-		//Rimozione recensione utente corrente
+		//Rimozione recensione utente corrente (serve per dividerle nel html)
 		recensioni.remove(recensione);
 		model.addAttribute("recensione", recensione);
 		model.addAttribute("recensioni", recensioni);
+		
+		int recensioniTotali=recensioneService.countBySoftware(software);
+		int[] stelle= {
+				recensioneService.countBySoftwareAndNumeroStelle(software, 0),
+				recensioneService.countBySoftwareAndNumeroStelle(software, 1),
+				recensioneService.countBySoftwareAndNumeroStelle(software, 2),
+				recensioneService.countBySoftwareAndNumeroStelle(software, 3),
+				recensioneService.countBySoftwareAndNumeroStelle(software, 4),
+				recensioneService.countBySoftwareAndNumeroStelle(software, 5)
+				};
+		model.addAttribute("recensioniTotali", recensioniTotali);
+		System.out.println(recensioniTotali);
+		model.addAttribute("stelle", stelle);
 		return "software.html";
 	}
 	
@@ -113,6 +129,7 @@ public class SoftwareController {
 		return "admin/formUpdateSoftware.html";
 	}
 	
+	//aggiorni software
 	@PostMapping("/admin/updateSoftware/{id}")
 	public String updateSoftware(@PathVariable("id") Long id,
 			@ModelAttribute("software") Software softwareAggiornato,
@@ -141,6 +158,7 @@ public class SoftwareController {
 		return "redirect:/software/"+software.getId();
 	}
 	
+	//rimuovi software
 	@GetMapping("/admin/removeSoftware/{id}")
 	public String removeSoftware(@PathVariable("id") Long id, Model model) {
 		Software software=this.softwareService.findById(id);

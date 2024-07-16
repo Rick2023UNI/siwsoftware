@@ -11,7 +11,7 @@ function mostraNascondiInformazione() {
 
 $(document).ready(function() {
 	var dragEl = document.getElementsByClassName('scroll-orizzontale')[0];
-	var scroll=document.getElementsByClassName('sviluppatori')[1];
+	var scroll=document.getElementsByClassName('sviluppatori')[2];
 	dragEl.style.width=((window.innerWidth-32)/(scroll.scrollWidth/(window.innerWidth)))+"px";
 var dragging = false;
 var elDragPointOffset = 16;
@@ -66,7 +66,7 @@ window.addEventListener('mousemove', function(evt){
     console.log("window.innerWidth "+window.innerWidth);
     console.log("newDragElLeftValue "+newDragElLeftValue);
     var r=(scrollMaxWidth-window.innerWidth-32)/(parentWidth - dragElWidth - 32);
-    //r=1.87;
+    r=r*0.990;
     console.log("r "+r);
     console.log("newDragElLeftValue*r "+newDragElLeftValue*r);
     console.log("--------------------------------------------------");

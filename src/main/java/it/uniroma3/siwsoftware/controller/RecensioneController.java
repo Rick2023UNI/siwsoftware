@@ -26,6 +26,7 @@ public class RecensioneController {
 	@Autowired SoftwareService softwareService;
 	@Autowired UtenteService utenteService;
 
+	//aggiunge una recensione per il software e controlla se esiste già
 	@PostMapping("/recensione/{idSoftware}/{idRecensione}")
 	public String newRecensione(@PathVariable("idSoftware") Long idSoftware, 
 			@PathVariable("idRecensione") Long idRecensione, 
@@ -53,6 +54,7 @@ public class RecensioneController {
 		return "redirect:/software/"+idSoftware;
 	}
 	
+	//aggiunge una recensione al software
 	@PostMapping("/recensione/{idSoftware}")
 	public String newRecensione(@PathVariable("idSoftware") Long idSoftware,
 			@ModelAttribute("recensione") Recensione recensione) {
@@ -74,6 +76,7 @@ public class RecensioneController {
 		return "redirect:/software/"+idSoftware;
 	}
 
+	//rimuove la recensione
 	@GetMapping("/removeRecensione/{idRecensione}")
 	public String removeRecensione(@PathVariable("idRecensione") Long id,
 			Model model) {

@@ -39,12 +39,14 @@ public class SviluppatoreController {
 	@Autowired PasswordEncoder passwordEncoder;
 	@Autowired UtenteService utenteService;
 
+	//dettagli di uno sviluppatore
 	@GetMapping("/sviluppatore/{id}")
 	public String getSviluppatore(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("sviluppatore", this.sviluppatoreService.findById(id));
 		return "Sviluppatore.html";
 	}
 	
+	//form per nuovo sviluppatore
 	@GetMapping("/admin/formNewSviluppatore")
 	public String formNewSviluppatore(Model model) {
 		model.addAttribute("action", "/admin/sviluppatore");
@@ -53,6 +55,8 @@ public class SviluppatoreController {
 		return "admin/formNewSviluppatore.html";
 	}
 	
+	//form per update sviluppatore
+	//action ti fa aprire sempre la stessa form sia per creare che per modificare e in base ad action la form chiama la post a path diversi
 	@GetMapping("/admin/formUpdateSviluppatore/{id}")
 	public String formUpdateSviluppatore(Model model,
 			@PathVariable("id") Long id) {
@@ -72,6 +76,7 @@ public class SviluppatoreController {
 		return "admin/formNewSviluppatore.html";
 	}
 	
+	//crea sviluppatore
 	@PostMapping("/admin/sviluppatore")
 	public String newSviluppatore(@ModelAttribute("utente") Utente utente,
 			@ModelAttribute("sviluppatore") Sviluppatore sviluppatore,
@@ -94,7 +99,7 @@ public class SviluppatoreController {
 		return "redirect:/sviluppatore/"+sviluppatore.getId();
 	}
 	
-	
+	//update svilupttaore
 	@PostMapping("/admin/updateSviluppatore/{id}")
 	public String updateSviluppatore(@PathVariable("id") Long id, 
 			@ModelAttribute("sviluppatore") Sviluppatore sviluppatoreAggiornato,
@@ -103,12 +108,10 @@ public class SviluppatoreController {
 		Sviluppatore sviluppatore=sviluppatoreService.findById(id);
 		Utente utente=utenteService.getCredentials(sviluppatore.getUtente().getId());
 		String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		/*Evita tentativo di caricare il file vuoto causato
-		 dall'ultimo input che viene aggiunto in automatico
-		 ed è sempre vuoto
-		 */
 		if (fileName!="") {
-			utente.getFoto().delete();
+			Immagine vecchiaImmagine=utente.getFoto();
+			utente.setFoto(null);
+			this.immagineService.delete(vecchiaImmagine);
 			fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
 			Immagine immagine=new Immagine();
 			immagine.setFolder("sviluppatore");
@@ -150,6 +153,7 @@ public class SviluppatoreController {
 		return "admin/formAddSviluppatore.html";
 	}
 	
+	//addsviluppatore al sofwtare
 	@GetMapping("/admin/addSviluppatoreSoftware/{idSoftware}/{idSviluppatore}")
 	public String addSviluppatoreSoftware(@PathVariable("idSoftware") Long idSoftware, 
 			@PathVariable("idSviluppatore") Long idSviluppatore,
@@ -162,6 +166,7 @@ public class SviluppatoreController {
 		return "redirect:/admin/formAddSviluppatoreSoftware/"+idSoftware;
 	}
 	
+	//remove sviluppatore dal software
 	@GetMapping("/admin/removeSviluppatoreSoftware/{idSoftware}/{idSviluppatore}")
 	public String removeSviluppatoreSoftware(@PathVariable("idSoftware") Long idSoftware, 
 			@PathVariable("idSviluppatore") Long idSviluppatore,
@@ -178,7 +183,7 @@ public class SviluppatoreController {
 	
 	
 	
-	
+	//form per mettere uno sviluppatore in una software house
 	@GetMapping("/admin/formAddSviluppatoreSoftwareHouse/{idSoftwareHouse}")
 	public String formAddSviluppatoreSoftwareHouse(@PathVariable("idSoftwareHouse") Long idSoftwareHouse, 
 			Model model) {
@@ -249,6 +254,7 @@ public class SviluppatoreController {
 		return "admin/manageSviluppatori.html";
 	}
 	
+	//tipologia è se usi form ricerca sopra o sotto, operazione è se apri la pagina da software o software house
 	@PostMapping("/admin/cercaAddSviluppatore/{tipologiaRicerca}/{operazione}/{id}")
 	public String searchAddSviluppatore(@PathVariable("operazione") String operazione, 
 			@PathVariable("tipologiaRicerca") String tipologiaRicerca, 

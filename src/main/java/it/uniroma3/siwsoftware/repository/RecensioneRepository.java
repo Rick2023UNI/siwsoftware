@@ -10,6 +10,11 @@ import java.util.List;
 
 public interface RecensioneRepository extends CrudRepository<Recensione, Long> {
 
+	//cerca recensione per software e utente
 	Recensione findBySoftwareAndUtente(Software software, Utente utente);
+
+	int countBySoftware(Software software);
+
+	int countBySoftwareAndNumeroStelle(Software software, int numeroStelle);
 
 }

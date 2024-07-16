@@ -233,7 +233,7 @@
 			</span>
 		      <input type="text" th:field="${recensione.descrizione}" placeholder="Descrizione"  class="input-recensione"/>
 			  <input id="numeroStelle" style="display: none;" type="number" name="stelle" th:field="${recensione.numeroStelle}" placeholder="Minimo 1, massimo 5" min="1" max="5">
-			  <span>
+			  <span id="conferma-annulla">
 				<button type="submit" class="submit">
 					<svg class="icona conferma" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
 					  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
@@ -251,6 +251,16 @@
 	<br>
 	<h3>Altre recensioni</h3>
 	<div th:if="${recensioni==null || recensioni.isEmpty()}">Non ci sono recensioni per il software corrente</div>
+	<div class="dati">
+		<h3>Percentuali</h3>
+		<span th:text="${recensioniTotali}+' recensioni totali'"></span>
+		<div class="percentuale">5 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[5]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[5]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
+		<div class="percentuale">4 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[4]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[4]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
+		<div class="percentuale">3 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[3]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[3]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
+		<div class="percentuale">2 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[2]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[2]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
+		<div class="percentuale">1 stella <div class="barra"><div class="progresso" th:progresso="${stelle[1]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[1]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
+		<div class="percentuale">0 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[0]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[0]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
+	</div>
 	<ul>
 		<li th:each="recensione : ${recensioni}" class="recensione">
 			<span>

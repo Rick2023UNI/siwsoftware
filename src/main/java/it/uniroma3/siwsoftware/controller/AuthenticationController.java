@@ -67,7 +67,7 @@ public class AuthenticationController {
 		Immagine immagine=new Immagine();
 		immagine.setFolder("sviluppatore");
 		fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
-		immagine.uploadImage(fileName, multipartFile);
+		immagine.uploadImage(fileName, multipartFile); //la cartella è salvata nell'immagine
 		this.immagineService.save(immagine);
 		utente.setFoto(immagine);
 

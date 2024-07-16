@@ -33,7 +33,7 @@
 	    <label class="input-label">Categoria</label>
 	    <input th:field="${software.categoria}" required name='categoria' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 	</div>
-	  <input required type="date" th:value="${software.id!=null} ? ${#dates.format(software.annoPubblicazione, 'yyyy-MM-dd')} : ''" th:field="${software.annoPubblicazione}"/>
+	  <input required type="date" th:value="${software.id!=null} ? ${software.annoPubblicazione} : ''" th:field="${software.annoPubblicazione}"/>
 	<div th:if="${software.immagini==null || software.immagini.isEmpty()}">Non ci sono immagini per il software corrente</div>
 	<ul class="immagini">
 		<li th:each="immagine : ${software.immagini}">

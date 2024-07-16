@@ -1,5 +1,4 @@
 .recensione{
-	border-radius: 10%;
 	border-radius: 25px;
 	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
 	display: inline-grid;
@@ -187,4 +186,41 @@
 .grande.selezionate {
 	margin-top: -5.35ch;
 	height: 5ch;
+}
+
+
+#conferma-annulla {
+	margin-top: 0.3ch;
+}
+
+.dati {
+	border-radius: 25px;
+	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
+	display: inline-grid;
+  	padding-left: 2ch;
+  	padding-right: 2ch;
+  	padding-bottom: 2ch;
+  	margin: 0.4ch;
+}
+
+.barra {
+	background-color: #fff1cc;
+	width:20ch;
+	height:2ch;
+	border-radius: 10px;
+	display: inline-block;
+	vertical-align: middle;
+	overflow: hidden
+}
+
+.progresso {
+	background: linear-gradient(90deg, rgba(251,255,136,1) 0%, gold 100%);
+	width:10ch;
+	height:2ch;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.percentuale {
+	margin-bottom: 1ch;
 }

@@ -10,7 +10,9 @@ function showHideCommentForm() {
 		recensione.style.display = "none";
 	}
 	
-	hideButton.style.display="block";
+	if (hideButton!=null)
+		hideButton.style.display="block";
+	if (showButton!=null)
 	showButton.style.display="none";
 	
     form.style.display = "block";
@@ -20,8 +22,10 @@ function showHideCommentForm() {
 		recensione.style.display = "";
 	}
 	
-	hideButton.style.display="none";
-	showButton.style.display="block";
+	if (hideButton!=null)
+		hideButton.style.display="none";
+	if (showButton!=null)	
+		showButton.style.display="block";
     form.style.display = "none";
   }
   stelleSelezionate(document.getElementById("numeroStelle").value);
@@ -32,6 +36,13 @@ $(document).ready(function() {
 	//Impostazione stelle selezionate nelle varie recensioni
 	for (var i = 0; i < stelle.length; i++) {
 		stelle[i].classList.add("selezionate-"+(stelle[i].getAttribute("stelle")/5*100))
+	}
+	
+	//Impostazione larghezza barre percentuali recensioni per stelle
+	var barreProgresso=document.getElementsByClassName("progresso");
+	for (var i = 0; i < barreProgresso.length; i++) {
+		var barraProgresso=barreProgresso[i];
+		barraProgresso.style.width=barraProgresso.getAttribute("progresso")+"%";
 	}
 });
 

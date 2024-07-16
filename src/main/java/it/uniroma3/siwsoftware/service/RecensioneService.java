@@ -15,6 +15,7 @@ public class RecensioneService {
 	@Autowired
 	private RecensioneRepository recensioneRepository;
 
+	//tutte recensioni
 	public Iterable<Recensione> findAll() {
 		return recensioneRepository.findAll();
 	}
@@ -23,20 +24,32 @@ public class RecensioneService {
 		recensioneRepository.save(recensione);
 	}
 
+	//cerca per id
 	public Recensione findById(Long id) {
 		return recensioneRepository.findById(id).get();
 	}
 
+	//cerca per software e utente
 	public Recensione findBySoftwareAndUtente(Software software, Utente utente) {
 		return recensioneRepository.findBySoftwareAndUtente(software, utente);
 	}
 
+	//elimina
 	public void delete(Recensione recensione) {
 		recensioneRepository.delete(recensione);
 		
 	}
 
+	//esiste per id
 	public boolean existsById(Long id) {
 		return recensioneRepository.existsById(id);
+	}
+
+	public int countBySoftware(Software software) {
+		return recensioneRepository.countBySoftware(software);
+	}
+
+	public int countBySoftwareAndNumeroStelle(Software software, int numeroStelle) {
+		return recensioneRepository.countBySoftwareAndNumeroStelle(software, numeroStelle);
 	}
 }
