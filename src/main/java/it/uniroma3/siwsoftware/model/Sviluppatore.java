@@ -10,9 +10,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PreRemove;
 
 @Entity
 public class Sviluppatore {
+	
+	//Prima della cancellazione
+	@PreRemove
+    private void preRemove() {
+        software.forEach(software -> software.removeSviluppatore(this));
+    }
+
 	public Long getId() {
 		return id;
 	}

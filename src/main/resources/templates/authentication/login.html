@@ -13,7 +13,7 @@
 		<div>
 		<h1>Accedi</h1>
 			<div th:switch="${errorMessage}">
-			<div class="error-message" th:case="'Bad credentials'">Username o password errati</div>
+			<div class="errore" th:case="'Bad credentials'">Username o password errati</div>
 			</div>
 	  <div class="input-div">
 	    <label class="input-label">Username</label>
@@ -38,7 +38,7 @@
 			</svg>
 		</div>
   	  </span>
-		<button type="submit" id="submit" class="bottone pull-right">Login</button>
+		<button type="submit" id="submit" class="bottone pull-right">Accedi</button>
       </div>
 	  <a class="link" href="/register">Non sei ancora registrato? registrati ora!</a>
     </form>

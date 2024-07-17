@@ -3,15 +3,24 @@ package it.uniroma3.siwsoftware.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PreRemove;
 
 @Entity
 public class SoftwareHouse {
+	
+	//Prima della cancellazione
+	@PreRemove
+    private void preRemove() {
+        sviluppatori.forEach(sviluppatori -> sviluppatori.setSoftwareHouse(null));
+    }
+	
 	public Immagine getLogo() {
 		return logo;
 	}
@@ -75,7 +84,7 @@ public class SoftwareHouse {
 	@OneToMany(mappedBy = "softwareHouse")
 	private List<Sviluppatore> sviluppatori;
 	
-	@OneToMany(mappedBy = "softwareHouse")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "softwareHouse")
 	private List<Software> software;
 	
 	public void aggiorna(SoftwareHouse softwareHouseAggiornato) {

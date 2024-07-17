@@ -21,7 +21,7 @@
 					    <label class="input-label">Username</label>
 					    <input required th:field="${utente.username}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 					</div>
-					<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></span>
+					<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="errore"></span>
 					<span class="input-div password-div">
 				  	    <label class="input-label">Password</label>
 				  	    <input required id="password" name='password' type="password" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
@@ -41,7 +41,7 @@
 							</svg>
 						</div>
 				  	  </span>
-					  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></span>
+					  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="errore"></span>
 					  <div class="input-div">
 				  		    <label class="input-label">Nome</label>
 				  		    <input required th:field="${sviluppatore.nome}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
@@ -58,7 +58,7 @@
 				      <br>
 				      </div>
 					  <img id="thumbnail"/>
-					  <button type="submit" id="submit" class="bottone destra">Login</button>
+					  <button type="submit" id="submit" class="bottone destra">Registrati</button>
 		</div>
 		  <a class="link" href="/login">Sei gi&agrave; registrato? Accedi!</a>
 	    </form>

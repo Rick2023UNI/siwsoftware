@@ -246,7 +246,7 @@ input {
   user-select: none;
 }
 
-.error-message {
+.errore {
   padding: 5%;
   background-color: #f44336;
   color: white;
@@ -256,7 +256,7 @@ input {
   width: 90%;
 }
 
-.data {
+.data-input {
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;

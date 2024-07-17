@@ -92,7 +92,7 @@ public class Utente {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Sviluppatore sviluppatore;
 	
-	@OneToMany(mappedBy = "utente")
+	@OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
 	private List<Recensione> recensioni;
 	
 	@OneToOne

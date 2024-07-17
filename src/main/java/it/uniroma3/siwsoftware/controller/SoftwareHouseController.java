@@ -59,7 +59,7 @@ public class SoftwareHouseController {
 		
 		softwareHouse.setLogo(immagine);
 		softwareHouseService.save(softwareHouse);
-		return "redirect:/softwareHouse/"+softwareHouse.getId();
+		return "redirect:/admin/formAddSviluppatoreSoftwareHouse/"+softwareHouse.getId();
 	}
 	
 	//form per modifica software house

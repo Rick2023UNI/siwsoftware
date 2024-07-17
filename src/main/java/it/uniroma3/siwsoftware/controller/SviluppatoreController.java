@@ -82,7 +82,8 @@ public class SviluppatoreController {
 
 	//crea sviluppatore
 	@PostMapping("/admin/sviluppatore")
-	public String newSviluppatore(@Valid @ModelAttribute("utente") Utente utente,BindingResult credentialsBindingResult,
+	public String newSviluppatore(@Valid @ModelAttribute("utente") Utente utente,
+			BindingResult credentialsBindingResult,
 			@ModelAttribute("sviluppatore") Sviluppatore sviluppatore,
 			@RequestParam("input-immagine") MultipartFile multipartFile) throws IOException {
 
@@ -115,12 +116,8 @@ public class SviluppatoreController {
 	@PostMapping("/admin/updateSviluppatore/{id}")
 	public String updateSviluppatore(@PathVariable("id") Long id, 
 			@ModelAttribute("sviluppatore") Sviluppatore sviluppatoreAggiornato,
-			@Valid @ModelAttribute("utente") Utente utenteAggiornato, BindingResult credentialsBindingResult,
+			@ModelAttribute("utente") Utente utenteAggiornato,
 			@RequestParam("input-immagine") MultipartFile multipartFile) throws IOException {
-		
-		this.utenteValidator.validate(utenteAggiornato, credentialsBindingResult);
-
-		if(!credentialsBindingResult.hasErrors()) {
 		
 		Sviluppatore sviluppatore=sviluppatoreService.findById(id);
 		Utente utente=utenteService.getCredentials(sviluppatore.getUtente().getId());
@@ -153,9 +150,6 @@ public class SviluppatoreController {
 
 
 		return "redirect:/sviluppatore/"+sviluppatore.getId();
-		}
-		System.err.println(credentialsBindingResult.getAllErrors());
-		return "redirect:/admin/manageSviluppatori?error=true";
 	}
 
 
