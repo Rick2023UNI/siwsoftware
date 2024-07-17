@@ -45,11 +45,15 @@ public class RecensioneService {
 		return recensioneRepository.existsById(id);
 	}
 
+	public int sumNumeroStelleBySoftware(Software software) {
+		return recensioneRepository.sumNumeroStelleBySoftware(software);
+	}
+
 	public int countBySoftware(Software software) {
 		return recensioneRepository.countBySoftware(software);
 	}
 
-	public int countBySoftwareAndNumeroStelle(Software software, int numeroStelle) {
+	public Integer countBySoftwareAndNumeroStelle(Software software, Integer numeroStelle) {
 		return recensioneRepository.countBySoftwareAndNumeroStelle(software, numeroStelle);
 	}
 }

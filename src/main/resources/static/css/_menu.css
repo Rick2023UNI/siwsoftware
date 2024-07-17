@@ -165,4 +165,6 @@ ul li ul:hover {
 	margin-top: 1ch;
 }
 
-#Home 
+.logo img {
+	width: 20ch;
+}

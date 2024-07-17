@@ -1,6 +1,8 @@
 package it.uniroma3.siwsoftware.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +84,7 @@ public class SoftwareController {
 				this.immagineService.save(immagine);
 			}
 		}
+		software.setMediaStelle(0);
 		softwareService.save(software);
 		
 		return "redirect:/admin/formAddSviluppatoreSoftware/"+software.getId();
@@ -108,16 +111,19 @@ public class SoftwareController {
 		model.addAttribute("recensioni", recensioni);
 		
 		int recensioniTotali=recensioneService.countBySoftware(software);
-		int[] stelle= {
-				recensioneService.countBySoftwareAndNumeroStelle(software, 0),
-				recensioneService.countBySoftwareAndNumeroStelle(software, 1),
-				recensioneService.countBySoftwareAndNumeroStelle(software, 2),
-				recensioneService.countBySoftwareAndNumeroStelle(software, 3),
-				recensioneService.countBySoftwareAndNumeroStelle(software, 4),
-				recensioneService.countBySoftwareAndNumeroStelle(software, 5)
-				};
+		System.out.println(recensioniTotali + " condizione "+(recensioniTotali==0));
+		List<Integer> stelle=new ArrayList<Integer>();
+		if (recensioniTotali==0) {
+			Collections.addAll(stelle, 0, 0, 0, 0, 0, 0);
+		} else {
+			for (Integer i=0;i<=5;i++) {
+				Integer numeroRecensioniConStelle=recensioneService.countBySoftwareAndNumeroStelle(software, i);
+				stelle.add((numeroRecensioniConStelle*100)/recensioniTotali);
+			}
+		};
+		System.out.println(stelle);
+				
 		model.addAttribute("recensioniTotali", recensioniTotali);
-		System.out.println(recensioniTotali);
 		model.addAttribute("stelle", stelle);
 		return "software.html";
 	}
@@ -129,7 +135,7 @@ public class SoftwareController {
 		return "admin/formUpdateSoftware.html";
 	}
 	
-	//aggiorni software
+	//aggiorna software
 	@PostMapping("/admin/updateSoftware/{id}")
 	public String updateSoftware(@PathVariable("id") Long id,
 			@ModelAttribute("software") Software softwareAggiornato,

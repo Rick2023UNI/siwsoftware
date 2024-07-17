@@ -2,6 +2,7 @@
 <html>
 
 <head>
+	<link rel="icon" href="/image/favicon.ico" type="image/x-icon">
 	<title>
 		SiwSoftware - Homepage
 	</title>
@@ -10,7 +11,6 @@
 	<link rel="stylesheet" href="/css/_menu.css" />
 	<link rel="stylesheet" href="/css/_icone.css" />
 	<link rel="stylesheet" href="/css/admin/manageSoftware.css" />
-	<link rel="icon" href="/image/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -103,7 +103,7 @@
 					th:src="@{${unSoft.immagini[0].getImagePath}}" class="immagine-software">
 				<div class="footer">
 					<span th:text="${unSoft.categoria}" class="categoria"></span>
-					<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd")}' class="data"></span>
+					<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy")}' class="data"></span>
 
 					<span class="footer-icone">
 						<a>

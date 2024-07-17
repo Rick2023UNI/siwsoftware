@@ -32,6 +32,12 @@ function showHideCommentForm() {
 } 
 
 $(document).ready(function() {
+	var dragEl = document.getElementsByClassName('scroll-orizzontale')[0];
+	var scroll =  document.getElementsByClassName('sviluppatori')[0];
+		 
+		
+	inizializzaScroll(dragEl, scroll);
+	
 	var stelle=document.getElementsByClassName("selezionate");
 	//Impostazione stelle selezionate nelle varie recensioni
 	for (var i = 0; i < stelle.length; i++) {

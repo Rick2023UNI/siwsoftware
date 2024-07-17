@@ -119,17 +119,13 @@ public class Software {
 	public void removeSviluppatore(Sviluppatore sviluppatore) {
 		this.sviluppatori.remove(this.sviluppatori.indexOf(sviluppatore));
 	}
+
+	public int getMediaStelle() {
+		return mediaStelle;
+	}
 	
-	public Integer getMediaStelle() {
-		Integer somma=0;
-		for (Recensione recensione : this.recensioni) {
-			somma+=recensione.getNumeroStelle();
-		}
-		//Se il numero di recensioni è 0
-		if (this.recensioni.size()==0) {
-			return 0;
-		}
-		return somma/this.recensioni.size();
+	public void setMediaStelle(int mediaStelle) {
+		this.mediaStelle = mediaStelle;
 	}
 
 	@Id
@@ -154,6 +150,8 @@ public class Software {
 	
 	@ManyToOne
 	private SoftwareHouse softwareHouse;
+
+	private int mediaStelle;
 
 	public void aggiorna(Software softwareAggiornato) {
 		this.setNome(softwareAggiornato.getNome());

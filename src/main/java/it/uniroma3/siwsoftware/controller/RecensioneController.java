@@ -51,6 +51,19 @@ public class RecensioneController {
 		recensione.setUtente(utente);
 		recensioneService.save(recensione);
 		softwareService.save(software);
+		
+		//Aggiornamento numero medio stelle software
+		int recensioniTotali = recensioneService.countBySoftware(software);
+		if (recensioniTotali!=0) {
+			int softwareSommaStelle = recensioneService.sumNumeroStelleBySoftware(software);
+			software.setMediaStelle(Math.round(softwareSommaStelle/recensioniTotali));
+		}
+		else {
+			software.setMediaStelle(0);
+		}
+		
+		softwareService.save(software);
+		
 		return "redirect:/software/"+idSoftware;
 	}
 	
@@ -72,7 +85,21 @@ public class RecensioneController {
 		recensione.setSoftware(software);
 		recensione.setUtente(utente);
 		recensioneService.save(recensione);
+		
 		softwareService.save(software);
+		
+		//Aggiornamento numero medio stelle software
+		int recensioniTotali = recensioneService.countBySoftware(software);
+		if (recensioniTotali!=0) {
+			int softwareSommaStelle = recensioneService.sumNumeroStelleBySoftware(software);
+			software.setMediaStelle(Math.round(softwareSommaStelle/recensioniTotali));
+		}
+		else {
+			software.setMediaStelle(0);
+		}
+		
+		softwareService.save(software);
+		
 		return "redirect:/software/"+idSoftware;
 	}
 
@@ -91,7 +118,20 @@ public class RecensioneController {
 		//Verifica se l'utente corrente è l'autore della Recensione o è un amministratore
 		if (recensione.getUtente()==utente || auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("admin"))) {
 			recensioneService.delete(recensione);
+			
+			//Aggiornamento numero medio stelle software
+			int recensioniTotali = recensioneService.countBySoftware(software);
+			if (recensioniTotali!=0) {
+				int softwareSommaStelle = recensioneService.sumNumeroStelleBySoftware(software);
+				software.setMediaStelle(Math.round(softwareSommaStelle/recensioniTotali));
+			}
+			else {
+				software.setMediaStelle(0);
+			}
+			
+			softwareService.save(software);
 		}
+		
 		return "redirect:/software/"+software.getId(); 
 	}
 }

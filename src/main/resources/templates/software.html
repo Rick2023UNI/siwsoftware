@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-
+	
 <head>
+	<link rel="icon" href="/image/favicon.ico" type="image/x-icon">
 	<title>Software</title>
 	<script src="/js/3.7.1_jquery.min.js"></script>
 	<script src="/js/software.js"></script>
@@ -13,9 +14,56 @@
 	<script src="/js/_avviso.js"></script>
 	
 	<link rel="stylesheet" href="/css/_form.css" />
+	
+	<link rel="stylesheet" href="/css/_menu.css" />
+	
+	<script src="/js/_scroll.js"></script>
+	<link rel="stylesheet" href="/css/_scroll.css" />
 </head>
 
 <body>
+	<section id="Home">
+			<nav>
+				<div class="logo">
+					<a href="/">
+						<img src="/image/logo.png">
+					</a>
+				</div>
+				<ul>
+					<li th:if="${admin!=true}">
+						<a href="/softwareHouses">Software house</a>
+					</li>
+					<li th:if="${admin==true}">
+						<a href="/admin/manageSoftware">Gestisci i software</a>
+						<ul class="dropdown">
+							<li><a href="/admin/formNewSoftware">Crea software</a></li>
+						</ul>
+					</li>
+					<li th:if="${admin==true}">
+						<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
+						<ul class="dropdown">
+							<li><a href="/admin/formNewSviluppatore">Crea sviluppatore</a></li>
+						</ul>
+					</li>
+					<li th:if="${admin==true}">
+						<a href="/admin/manageSoftwareHouses">Gestisci le software house</a>
+						<ul class="dropdown">
+							<li><a href="/admin/formNewSoftwareHouse">Crea software house</a></li>
+						</ul>
+					</li>
+				</ul>
+		
+				<div>
+					<a th:if="${utenteAuth!=null}" th:href="@{'/sviluppatore/' + ${sviluppatoreAuth.id}}" id="account">
+						<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" id="utente-corrente-immagine">
+					</a>
+					<a th:if="${utenteAuth!=null}" href="/logout" id="esci">Esci</a>
+					<a th:unless="${utenteAuth!=null}" href="/login" id="accedi">Accedi</a>
+					<a th:unless="${utenteAuth!=null}" href="/register" id="registrati">Registrati</a>
+				</div>
+		
+			</nav>
+		</section>
 	<span>
 		<h1 th:text="${software.nome}">Software</h1>
 		<span class="destra stelle">
@@ -41,7 +89,7 @@
 						d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
 				</svg>
 			</span>
-			<span class="selezionate grande" th:stelle="${software.getMediaStelle()}">
+			<span class="selezionate grande" th:stelle="${software.mediaStelle}">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
 					<path
 						d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -113,6 +161,7 @@
 			</span>
 		</li>
 	</ul>
+	<div class="scroll-orizzontale"></div>
 	<br>
 	<button th:if="${recensione.id}==null" onclick="showHideCommentForm()" id="hideCommentForm" class="bottone" style="display: none;">Non recensisci</button>
 	<button th:if="${recensione.id}==null" onclick="showHideCommentForm()" id="showCommentForm" class="bottone">
@@ -253,14 +302,15 @@
 	<div th:if="${recensioni==null || recensioni.isEmpty()}">Non ci sono recensioni per il software corrente</div>
 	<div class="dati">
 		<h3>Percentuali</h3>
-		<span th:text="${recensioniTotali}+' recensioni totali'"></span>
-		<div class="percentuale">5 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[5]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[5]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
-		<div class="percentuale">4 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[4]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[4]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
-		<div class="percentuale">3 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[3]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[3]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
-		<div class="percentuale">2 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[2]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[2]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
-		<div class="percentuale">1 stella <div class="barra"><div class="progresso" th:progresso="${stelle[1]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[1]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
-		<div class="percentuale">0 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[0]}/${recensioniTotali}*100"></div></div><span th:text="' ' + ${stelle[0]}/${recensioniTotali}*100 + '%'">percentuale</span></div>
+		<span th:text="${recensioniTotali}+' recensioni totali'" style="margin-bottom: 1ch;"></span>
+		<div class="percentuale">5 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[5]}"></div></div><span th:text="' ' + ${stelle[5]} + '%'">percentuale</span></div>
+		<div class="percentuale">4 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[4]}"></div></div><span th:text="' ' + ${stelle[4]} + '%'">percentuale</span></div>
+		<div class="percentuale">3 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[3]}"></div></div><span th:text="' ' + ${stelle[3]} + '%'">percentuale</span></div>
+		<div class="percentuale">2 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[2]}"></div></div><span th:text="' ' + ${stelle[2]} + '%'">percentuale</span></div>
+		<div class="percentuale">1 stella <div class="barra"><div class="progresso" th:progresso="${stelle[1]}"></div></div><span th:text="' ' + ${stelle[1]} + '%'">percentuale</span></div>
+		<div class="percentuale">0 stelle <div class="barra"><div class="progresso" th:progresso="${stelle[0]}"></div></div><span th:text="' ' + ${stelle[0]} + '%'">percentuale</span></div>
 	</div>
+	
 	<ul>
 		<li th:each="recensione : ${recensioni}" class="recensione">
 			<span>

@@ -1,0 +1,19 @@
+.sviluppatori {
+	overflow: -moz-scrollbars-none;
+  	scrollbar-width: none;
+  	padding-left: 0;
+}
+
+.scroll-orizzontale {
+	height: 1.7ch;
+	background: #ccc;
+	border-radius: 25px;
+	left: 0px;
+	position: relative;
+	visibility: hidden;
+	margin-bottom: 4ch;
+}
+
+.scroll-orizzontale:hover {
+	background: rgb(190, 190, 190);
+}

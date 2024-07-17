@@ -2,15 +2,60 @@
 <html>
 
 <head>
+	<link rel="icon" href="/image/favicon.ico" type="image/x-icon">
 	<title>Sviluppatore</title>
 	<link rel="stylesheet" href="/css/sviluppatore.css" />
 	
 	<link rel="stylesheet" href="/css/_lista software.css" />
 	<link rel="stylesheet" href="/css/_icone.css" />
 	<link rel="stylesheet" href="/css/admin/manageSoftware.css" />
+	
+	<link rel="stylesheet" href="/css/_menu.css" />
 </head>
 
 <body>
+	<section id="Home">
+			<nav>
+				<div class="logo">
+					<a href="/">
+						<img src="/image/logo.png">
+					</a>
+				</div>
+				<ul>
+					<li th:if="${admin!=true}">
+						<a href="/softwareHouses">Software house</a>
+					</li>
+					<li th:if="${admin==true}">
+						<a href="/admin/manageSoftware">Gestisci i software</a>
+						<ul class="dropdown">
+							<li><a href="/admin/formNewSoftware">Crea software</a></li>
+						</ul>
+					</li>
+					<li th:if="${admin==true}">
+						<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
+						<ul class="dropdown">
+							<li><a href="/admin/formNewSviluppatore">Crea sviluppatore</a></li>
+						</ul>
+					</li>
+					<li th:if="${admin==true}">
+						<a href="/admin/manageSoftwareHouses">Gestisci le software house</a>
+						<ul class="dropdown">
+							<li><a href="/admin/formNewSoftwareHouse">Crea software house</a></li>
+						</ul>
+					</li>
+				</ul>
+		
+				<div>
+					<a th:if="${utenteAuth!=null}" th:href="@{'/sviluppatore/' + ${sviluppatoreAuth.id}}" id="account">
+						<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" id="utente-corrente-immagine">
+					</a>
+					<a th:if="${utenteAuth!=null}" href="/logout" id="esci">Esci</a>
+					<a th:unless="${utenteAuth!=null}" href="/login" id="accedi">Accedi</a>
+					<a th:unless="${utenteAuth!=null}" href="/register" id="registrati">Registrati</a>
+				</div>
+		
+			</nav>
+		</section>
 	<span>
 		<h1 th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"></h1>
 		<span th:if="${admin}">
@@ -68,7 +113,7 @@
 					th:src="@{${unSoft.immagini[0].getImagePath}}" class="immagine-software">
 				<div class="footer">
 					<span th:text="${unSoft.categoria}" class="categoria"></span>
-					<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy-MM-dd")}' class="data"></span>
+					<span th:text='${#dates.format(unSoft.annoPubblicazione, "yyyy")}' class="data"></span>
 	
 					<span class="footer-icone">
 						<a>

@@ -78,22 +78,3 @@
 		opacity: 1
 	}
 }
-
-.sviluppatori {
-	/*overflow: -moz-scrollbars-none;
-  	scrollbar-width: none;*/
-  	margin-bottom: 10ch;
-  	padding-left: 0;
-}
-
-.scroll-orizzontale {
-	height: 1.7ch;
-	background: #ccc;
-	border-radius: 25px;
-	left: 16px;
-	position: fixed;
-}
-
-.scroll-orizzontale:hover {
-	background: rgb(190, 190, 190);
-}
