@@ -42,6 +42,7 @@ public class AuthenticationController {
 	@Autowired SoftwareService softwareService;
 	@Autowired SviluppatoreService sviluppatoreService;
 	@Autowired ImmagineService immagineService;
+	
 	@Autowired UtenteValidator utenteValidator;
 
 	@GetMapping("/login")
@@ -62,14 +63,14 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/register")
-	public String registerUtente(@Valid @ModelAttribute("utente") Utente utente, BindingResult credentialsBindingResult,
+	public String registerUtente(@Valid @ModelAttribute("utente") Utente utente, 
+			BindingResult credentialsBindingResult,
 			@ModelAttribute("sviluppatore") Sviluppatore sviluppatore,
 			@RequestParam("input-immagine") MultipartFile multipartFile) throws IOException {
 
 		this.utenteValidator.validate(utente, credentialsBindingResult);
 
 		if(!credentialsBindingResult.hasErrors()) {
-
 			this.sviluppatoreService.save(sviluppatore);
 			String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
 			Immagine immagine=new Immagine();
@@ -87,8 +88,7 @@ public class AuthenticationController {
 
 			return "authentication/login.html";
 		}
-		System.err.println(credentialsBindingResult.getAllErrors());
-		return "redirect:/register?error=true";
+		return "authentication/register.html";
 	}
 
 	@GetMapping("/success")

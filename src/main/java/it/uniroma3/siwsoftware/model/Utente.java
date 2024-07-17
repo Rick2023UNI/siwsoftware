@@ -11,6 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Utente {
@@ -75,8 +78,13 @@ public class Utente {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotBlank(message = "Lo username e' richiesto")
+	@NotNull
 	private String username;
 	
+	@NotBlank(message = "La password e' richiesta")
+	@Size(min = 8, message = "La password deve essere lunga almeno 8 caratteri")
+	@NotNull
 	private String password;
 	
 	private String ruolo;

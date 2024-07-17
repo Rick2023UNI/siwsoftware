@@ -64,7 +64,7 @@
     <form th:action="${softwareHouse.id!=null} ? '/admin/updateSoftwareHouse/' + ${softwareHouse.id} : '/admin/softwareHouse'" method="POST" th:object="${softwareHouse}" enctype="multipart/form-data">
 		<div class="input-div">
 		    <label class="input-label">Nome</label>
-		    <input th:field="${softwareHouse.nome}" required name='nome' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
+		    <input required th:field="${softwareHouse.nome}" required name='nome' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 		</div>
 	  <br>
 	  <input type="file" name='input-immagine' id="input-immagine" accept="image/png, image/jpeg" class="input-immagine nascosto"/>

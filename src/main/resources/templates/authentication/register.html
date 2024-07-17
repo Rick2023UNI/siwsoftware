@@ -12,16 +12,16 @@
   </head>
   <body>
     <h1>Registrati</h1>
-    	<!-- errori globali se invii ingrediente con nome che gia esiste -->
-			<div class="error-message" th:if="${param.error != null}">
-				<span class="error-message" th:text="'Dati inseriti non accettabili'">Dati inseriti non accettabili</span>
-			</div>
-	<form th:action="@{/register}" method="POST" enctype="multipart/form-data" th:object="${utente}">		
+	<form th:action="@{/register}" method="POST" enctype="multipart/form-data" th:object="${utente}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+				<span class="error-message" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</span>
+			</div>		
 		<div>
 			<div class="input-div">
 					    <label class="input-label">Username</label>
-					    <input th:field="${utente.username}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
+					    <input required th:field="${utente.username}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 					</div>
+					<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></span>
 					<span class="input-div password-div">
 				  	    <label class="input-label">Password</label>
 				  	    <input required id="password" name='password' type="password" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
@@ -41,16 +41,17 @@
 							</svg>
 						</div>
 				  	  </span>
+					  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></span>
 					  <div class="input-div">
 				  		    <label class="input-label">Nome</label>
-				  		    <input th:field="${sviluppatore.nome}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
+				  		    <input required th:field="${sviluppatore.nome}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 				  		</div>
 						<div class="input-div">
 				  		    <label class="input-label">Cognome</label>
-				  		    <input th:field="${sviluppatore.cognome}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
+				  		    <input required th:field="${sviluppatore.cognome}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 				  		</div>
 				      <div>
-						<input class="nascosto" type="file" name='input-immagine' id="input-immagine" accept="image/png, image/jpeg"/>
+						<input required class="nascosto" type="file" name='input-immagine' id="input-immagine" accept="image/png, image/jpeg"/>
 						<label for="input-immagine" class="bottone"><svg class="icona-upload" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
 						  <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M6.354 9.854a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 8.707V12.5a.5.5 0 0 1-1 0V8.707z"/>
 						</svg>Carica immagine profilo</label>

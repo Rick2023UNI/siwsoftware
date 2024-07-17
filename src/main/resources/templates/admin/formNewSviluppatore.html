@@ -85,11 +85,11 @@
 				  	  </span>
 					  <div class="input-div">
 				  		    <label class="input-label">Nome</label>
-				  		    <input th:field="${sviluppatore.nome}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
+				  		    <input required th:field="${sviluppatore.nome}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 				  		</div>
 						<div class="input-div">
 				  		    <label class="input-label">Cognome</label>
-				  		    <input th:field="${sviluppatore.cognome}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
+				  		    <input required th:field="${sviluppatore.cognome}" name='username' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 				  		</div>
 				      <div>
 						<input class="nascosto" type="file" name='input-immagine' id="input-immagine" accept="image/png, image/jpeg"/>

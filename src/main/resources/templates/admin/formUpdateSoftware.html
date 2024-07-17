@@ -61,12 +61,12 @@
     <form th:action="${software.id!=null} ? '/admin/updateSoftware/' + ${software.id} : '/admin/software'" method="POST" th:object="${software}" enctype="multipart/form-data">
 		<div class="input-div">
 		    <label class="input-label">Nome</label>
-		    <input th:field="${software.nome}" required name='nome' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
+		    <input required th:field="${software.nome}" required name='nome' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 		</div>
 		<div>
 			Software house
 			<label class="select" for="softwareHouseId">
-				<select th:field="${software.softwareHouse}" id="slct" required name="softwareHouseId">
+				<select required th:field="${software.softwareHouse}" id="slct" name="softwareHouseId">
 					<option th:each="unSoftHouse : ${softwareHouse}" th:value="${unSoftHouse.id}" th:text="${unSoftHouse.nome}">
 					</option>
 				</select>
@@ -77,7 +77,7 @@
 		</div>
 	  <div class="input-div">
 	    <label class="input-label">Categoria</label>
-	    <input th:field="${software.categoria}" required name='categoria' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
+	    <input required th:field="${software.categoria}" required name='categoria' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
 	</div>
 	  <input required type="date" class="data" th:value="${software.id!=null} ? ${software.annoPubblicazione} : ''" th:field="${software.annoPubblicazione}"/>
 	<div th:if="${software.immagini==null || software.immagini.isEmpty()}">Non ci sono immagini per il software corrente</div>
