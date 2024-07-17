@@ -18,8 +18,10 @@ public interface RecensioneRepository extends CrudRepository<Recensione, Long> {
 	@Query("SELECT sum(r.numeroStelle) from Recensione r where r.software=:software")
 	int sumNumeroStelleBySoftware(@Param("software") Software software);
 
+	//conta recensioni del software
 	int countBySoftware(Software software);
 
+	//conta recensioni di un certo numero di stelle del software
 	int countBySoftwareAndNumeroStelle(Software software, Integer numeroStelle);	
 	
 }

@@ -11,7 +11,7 @@ public interface UtenteRepository extends CrudRepository<Utente, Long> {
 
 	Optional<Utente> findByUsername(String username);
 
-	boolean existsByUsername(String username);
+	public boolean existsByUsername(String username);
 
 
 

@@ -49,10 +49,12 @@ public class RecensioneService {
 		return recensioneRepository.sumNumeroStelleBySoftware(software);
 	}
 
+	//conta per software
 	public int countBySoftware(Software software) {
 		return recensioneRepository.countBySoftware(software);
 	}
 
+	//conta per software e numero stelle
 	public Integer countBySoftwareAndNumeroStelle(Software software, Integer numeroStelle) {
 		return recensioneRepository.countBySoftwareAndNumeroStelle(software, numeroStelle);
 	}

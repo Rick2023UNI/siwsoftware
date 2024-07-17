@@ -12,7 +12,11 @@
   </head>
   <body>
     <h1>Registrati</h1>
-	<form th:action="@{/register}" method="POST" enctype="multipart/form-data" th:object="${utente}">
+    	<!-- errori globali se invii ingrediente con nome che gia esiste -->
+			<div class="error-message" th:if="${param.error != null}">
+				<span class="error-message" th:text="'Dati inseriti non accettabili'">Dati inseriti non accettabili</span>
+			</div>
+	<form th:action="@{/register}" method="POST" enctype="multipart/form-data" th:object="${utente}">		
 		<div>
 			<div class="input-div">
 					    <label class="input-label">Username</label>

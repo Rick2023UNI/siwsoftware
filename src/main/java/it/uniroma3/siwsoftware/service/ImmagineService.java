@@ -21,7 +21,7 @@ public class ImmagineService {
 	}
 	
 	public void delete(Immagine immagine) {
-		immagine.delete();
-		immagineRepository.delete(immagine);
+		immagine.delete(); //delete localmente nel filesystem
+		immagineRepository.delete(immagine); //delete dal db
 	}
 }

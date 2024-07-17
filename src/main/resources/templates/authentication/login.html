@@ -13,7 +13,7 @@
 		<div>
 		<h1>Accedi</h1>
 			<div th:switch="${errorMessage}">
-			<div class="alert" th:case="'Bad credentials'">Username o password errati</div>
+			<div class="error-message" th:case="'Bad credentials'">Username o password errati</div>
 			</div>
 	  <div class="input-div">
 	    <label class="input-label">Username</label>

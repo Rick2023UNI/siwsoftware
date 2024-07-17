@@ -245,3 +245,22 @@ input {
   pointer-events: none;
   user-select: none;
 }
+
+.error-message {
+  padding: 5%;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 10px;
+  opacity: 0.7;
+  display: inline-block;
+  width: 90%;
+}
+
+.data {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}

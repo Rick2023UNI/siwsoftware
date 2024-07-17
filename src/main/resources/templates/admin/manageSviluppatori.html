@@ -62,6 +62,11 @@
 		
 			</nav>
 		</section>
+		<br>
+			<div class="error-message" th:if="${param.error != null}">
+				<span class="error-message" th:text="'Dati inseriti non accettabili'">Dati inseriti non accettabili</span> 
+			</div>
+			<br>
 	<form th:action="@{/admin/manageSviluppatore}" method="post">
 		<div class="input-div doppio-input">
 		    <input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome" onfocus="setFocus(true)" onblur="setFocus(false)">

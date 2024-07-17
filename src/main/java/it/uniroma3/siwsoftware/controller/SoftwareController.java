@@ -47,7 +47,7 @@ public class SoftwareController {
 		return "index.html";
 	}
 	
-	//Ricerca software
+	//Ricerca software dalla barra ricerca nella home
 	@PostMapping("/")
 	public String search(@RequestParam("nome") String nome, Model model) {
 		model.addAttribute("software", this.softwareService.findByNomeContaining(nome));
