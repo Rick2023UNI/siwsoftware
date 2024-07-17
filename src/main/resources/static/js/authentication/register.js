@@ -3,12 +3,12 @@ $(document).ready(function() {
 	controllaThumbnail();
 });
 
-function controllaThumbnail(){
-	var thumbnail=document.getElementById("thumbnail");
+function controllaThumbnail() {
+	var thumbnail = document.getElementById("thumbnail");
 	//Se è stato inizializzato l'attributo src
 	//allora c'è un'immagine
-	if (thumbnail.getAttribute("src")!=null && thumbnail.getAttribute("src")!="") {
-		thumbnail.style.display = "block";	
+	if (thumbnail.getAttribute("src") != null && thumbnail.getAttribute("src") != "") {
+		thumbnail.style.display = "block";
 	}
 }
 
@@ -19,9 +19,9 @@ function aggiorna() {
 function aggiornaMiniatura(fileInput) {
 	//Selezione del file
 	file = fileInput.files[0];
-	
+
 	reader = new FileReader();
-	
+
 	//Aggiornamento dell'immagine 
 	reader.onload = function(e) {
 		$('#thumbnail').attr('src', e.target.result);

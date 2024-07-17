@@ -1,6 +1,5 @@
 package it.uniroma3.siwsoftware.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ public class RecensioneService {
 	@Autowired
 	private RecensioneRepository recensioneRepository;
 
-	//tutte recensioni
+	// tutte recensioni
 	public Iterable<Recensione> findAll() {
 		return recensioneRepository.findAll();
 	}
@@ -24,23 +23,23 @@ public class RecensioneService {
 		recensioneRepository.save(recensione);
 	}
 
-	//cerca per id
+	// cerca per id
 	public Recensione findById(Long id) {
 		return recensioneRepository.findById(id).get();
 	}
 
-	//cerca per software e utente
+	// cerca per software e utente
 	public Recensione findBySoftwareAndUtente(Software software, Utente utente) {
 		return recensioneRepository.findBySoftwareAndUtente(software, utente);
 	}
 
-	//elimina
+	// elimina
 	public void delete(Recensione recensione) {
 		recensioneRepository.delete(recensione);
-		
+
 	}
 
-	//esiste per id
+	// esiste per id
 	public boolean existsById(Long id) {
 		return recensioneRepository.existsById(id);
 	}
@@ -49,12 +48,12 @@ public class RecensioneService {
 		return recensioneRepository.sumNumeroStelleBySoftware(software);
 	}
 
-	//conta per software
+	// conta per software
 	public int countBySoftware(Software software) {
 		return recensioneRepository.countBySoftware(software);
 	}
 
-	//conta per software e numero stelle
+	// conta per software e numero stelle
 	public Integer countBySoftwareAndNumeroStelle(Software software, Integer numeroStelle) {
 		return recensioneRepository.countBySoftwareAndNumeroStelle(software, numeroStelle);
 	}

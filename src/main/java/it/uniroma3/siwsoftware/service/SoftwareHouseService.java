@@ -1,6 +1,5 @@
 package it.uniroma3.siwsoftware.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class SoftwareHouseService {
 
 	public void delete(SoftwareHouse softwareHouse) {
 		softwareHouseRepository.delete(softwareHouse);
-		
+
 	}
 
 	public Iterable<SoftwareHouse> findByNomeContaining(String nome) {

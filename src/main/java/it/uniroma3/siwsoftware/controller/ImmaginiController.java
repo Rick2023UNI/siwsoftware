@@ -15,20 +15,22 @@ import it.uniroma3.siwsoftware.service.SoftwareService;
 
 @Controller
 public class ImmaginiController {
-	@Autowired ImmagineService immagineService;
-	@Autowired SoftwareService softwareService;
-	
-	//rimuove la foto di quel software
-	@GetMapping("/admin/removeImageSoftware/{idSoftware}/{idImmagine}") 
+	@Autowired
+	ImmagineService immagineService;
+	@Autowired
+	SoftwareService softwareService;
+
+	// rimuove la foto di quel software
+	@GetMapping("/admin/removeImageSoftware/{idSoftware}/{idImmagine}")
 	public String removeImageSoftware(@PathVariable("idSoftware") Long idSoftware,
 			@PathVariable("idImmagine") Long idImmagine) {
-		Immagine immagine=immagineService.findById(idImmagine);
-		Software software=softwareService.findById(idSoftware);
-		
+		Immagine immagine = immagineService.findById(idImmagine);
+		Software software = softwareService.findById(idSoftware);
+
 		software.removeImmagine(immagine);
 		softwareService.save(software);
-		
+
 		immagineService.delete(immagine);
-		return "redirect:/admin/formUpdateSoftware/"+idSoftware;
+		return "redirect:/admin/formUpdateSoftware/" + idSoftware;
 	}
 }

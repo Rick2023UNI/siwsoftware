@@ -14,13 +14,13 @@ import jakarta.persistence.PreRemove;
 
 @Entity
 public class SoftwareHouse {
-	
-	//Prima della cancellazione
+
+	// Prima della cancellazione
 	@PreRemove
-    private void preRemove() {
-        sviluppatori.forEach(sviluppatori -> sviluppatori.setSoftwareHouse(null));
-    }
-	
+	private void preRemove() {
+		sviluppatori.forEach(sviluppatori -> sviluppatori.setSoftwareHouse(null));
+	}
+
 	public Immagine getLogo() {
 		return logo;
 	}
@@ -60,10 +60,10 @@ public class SoftwareHouse {
 	public void setSoftware(List<Software> software) {
 		this.software = software;
 	}
-	
+
 	public void addSviluppatore(Sviluppatore sviluppatore) {
-		if (this.sviluppatori==null) {
-			this.sviluppatori= new ArrayList<Sviluppatore>();
+		if (this.sviluppatori == null) {
+			this.sviluppatori = new ArrayList<Sviluppatore>();
 		}
 		this.sviluppatori.add(sviluppatore);
 	}
@@ -75,18 +75,18 @@ public class SoftwareHouse {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String nome;
-	
+
 	@OneToOne
 	private Immagine logo;
-	
+
 	@OneToMany(mappedBy = "softwareHouse")
 	private List<Sviluppatore> sviluppatori;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "softwareHouse")
 	private List<Software> software;
-	
+
 	public void aggiorna(SoftwareHouse softwareHouseAggiornato) {
 		this.setNome(softwareHouseAggiornato.getNome());
 	}

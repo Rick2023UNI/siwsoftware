@@ -17,7 +17,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 public class Utente {
-	
+
 	public String getRuolo() {
 		return ruolo;
 	}
@@ -65,7 +65,7 @@ public class Utente {
 	public void setRecensioni(List<Recensione> recensioni) {
 		this.recensioni = recensioni;
 	}
-	
+
 	public Immagine getFoto() {
 		return foto;
 	}
@@ -73,28 +73,28 @@ public class Utente {
 	public void setFoto(Immagine foto) {
 		this.foto = foto;
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@NotBlank(message = "Lo username e' richiesto")
 	@NotNull
 	private String username;
-	
+
 	@NotBlank(message = "La password e' richiesta")
 	@Size(min = 8, message = "La password deve essere lunga almeno 8 caratteri")
 	@NotNull
 	private String password;
-	
+
 	private String ruolo;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Sviluppatore sviluppatore;
-	
+
 	@OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
 	private List<Recensione> recensioni;
-	
+
 	@OneToOne
 	private Immagine foto;
 }

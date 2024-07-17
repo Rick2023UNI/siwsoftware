@@ -12,16 +12,16 @@ import java.util.List;
 
 public interface RecensioneRepository extends CrudRepository<Recensione, Long> {
 
-	//cerca recensione per software e utente
+	// cerca recensione per software e utente
 	Recensione findBySoftwareAndUtente(Software software, Utente utente);
-	
+
 	@Query("SELECT sum(r.numeroStelle) from Recensione r where r.software=:software")
 	int sumNumeroStelleBySoftware(@Param("software") Software software);
 
-	//conta recensioni del software
+	// conta recensioni del software
 	int countBySoftware(Software software);
 
-	//conta recensioni di un certo numero di stelle del software
-	int countBySoftwareAndNumeroStelle(Software software, Integer numeroStelle);	
-	
+	// conta recensioni di un certo numero di stelle del software
+	int countBySoftwareAndNumeroStelle(Software software, Integer numeroStelle);
+
 }

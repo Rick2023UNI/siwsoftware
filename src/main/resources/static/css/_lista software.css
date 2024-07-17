@@ -34,7 +34,7 @@
 	font-size: 2ch;
 	max-width: 26ch;
 	overflow-wrap: break-word;
-	color:black;
+	color: black;
 	z-index: 1;
 }
 
@@ -58,7 +58,7 @@
 .footer-icone {
 	position: absolute;
 	bottom: 0;
-	right:0;
+	right: 0;
 	padding: 1ch;
 	display: block;
 }

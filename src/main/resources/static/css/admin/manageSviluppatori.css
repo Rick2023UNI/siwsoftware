@@ -5,8 +5,8 @@
 	border-radius: 25px;
 	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
 	display: inline-grid;
-  	padding: 1ch;
-  	margin: 1.2ch;
+	padding: 1ch;
+	margin: 1.2ch;
 }
 
 .immagine-sviluppatore {
@@ -38,15 +38,15 @@
 }
 
 .footer {
-	margin-left:1ch;
+	margin-left: 1ch;
 }
 
 .barra-titolo span {
 	overflow: hidden;
-	white-space:nowrap;
+	white-space: nowrap;
 	text-overflow: ellipsis;
 	max-width: 21ch;
-  	display: inline-block;
-  	vertical-align: middle;
-  	height: 2.3ch;
+	display: inline-block;
+	vertical-align: middle;
+	height: 2.3ch;
 }

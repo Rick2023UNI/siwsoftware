@@ -5,8 +5,8 @@
 	border-radius: 25px;
 	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
 	display: inline-grid;
-  	padding: 1ch;
-  	margin: 1.2ch;
+	padding: 1ch;
+	margin: 1.2ch;
 }
 
 .immagine-software-house {
@@ -40,6 +40,6 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	max-width: 18ch;
-  	display: inline-block;
-  	vertical-align: middle;
+	display: inline-block;
+	vertical-align: middle;
 }

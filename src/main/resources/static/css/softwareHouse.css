@@ -1,9 +1,9 @@
 h1 {
-  display: inline;
-  vertical-align: middle;
+	display: inline;
+	vertical-align: middle;
 }
 
 .logo {
 	box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
-  	border-radius: 0.5rem;
+	border-radius: 0.5rem;
 }

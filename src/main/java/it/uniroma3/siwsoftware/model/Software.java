@@ -19,7 +19,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Software {
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -83,12 +83,11 @@ public class Software {
 	public void setSoftwareHouse(SoftwareHouse softwareHouse) {
 		this.softwareHouse = softwareHouse;
 	}
-	
+
 	public void addRecensione(Recensione recensione) {
-		if (this.recensioni==null) {
-			this.recensioni= new ArrayList<Recensione>();
-		}
-		else {
+		if (this.recensioni == null) {
+			this.recensioni = new ArrayList<Recensione>();
+		} else {
 			this.recensioni.add(recensione);
 		}
 	}
@@ -96,10 +95,10 @@ public class Software {
 	public void removeRecensione(Recensione recensione) {
 		this.recensioni.remove(this.recensioni.indexOf(recensione));
 	}
-	
+
 	public void addImmagine(Immagine immagine) {
-		if (this.immagini==null) {
-			this.immagini= new ArrayList<Immagine>();
+		if (this.immagini == null) {
+			this.immagini = new ArrayList<Immagine>();
 		}
 		this.immagini.add(immagine);
 	}
@@ -107,10 +106,10 @@ public class Software {
 	public void removeImmagine(Immagine immagine) {
 		this.immagini.remove(this.immagini.indexOf(immagine));
 	}
-	
+
 	public void addSviluppatore(Sviluppatore sviluppatore) {
-		if (this.sviluppatori==null) {
-			this.sviluppatori=new ArrayList<Sviluppatore>();
+		if (this.sviluppatori == null) {
+			this.sviluppatori = new ArrayList<Sviluppatore>();
 		}
 		System.out.println(sviluppatori);
 		this.sviluppatori.add(sviluppatore);
@@ -123,7 +122,7 @@ public class Software {
 	public int getMediaStelle() {
 		return mediaStelle;
 	}
-	
+
 	public void setMediaStelle(int mediaStelle) {
 		this.mediaStelle = mediaStelle;
 	}
@@ -131,23 +130,23 @@ public class Software {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String nome;
-	
-	@DateTimeFormat(pattern ="yyyy")
+
+	@DateTimeFormat(pattern = "yyyy")
 	private Date annoPubblicazione;
-	
+
 	@OneToMany
 	private List<Immagine> immagini;
-	
+
 	private String categoria;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "software")
 	private List<Recensione> recensioni;
-	
+
 	@ManyToMany
 	private List<Sviluppatore> sviluppatori;
-	
+
 	@ManyToOne
 	private SoftwareHouse softwareHouse;
 

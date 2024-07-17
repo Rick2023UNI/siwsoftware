@@ -64,9 +64,10 @@ public class Immagine {
 
 	@Transient
 	public String getImagePath() {
-		if (fileName == null || id == null) return null;
+		if (fileName == null || id == null)
+			return null;
 
-		return "/images/"+folder+"/"+fileName;
+		return "/images/" + folder + "/" + fileName;
 	}
 
 	public String getFolder() {
@@ -76,12 +77,11 @@ public class Immagine {
 	public void setFolder(String folder) {
 		this.folder = folder;
 	}
-	
-	
-	//Metodo per salvare l'immagine localmente
+
+	// Metodo per salvare l'immagine localmente
 	public void uploadImage(String fileName, MultipartFile multipartFile) throws IOException {
-		String uploadDir="./images/"+this.getFolder();
-		
+		String uploadDir = "./images/" + this.getFolder();
+
 		this.setFileName(fileName);
 		Path uploadPath = Paths.get(uploadDir);
 		if (!Files.exists(uploadPath)) {
@@ -99,7 +99,7 @@ public class Immagine {
 			throw new IOException("Could not save the upload file: " + fileName);
 		}
 	}
-	
+
 	public void delete() {
 		File file = new File("./images/" + this.getFolder() + "/" + this.getFileName());
 		file.delete();

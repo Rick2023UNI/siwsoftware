@@ -14,21 +14,22 @@ svg.icon {
 }
 
 .cancella {
-	color:red;
+	color: red;
 }
 
 .contenitore {
 	position: relative;
-  min-width: 20px;
-    min-height: 20px;
-    padding: 13px;
-    display:inline-block;
-  position: absolute;
-  z-index: 2;
-  text-align: right;
+	min-width: 20px;
+	min-height: 20px;
+	padding: 13px;
+	display: inline-block;
+	position: absolute;
+	z-index: 2;
+	text-align: right;
 }
 
-.ingredient, .carica-immagine {
+.ingredient,
+.carica-immagine {
 	display: flex;
 	padding-bottom: 10px;
 }
@@ -42,13 +43,13 @@ svg.icon {
 }
 
 .middle {
-	vertical-align:middle;
+	vertical-align: middle;
 }
 
 .icona-upload {
-  width: 3ch;
-  height: 3ch;
-  vertical-align: middle;
+	width: 3ch;
+	height: 3ch;
+	vertical-align: middle;
 }
 
 .contenitore-immagine {

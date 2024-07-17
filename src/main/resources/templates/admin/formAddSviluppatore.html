@@ -7,72 +7,75 @@
 		Aggiungi sviluppatore
 	</title>
 	<link rel="stylesheet" href="/css/_lista sviluppatori.css" />
-	
+
 	<link rel="stylesheet" href="/css/_form.css" />
 	<link rel="stylesheet" href="/css/admin/formAddSviluppatore.css" />
-	
+
 	<link rel="stylesheet" href="/css/_icone.css" />
-	
+
 	<script src="/js/3.7.1_jquery.min.js"></script>
 	<script src="/js/_form.js"></script>
-	
+
 	<script src="/js/admin/formAddSviluppatore.js"></script>
-	
+
 	<link rel="stylesheet" href="/css/_menu.css" />
-	
+
 	<script src="/js/_scroll.js"></script>
 	<link rel="stylesheet" href="/css/_scroll.css" />
 </head>
 
 <body>
 	<section id="Home">
-			<nav>
-				<div class="logo">
-					<a href="/">
-						<img src="/image/logo.png">
-					</a>
-				</div>
-				<ul>
-					<li th:if="${admin!=true}">
-						<a href="/softwareHouses">Software house</a>
-					</li>
-					<li th:if="${admin==true}">
-						<a href="/admin/manageSoftware">Gestisci i software</a>
-						<ul class="dropdown">
-							<li><a href="/admin/formNewSoftware">Crea software</a></li>
-						</ul>
-					</li>
-					<li th:if="${admin==true}">
-						<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
-						<ul class="dropdown">
-							<li><a href="/admin/formNewSviluppatore">Crea sviluppatore</a></li>
-						</ul>
-					</li>
-					<li th:if="${admin==true}">
-						<a href="/admin/manageSoftwareHouses">Gestisci le software house</a>
-						<ul class="dropdown">
-							<li><a href="/admin/formNewSoftwareHouse">Crea software house</a></li>
-						</ul>
-					</li>
-				</ul>
-		
-				<div>
-					<a th:if="${utenteAuth!=null}" th:href="@{'/sviluppatore/' + ${sviluppatoreAuth.id}}" id="account">
-						<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" id="utente-corrente-immagine">
-					</a>
-					<a th:if="${utenteAuth!=null}" href="/logout" id="esci">Esci</a>
-					<a th:unless="${utenteAuth!=null}" href="/login" id="accedi">Accedi</a>
-					<a th:unless="${utenteAuth!=null}" href="/register" id="registrati">Registrati</a>
-				</div>
-		
-			</nav>
-		</section>
-	<h3>Aggiunti 
+		<nav>
+			<div class="logo">
+				<a href="/">
+					<img src="/image/logo.png">
+				</a>
+			</div>
+			<ul>
+				<li th:if="${admin!=true}">
+					<a href="/softwareHouses">Software house</a>
+				</li>
+				<li th:if="${admin==true}">
+					<a href="/admin/manageSoftware">Gestisci i software</a>
+					<ul class="dropdown">
+						<li><a href="/admin/formNewSoftware">Crea software</a></li>
+					</ul>
+				</li>
+				<li th:if="${admin==true}">
+					<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
+					<ul class="dropdown">
+						<li><a href="/admin/formNewSviluppatore">Crea sviluppatore</a></li>
+					</ul>
+				</li>
+				<li th:if="${admin==true}">
+					<a href="/admin/manageSoftwareHouses">Gestisci le software house</a>
+					<ul class="dropdown">
+						<li><a href="/admin/formNewSoftwareHouse">Crea software house</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<div>
+				<a th:if="${utenteAuth!=null}" th:href="@{'/sviluppatore/' + ${sviluppatoreAuth.id}}" id="account">
+					<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" id="utente-corrente-immagine">
+				</a>
+				<a th:if="${utenteAuth!=null}" href="/logout" id="esci">Esci</a>
+				<a th:unless="${utenteAuth!=null}" href="/login" id="accedi">Accedi</a>
+				<a th:unless="${utenteAuth!=null}" href="/register" id="registrati">Registrati</a>
+			</div>
+
+		</nav>
+	</section>
+	<h3>Aggiunti
 		<span th:if="${operazione}=='oftware'" onclick="mostraNascondiInformazione();">
-			<svg class="icona informazioni" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-				<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+			<svg class="icona informazioni" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+				fill="currentColor" viewBox="0 0 16 16">
+				<path
+					d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
 			</svg>
-	</span></h3>
+		</span>
+	</h3>
 	<section th:if="${operazione}=='oftware'" id="informazione" class="nascosto">
 		<div>
 			I sviluppatori che appaiono rappresentati come di seguito con un sfondo grigio
@@ -89,17 +92,21 @@
 	</section>
 	<form th:action="@{'/admin/cercaAddSviluppatore/software/'+${operazione}+'/'+${software.id}}" method="post">
 		<div class="input-div doppio-input">
-		    <input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome" onfocus="setFocus(true)" onblur="setFocus(false)">
+			<input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome"
+				onfocus="setFocus(true)" onblur="setFocus(false)">
 		</div>
 		<div class="input-div doppio-input">
-		    <input th:value="${cognome}" required name='cognome' type="text" class="input" placeholder="Cerca per cognome" onfocus="setFocus(true)" onblur="setFocus(false)">
+			<input th:value="${cognome}" required name='cognome' type="text" class="input"
+				placeholder="Cerca per cognome" onfocus="setFocus(true)" onblur="setFocus(false)">
 		</div>
 		<button id="submit" type="submit" class="bottone bottone-ricerca">Cerca</button>
 	</form>
 	<ul class="sviluppatori" th:if="${sviluppatoriSoftware!=null || !sviluppatoriSoftware.isEmpty()}">
-		<li th:each="sviluppatore : ${sviluppatoriSoftware}" th:class="${operazione!='oftware' || sviluppatore.softwareHouse==software.getSoftwareHouse()} ? 'sviluppatore' : 'sviluppatore diversa-software-house'">
+		<li th:each="sviluppatore : ${sviluppatoriSoftware}"
+			th:class="${operazione!='oftware' || sviluppatore.softwareHouse==software.getSoftwareHouse()} ? 'sviluppatore' : 'sviluppatore diversa-software-house'">
 			<span>
-				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}" th:href="'/admin/removeSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" 
+				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"
+					th:href="'/admin/removeSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}"
 					class="nome-sviluppatore"></a>
 				<img th:src="@{${sviluppatore.utente.foto.getImagePath}}" class="immagine-sviluppatore"></img>
 			</span>
@@ -109,17 +116,21 @@
 	<h3>Sviluppatori</h3>
 	<form th:action="@{'/admin/cercaAddSviluppatore/sviluppatori/'+${operazione}+'/'+${software.id}}" method="post">
 		<div class="input-div doppio-input">
-		    <input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome" onfocus="setFocus(true)" onblur="setFocus(false)">
+			<input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome"
+				onfocus="setFocus(true)" onblur="setFocus(false)">
 		</div>
 		<div class="input-div doppio-input">
-		    <input th:value="${cognome}" required name='cognome' type="text" class="input" placeholder="Cerca per cognome" onfocus="setFocus(true)" onblur="setFocus(false)">
+			<input th:value="${cognome}" required name='cognome' type="text" class="input"
+				placeholder="Cerca per cognome" onfocus="setFocus(true)" onblur="setFocus(false)">
 		</div>
 		<button id="submit" type="submit" class="bottone bottone-ricerca">Cerca</button>
 	</form>
 	<ul class="sviluppatori" th:if="${sviluppatori!=null || !sviluppatori.isEmpty()}">
-		<li th:each="sviluppatore : ${sviluppatori}" th:class="${operazione!='oftware' || sviluppatore.softwareHouse==software.getSoftwareHouse()} ? 'sviluppatore' : 'sviluppatore diversa-software-house'">
+		<li th:each="sviluppatore : ${sviluppatori}"
+			th:class="${operazione!='oftware' || sviluppatore.softwareHouse==software.getSoftwareHouse()} ? 'sviluppatore' : 'sviluppatore diversa-software-house'">
 			<span>
-				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"  th:href="'/admin/addSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}" 
+				<a th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"
+					th:href="'/admin/addSviluppatoreS' + ${operazione} + '/' + ${software.id} + '/' + ${sviluppatore.id}"
 					class="nome-sviluppatore"></a>
 				<img th:src="@{${sviluppatore.utente.foto.getImagePath}}" class="immagine-sviluppatore"></img>
 			</span>

@@ -1,9 +1,9 @@
-.recensione{
+.recensione {
 	border-radius: 25px;
 	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
 	display: inline-grid;
-  	padding: 1ch;
-  	margin: 0.4ch;
+	padding: 1ch;
+	margin: 0.4ch;
 }
 
 .recensione {
@@ -14,59 +14,92 @@
 }
 
 .stelle {
-	top:0;
-	height:2ch;
+	top: 0;
+	height: 2ch;
 	margin-left: 2ch;
 }
 
-.non-selezionate, .non-selezionata {
+.non-selezionate,
+.non-selezionata {
 	color: lightgray;
-	padding:0;
-	margin:0;
-	
+	padding: 0;
+	margin: 0;
+
 }
 
 .selezionata {
 	color: gold;
-	padding:0;
-	margin:0;
+	padding: 0;
+	margin: 0;
 }
 
 .selezionate {
 	color: gold;
 	overflow: hidden;
 	display: block;
-	height:2ch;
+	height: 2ch;
 	z-index: 1;
 	margin-top: -2.25ch;
 }
 
-.selezionate-0{ width: 0%; }
-.selezionate-10{ width: 10%; }
-.selezionate-20{ width: 20%; }
-.selezionate-30{ width: 30%; }
-.selezionate-40{ width: 40%; }
-.selezionate-50{ width: 50%; }
-.selezionate-60{ width: 60%; }
-.selezionate-70{ width: 70%; }
-.selezionate-80{ width: 80%; }
-.selezionate-90{ width: 90%; }
-.selezionate-100{ width: 100; }
+.selezionate-0 {
+	width: 0%;
+}
+
+.selezionate-10 {
+	width: 10%;
+}
+
+.selezionate-20 {
+	width: 20%;
+}
+
+.selezionate-30 {
+	width: 30%;
+}
+
+.selezionate-40 {
+	width: 40%;
+}
+
+.selezionate-50 {
+	width: 50%;
+}
+
+.selezionate-60 {
+	width: 60%;
+}
+
+.selezionate-70 {
+	width: 70%;
+}
+
+.selezionate-80 {
+	width: 80%;
+}
+
+.selezionate-90 {
+	width: 90%;
+}
+
+.selezionate-100 {
+	width: 100;
+}
 
 
 .destra {
-	float:right;
+	float: right;
 }
 
 .titolo {
 	font-weight: 700;
 	max-width: 40ch;
-  	display: inline-block;
-  	word-wrap: break-word;
+	display: inline-block;
+	word-wrap: break-word;
 }
 
 .utente-autenticato {
-	box-shadow: 2px 3px 20px -3px rgba(255,255,0, .15);
+	box-shadow: 2px 3px 20px -3px rgba(255, 255, 0, .15);
 }
 
 .stella:hover::before {
@@ -76,15 +109,15 @@
 .input-recensione {
 	background-color: none;
 	outline: 0;
-  border-width: 0 0 1px;
-  border-color: #80868b;
-  margin-bottom: 1ch;
-  transition: 150ms;
+	border-width: 0 0 1px;
+	border-color: #80868b;
+	margin-bottom: 1ch;
+	transition: 150ms;
 }
 
 .input-recensione:focus {
 	border-width: 0 0 2px;
-  	border-color: #1a73e8;
+	border-color: #1a73e8;
 }
 
 .submit {
@@ -154,33 +187,33 @@
 
 .recensione-autore {
 	display: inline-flex;
-  	justify-content: space-between;
+	justify-content: space-between;
 }
 
 .destra-autore {
 	display: block;
-  position: initial;
-  right: 0;
-  float: right;
-  margin-top: 1ch;
-  margin-left: 3ch;
+	position: initial;
+	right: 0;
+	float: right;
+	margin-top: 1ch;
+	margin-left: 3ch;
 }
 
 .descrizione-recensione {
 	max-width: 40ch;
-  display: inline-block;
-  word-wrap: break-word;
-  margin-right: 1ch;
-  margin-top: 1ch;
+	display: inline-block;
+	word-wrap: break-word;
+	margin-right: 1ch;
+	margin-top: 1ch;
 }
 
 .nome-autore {
 	vertical-align: middle;
 }
 
-.grande svg{
+.grande svg {
 	width: 5ch;
-  	height: 5ch;
+	height: 5ch;
 }
 
 .grande.selezionate {
@@ -197,16 +230,16 @@
 	border-radius: 25px;
 	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
 	display: inline-grid;
-  	padding-left: 2ch;
-  	padding-right: 2ch;
-  	padding-bottom: 2ch;
-  	margin: 0.4ch;
+	padding-left: 2ch;
+	padding-right: 2ch;
+	padding-bottom: 2ch;
+	margin: 0.4ch;
 }
 
 .barra {
 	background-color: #fff1cc;
-	width:20ch;
-	height:2ch;
+	width: 20ch;
+	height: 2ch;
 	border-radius: 10px;
 	display: inline-block;
 	vertical-align: middle;
@@ -214,13 +247,17 @@
 }
 
 .progresso {
-	background: linear-gradient(90deg, rgba(251,255,136,1) 0%, gold 100%);
-	width:10ch;
-	height:2ch;
+	background: linear-gradient(90deg, rgba(251, 255, 136, 1) 0%, gold 100%);
+	width: 10ch;
+	height: 2ch;
 	border-top-left-radius: 10px;
 	border-bottom-left-radius: 10px;
 }
 
 .percentuale {
 	margin-bottom: 1ch;
+}
+
+.data-recensione {
+	font-style: italic;
 }

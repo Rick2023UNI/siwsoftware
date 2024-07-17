@@ -10,12 +10,12 @@
 
 #nome-sviluppatore-informazione {
 	width: 14ch;
-  display: inline-block;
-  vertical-align: middle;
-  height: 2ch;
-  background: #f2f2f2;
-  border-radius: 25px;
-  -webkit-animation-name: fadeIn;
+	display: inline-block;
+	vertical-align: middle;
+	height: 2ch;
+	background: #f2f2f2;
+	border-radius: 25px;
+	-webkit-animation-name: fadeIn;
 	-webkit-animation-duration: 0.7s;
 	animation-name: fadeIn;
 	animation-duration: 0.7s;
@@ -32,7 +32,7 @@
 }
 
 #informazione div {
-	margin:1ch;
+	margin: 1ch;
 }
 
 @-webkit-keyframes slideIn {

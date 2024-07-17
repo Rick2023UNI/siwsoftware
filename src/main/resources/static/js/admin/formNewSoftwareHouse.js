@@ -9,9 +9,9 @@ function aggiorna() {
 function aggiornaMiniatura(fileInput) {
 	//Selezione del file
 	file = fileInput.files[0];
-	
+
 	reader = new FileReader();
-	
+
 	//Aggiornamento dell'immagine 
 	reader.onload = function(e) {
 		$('#thumbnail').attr('src', e.target.result);

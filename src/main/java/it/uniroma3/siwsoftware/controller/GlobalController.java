@@ -30,7 +30,7 @@ public class GlobalController {
 		return user;
 	}
 
-	//ritorna lo sviluppatore se loggato
+	// ritorna lo sviluppatore se loggato
 	@ModelAttribute("sviluppatoreAuth")
 	public Sviluppatore getSviluppatore() {
 		UserDetails user = null;
@@ -45,7 +45,7 @@ public class GlobalController {
 		return sviluppatore;
 	}
 
-	//booleano se sei admin
+	// booleano se sei admin
 	@ModelAttribute("admin")
 	public boolean admin() {
 		UserDetails user = null;

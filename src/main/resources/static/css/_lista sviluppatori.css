@@ -1,21 +1,21 @@
 .sviluppatori {
 	overflow: auto;
- 	white-space: nowrap;
+	white-space: nowrap;
 }
 
-.sviluppatore{
+.sviluppatore {
 	border-radius: 10%;
 	border-radius: 25px;
 	box-shadow: 2px 3px 20px -3px rgba(0, 0, 0, .15);
 	display: inline-grid;
-  	padding: 1ch;
-  	margin: 0.4ch;
+	padding: 1ch;
+	margin: 0.4ch;
 }
 
 .nome-sviluppatore {
 	text-decoration: none;
 	vertical-align: middle;
-	color:black;
+	color: black;
 	font-size: 3ch;
 	margin-left: 0.4ch;
 }
@@ -28,7 +28,7 @@
 	border-radius: 50%;
 	vertical-align: middle;
 	margin-right: 0.4rem;
-  	margin-left: 1rem;
+	margin-left: 1rem;
 }
 
 .diversa-software-house {

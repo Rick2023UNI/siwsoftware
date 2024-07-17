@@ -13,6 +13,4 @@ public interface UtenteRepository extends CrudRepository<Utente, Long> {
 
 	public boolean existsByUsername(String username);
 
-
-
 }

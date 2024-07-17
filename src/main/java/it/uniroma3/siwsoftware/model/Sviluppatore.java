@@ -14,12 +14,12 @@ import jakarta.persistence.PreRemove;
 
 @Entity
 public class Sviluppatore {
-	
-	//Prima della cancellazione
+
+	// Prima della cancellazione
 	@PreRemove
-    private void preRemove() {
-        software.forEach(software -> software.removeSviluppatore(this));
-    }
+	private void preRemove() {
+		software.forEach(software -> software.removeSviluppatore(this));
+	}
 
 	public Long getId() {
 		return id;
@@ -64,17 +64,17 @@ public class Sviluppatore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String nome;
-	
+
 	private String cognome;
-	
+
 	@ManyToMany(mappedBy = "sviluppatori")
 	private List<Software> software;
-	
+
 	@ManyToOne
 	private SoftwareHouse softwareHouse;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "sviluppatore")
 	private Utente utente;
 
@@ -89,6 +89,6 @@ public class Sviluppatore {
 	public void aggiorna(Sviluppatore sviluppatoreAggiornato) {
 		this.setNome(sviluppatoreAggiornato.getNome());
 		this.setCognome(sviluppatoreAggiornato.getCognome());
-		
+
 	}
 }

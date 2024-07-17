@@ -1,9 +1,9 @@
 function inizializzaScroll(dragEl, scroll) {
-	
-	if (scroll.scrollWidth>window.innerWidth-32) {
-		dragEl.style.width=((window.innerWidth-32)/(scroll.scrollWidth/(window.innerWidth)))+"px";
-		dragEl.style.visibility="visible";
-		
+
+	if (scroll.scrollWidth > window.innerWidth) {
+		dragEl.style.width = ((window.innerWidth - 32) / (scroll.scrollWidth / (window.innerWidth))) + "px";
+		dragEl.style.visibility = "visible";
+
 		var dragging = false;
 		var elDragPointOffset = 0;
 

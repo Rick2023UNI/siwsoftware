@@ -9,75 +9,78 @@
 	<link rel="stylesheet" href="/css/_add.css" />
 	<link rel="stylesheet" href="/css/admin/manageSviluppatori.css" />
 	<link rel="stylesheet" href="/css/_icone.css" />
-	
+
 	<script src="/js/3.7.1_jquery.min.js"></script>
 	<link rel="stylesheet" href="/css/_avviso.css" />
 	<script src="/js/_avviso.js"></script>
-	
+
 	<link rel="stylesheet" href="/css/_form.css" />
-	
+
 	<link rel="stylesheet" href="/css/_menu.css" />
 </head>
 
 <body>
 	<section id="Home">
-			<nav>
-				<div class="logo">
-					<a href="/">
-						<img src="/image/logo.png">
-					</a>
-				</div>
-				<ul>
-					<li th:if="${admin!=true}">
-						<a href="/softwareHouses">Software house</a>
-					</li>
-					<li th:if="${admin==true}">
-						<a href="/admin/manageSoftware">Gestisci i software</a>
-						<ul class="dropdown">
-							<li><a href="/admin/formNewSoftware">Crea software</a></li>
-						</ul>
-					</li>
-					<li th:if="${admin==true}">
-						<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
-						<ul class="dropdown">
-							<li><a href="/admin/formNewSviluppatore">Crea sviluppatore</a></li>
-						</ul>
-					</li>
-					<li th:if="${admin==true}">
-						<a href="/admin/manageSoftwareHouses">Gestisci le software house</a>
-						<ul class="dropdown">
-							<li><a href="/admin/formNewSoftwareHouse">Crea software house</a></li>
-						</ul>
-					</li>
-				</ul>
-		
-				<div>
-					<a th:if="${utenteAuth!=null}" th:href="@{'/sviluppatore/' + ${sviluppatoreAuth.id}}" id="account">
-						<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" id="utente-corrente-immagine">
-					</a>
-					<a th:if="${utenteAuth!=null}" href="/logout" id="esci">Esci</a>
-					<a th:unless="${utenteAuth!=null}" href="/login" id="accedi">Accedi</a>
-					<a th:unless="${utenteAuth!=null}" href="/register" id="registrati">Registrati</a>
-				</div>
-		
-			</nav>
-		</section>
-		<br>
-			<div class="error-message" th:if="${param.error != null}">
-				<span class="error-message" th:text="'Dati inseriti non accettabili'">Dati inseriti non accettabili</span>
+		<nav>
+			<div class="logo">
+				<a href="/">
+					<img src="/image/logo.png">
+				</a>
 			</div>
-			<br>
+			<ul>
+				<li th:if="${admin!=true}">
+					<a href="/softwareHouses">Software house</a>
+				</li>
+				<li th:if="${admin==true}">
+					<a href="/admin/manageSoftware">Gestisci i software</a>
+					<ul class="dropdown">
+						<li><a href="/admin/formNewSoftware">Crea software</a></li>
+					</ul>
+				</li>
+				<li th:if="${admin==true}">
+					<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
+					<ul class="dropdown">
+						<li><a href="/admin/formNewSviluppatore">Crea sviluppatore</a></li>
+					</ul>
+				</li>
+				<li th:if="${admin==true}">
+					<a href="/admin/manageSoftwareHouses">Gestisci le software house</a>
+					<ul class="dropdown">
+						<li><a href="/admin/formNewSoftwareHouse">Crea software house</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<div>
+				<a th:if="${utenteAuth!=null}" th:href="@{'/sviluppatore/' + ${sviluppatoreAuth.id}}" id="account">
+					<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" id="utente-corrente-immagine">
+				</a>
+				<a th:if="${utenteAuth!=null}" href="/logout" id="esci">Esci</a>
+				<a th:unless="${utenteAuth!=null}" href="/login" id="accedi">Accedi</a>
+				<a th:unless="${utenteAuth!=null}" href="/register" id="registrati">Registrati</a>
+			</div>
+
+		</nav>
+	</section>
+	<br>
+	<div class="error-message" th:if="${param.error != null}">
+		<span class="error-message" th:text="'Dati inseriti non accettabili'">Dati inseriti non accettabili</span>
+	</div>
+	<br>
 	<form th:action="@{/admin/manageSviluppatore}" method="post">
 		<div class="input-div doppio-input">
-		    <input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome" onfocus="setFocus(true)" onblur="setFocus(false)">
+			<input th:value="${nome}" required name='nome' type="text" class="input" placeholder="Cerca per nome"
+				onfocus="setFocus(true)" onblur="setFocus(false)">
 		</div>
 		<div class="input-div doppio-input">
-		    <input th:value="${cognome}" required name='cognome' type="text" class="input" placeholder="Cerca per cognome" onfocus="setFocus(true)" onblur="setFocus(false)">
+			<input th:value="${cognome}" required name='cognome' type="text" class="input"
+				placeholder="Cerca per cognome" onfocus="setFocus(true)" onblur="setFocus(false)">
 		</div>
 		<button id="submit" type="submit" class="bottone bottone-ricerca">Cerca</button>
 	</form>
 	<span class="aggiungi-span">
-		<svg class="aggiungi" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+		<svg class="aggiungi" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+			viewBox="0 0 16 16">
 			<path fill-rule="evenodd"
 				d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
 		</svg><a href="/admin/formNewSviluppatore">Aggiungi sviluppatore</a>
@@ -85,32 +88,36 @@
 	<div th:if="${sviluppatori==null || sviluppatori.isEmpty()}">Non ci sono software nel sistema</div>
 	<ul class="sviluppatori">
 		<li class="sviluppatore" th:each="sviluppatore : ${sviluppatori}">
-			<span  class="barra-titolo">
+			<span class="barra-titolo">
 				<span>
-					<a class="titolo" th:href="@{'/sviluppatore' + '/' + ${sviluppatore.id}}" th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"></a>
+					<a class="titolo" th:href="@{'/sviluppatore' + '/' + ${sviluppatore.id}}"
+						th:text="${sviluppatore.nome} + ' ' + ${sviluppatore.cognome}"></a>
 				</span>
 				<a th:href="@{'/admin/formUpdateSviluppatore/' + ${sviluppatore.id}}">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icona modifica"
-						viewBox="0 0 16 16">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+						class="icona modifica" viewBox="0 0 16 16">
 						<path
 							d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001" />
 					</svg>
 				</a>
 				<a th:onclick="@{'verifica(&quot;/admin/removeSviluppatore/' + ${sviluppatore.id}+'&quot;)'}">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icona cancellazione"
-						viewBox="0 0 16 16">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+						class="icona cancellazione" viewBox="0 0 16 16">
 						<path
 							d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
 					</svg>
 				</a>
 			</span>
-			<img th:if="${sviluppatore.getUtente().foto!=null || !sviluppatore.getUtente().foto.isEmpty()}"  th:src="@{${sviluppatore.getUtente().foto.getImagePath}}" class="immagine-sviluppatore">
-			<span th:if="${sviluppatore.software.size()}>1" th:text="${sviluppatore.software.size()} + ' software prodotti'" class="footer"></span>
-			<span th:if="${sviluppatore.software.size()}==1" th:text="${sviluppatore.software.size()} + ' software prodotto'" class="footer"></span>
+			<img th:if="${sviluppatore.getUtente().foto!=null || !sviluppatore.getUtente().foto.isEmpty()}"
+				th:src="@{${sviluppatore.getUtente().foto.getImagePath}}" class="immagine-sviluppatore">
+			<span th:if="${sviluppatore.software.size()}>1"
+				th:text="${sviluppatore.software.size()} + ' software prodotti'" class="footer"></span>
+			<span th:if="${sviluppatore.software.size()}==1"
+				th:text="${sviluppatore.software.size()} + ' software prodotto'" class="footer"></span>
 			<span th:if="${sviluppatore.software.size()}==0" class="footer">Nessun software prodotto</span>
 		</li>
 	</ul>
-	
+
 	<div class="avviso" id="avviso">
 		<div class="contenuto-avviso">
 			<div class="header-avviso">
@@ -118,7 +125,8 @@
 				<h2>Conferma eliminazione</h2>
 			</div>
 			<div class="body-avviso">
-				<span>L'utente corrispondente perder&agrave; l'accesso al sito. L'eliminazione &egrave; un'operazione irreversibile.</span>
+				<span>L'utente corrispondente perder&agrave; l'accesso al sito. L'eliminazione &egrave; un'operazione
+					irreversibile.</span>
 				<p>Vuoi confermare l'eliminazione del sviluppatore?</p>
 				<span>
 					<button id="annulla">Annulla</button>

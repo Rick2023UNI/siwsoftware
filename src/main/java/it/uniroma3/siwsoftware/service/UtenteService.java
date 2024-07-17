@@ -12,7 +12,7 @@ public class UtenteService {
 	private UtenteRepository utenteRepository;
 
 	public void save(Utente utente) {
-		utenteRepository.save(utente);	
+		utenteRepository.save(utente);
 	}
 
 	public Utente getCredentials(Long id) {
@@ -27,4 +27,3 @@ public class UtenteService {
 		return utenteRepository.existsByUsername(username);
 	}
 }
-

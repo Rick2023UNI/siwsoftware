@@ -35,15 +35,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
-@Controller 
+@Controller
 public class AuthenticationController {
-	@Autowired UtenteService utenteService;
-	@Autowired PasswordEncoder passwordEncoder;
-	@Autowired SoftwareService softwareService;
-	@Autowired SviluppatoreService sviluppatoreService;
-	@Autowired ImmagineService immagineService;
-	
-	@Autowired UtenteValidator utenteValidator;
+	@Autowired
+	UtenteService utenteService;
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	@Autowired
+	SoftwareService softwareService;
+	@Autowired
+	SviluppatoreService sviluppatoreService;
+	@Autowired
+	ImmagineService immagineService;
+
+	@Autowired
+	UtenteValidator utenteValidator;
 
 	@GetMapping("/login")
 	public String formLoginUtente(Model model) {
@@ -63,20 +69,19 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/register")
-	public String registerUtente(@Valid @ModelAttribute("utente") Utente utente, 
-			BindingResult credentialsBindingResult,
+	public String registerUtente(@Valid @ModelAttribute("utente") Utente utente, BindingResult credentialsBindingResult,
 			@ModelAttribute("sviluppatore") Sviluppatore sviluppatore,
 			@RequestParam("input-immagine") MultipartFile multipartFile) throws IOException {
 
 		this.utenteValidator.validate(utente, credentialsBindingResult);
 
-		if(!credentialsBindingResult.hasErrors()) {
+		if (!credentialsBindingResult.hasErrors()) {
 			this.sviluppatoreService.save(sviluppatore);
-			String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			Immagine immagine=new Immagine();
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			Immagine immagine = new Immagine();
 			immagine.setFolder("sviluppatore");
-			fileName=sviluppatore.getId()+fileName.substring(fileName.lastIndexOf('.'));
-			immagine.uploadImage(fileName, multipartFile); //la cartella è salvata nell'immagine
+			fileName = sviluppatore.getId() + fileName.substring(fileName.lastIndexOf('.'));
+			immagine.uploadImage(fileName, multipartFile); // la cartella è salvata nell'immagine
 			this.immagineService.save(immagine);
 			utente.setFoto(immagine);
 

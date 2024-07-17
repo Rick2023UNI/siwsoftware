@@ -1,81 +1,92 @@
 <!DOCTYPE html>
-<html>  
-	<head>
-		<link rel="icon" href="/image/favicon.ico" type="image/x-icon">
-    <title th:if="${softwareHouse.id==null}">Nuova Software House</title>
+<html>
+
+<head>
+	<link rel="icon" href="/image/favicon.ico" type="image/x-icon">
+	<title th:if="${softwareHouse.id==null}">Nuova Software House</title>
 	<title th:if="${softwareHouse.id!=null}">Modifica Software House</title>
-	
+
 	<script src="/js/3.7.1_jquery.min.js"></script>
-	
+
 	<script src="/js/admin/formNewSoftwareHouse.js"></script>
-	
+
 	<script src="/js/_form.js"></script>
-	<link rel="stylesheet" href="/css/_form.css?version=3"/>
-	
-	<link rel="stylesheet" href="/css/admin/formNewSoftwareHouse.css?version=3"/>
-	
+	<link rel="stylesheet" href="/css/_form.css?version=3" />
+
+	<link rel="stylesheet" href="/css/admin/formNewSoftwareHouse.css?version=3" />
+
 	<link rel="stylesheet" href="/css/_menu.css" />
-  </head>
-  <body>
+</head>
+
+<body>
 	<section id="Home">
-			<nav>
-				<div class="logo">
-					<a href="/">
-						<img src="/image/logo.png">
-					</a>
-				</div>
-				<ul>
-					<li th:if="${admin!=true}">
-						<a href="/softwareHouses">Software house</a>
-					</li>
-					<li th:if="${admin==true}">
-						<a href="/admin/manageSoftware">Gestisci i software</a>
-						<ul class="dropdown">
-							<li><a href="/admin/formNewSoftware">Crea software</a></li>
-						</ul>
-					</li>
-					<li th:if="${admin==true}">
-						<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
-						<ul class="dropdown">
-							<li><a href="/admin/formNewSviluppatore">Crea sviluppatore</a></li>
-						</ul>
-					</li>
-					<li th:if="${admin==true}">
-						<a href="/admin/manageSoftwareHouses">Gestisci le software house</a>
-						<ul class="dropdown">
-							<li><a href="/admin/formNewSoftwareHouse">Crea software house</a></li>
-						</ul>
-					</li>
-				</ul>
-		
-				<div>
-					<a th:if="${utenteAuth!=null}" th:href="@{'/sviluppatore/' + ${sviluppatoreAuth.id}}" id="account">
-						<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" id="utente-corrente-immagine">
-					</a>
-					<a th:if="${utenteAuth!=null}" href="/logout" id="esci">Esci</a>
-					<a th:unless="${utenteAuth!=null}" href="/login" id="accedi">Accedi</a>
-					<a th:unless="${utenteAuth!=null}" href="/register" id="registrati">Registrati</a>
-				</div>
-		
-			</nav>
-		</section>
-    <h1 th:if="${softwareHouse.id==null}">Aggiungi una software house</h1>
+		<nav>
+			<div class="logo">
+				<a href="/">
+					<img src="/image/logo.png">
+				</a>
+			</div>
+			<ul>
+				<li th:if="${admin!=true}">
+					<a href="/softwareHouses">Software house</a>
+				</li>
+				<li th:if="${admin==true}">
+					<a href="/admin/manageSoftware">Gestisci i software</a>
+					<ul class="dropdown">
+						<li><a href="/admin/formNewSoftware">Crea software</a></li>
+					</ul>
+				</li>
+				<li th:if="${admin==true}">
+					<a href="/admin/manageSviluppatori">Gestisci i sviluppatori</a>
+					<ul class="dropdown">
+						<li><a href="/admin/formNewSviluppatore">Crea sviluppatore</a></li>
+					</ul>
+				</li>
+				<li th:if="${admin==true}">
+					<a href="/admin/manageSoftwareHouses">Gestisci le software house</a>
+					<ul class="dropdown">
+						<li><a href="/admin/formNewSoftwareHouse">Crea software house</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<div>
+				<a th:if="${utenteAuth!=null}" th:href="@{'/sviluppatore/' + ${sviluppatoreAuth.id}}" id="account">
+					<img th:src="@{${sviluppatoreAuth.utente.foto.getImagePath}}" id="utente-corrente-immagine">
+				</a>
+				<a th:if="${utenteAuth!=null}" href="/logout" id="esci">Esci</a>
+				<a th:unless="${utenteAuth!=null}" href="/login" id="accedi">Accedi</a>
+				<a th:unless="${utenteAuth!=null}" href="/register" id="registrati">Registrati</a>
+			</div>
+
+		</nav>
+	</section>
+	<h1 th:if="${softwareHouse.id==null}">Aggiungi una software house</h1>
 	<h1 th:if="${softwareHouse.id!=null}">Modifica una software house</h1>
-    <form th:action="${softwareHouse.id!=null} ? '/admin/updateSoftwareHouse/' + ${softwareHouse.id} : '/admin/softwareHouse'" method="POST" th:object="${softwareHouse}" enctype="multipart/form-data">
+	<form
+		th:action="${softwareHouse.id!=null} ? '/admin/updateSoftwareHouse/' + ${softwareHouse.id} : '/admin/softwareHouse'"
+		method="POST" th:object="${softwareHouse}" enctype="multipart/form-data">
 		<div class="input-div">
-		    <label class="input-label">Nome</label>
-		    <input required th:field="${softwareHouse.nome}" name='nome' type="text" class="input" onfocus="setFocus(true)" onblur="setFocus(false)">
+			<label class="input-label">Nome</label>
+			<input required th:field="${softwareHouse.nome}" name='nome' type="text" class="input"
+				onfocus="setFocus(true)" onblur="setFocus(false)">
 		</div>
-	  <br>
-	  <input type="file" name='input-immagine' id="input-immagine" accept="image/png, image/jpeg" class="input-immagine nascosto"/>
-	  <label for="input-immagine" class="bottone"><svg class="icona-upload" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-		  <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M6.354 9.854a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 8.707V12.5a.5.5 0 0 1-1 0V8.707z"></path>
-		</svg> Carica file</label>
 		<br>
-		<img th:src="${softwareHouse.id!=null} ? ${softwareHouse.logo.getImagePath()} : ''" method="POST" th:object="${softwareHouse}" id="thumbnail" class="immagine"/>
+		<input type="file" name='input-immagine' id="input-immagine" accept="image/png, image/jpeg"
+			class="input-immagine nascosto" />
+		<label for="input-immagine" class="bottone"><svg class="icona-upload" xmlns="http://www.w3.org/2000/svg"
+				width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+				<path
+					d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M6.354 9.854a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 8.707V12.5a.5.5 0 0 1-1 0V8.707z">
+				</path>
+			</svg> Carica file</label>
 		<br>
-        <span><button type="submit" class="bottone">Conferma</button></span>
-      </div>
-   </form>
-  </body>
+		<img th:src="${softwareHouse.id!=null} ? ${softwareHouse.logo.getImagePath()} : ''" method="POST"
+			th:object="${softwareHouse}" id="thumbnail" class="immagine" />
+		<br>
+		<span><button type="submit" class="bottone">Conferma</button></span>
+		</div>
+	</form>
+</body>
+
 </html>
